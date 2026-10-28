@@ -30,9 +30,9 @@ describe("themes", () => {
 });
 
 describe("providers", () => {
-  it("lists seven providers with unique ids", () => {
-    expect(PROVIDERS).toHaveLength(7);
-    expect(new Set(PROVIDERS.map((provider) => provider.id)).size).toBe(7);
+  it("lists ten free providers with unique ids", () => {
+    expect(PROVIDERS).toHaveLength(10);
+    expect(new Set(PROVIDERS.map((provider) => provider.id)).size).toBe(10);
   });
 
   it("keeps forecast ranges plausible", () => {
@@ -43,14 +43,14 @@ describe("providers", () => {
     }
   });
 
-  it("marks the commercial providers as keyed", () => {
-    const keyed = PROVIDERS.filter((provider) => !provider.keyless).map((provider) => provider.id);
-    expect(keyed).toEqual(["openweathermap", "visual-crossing"]);
-    expect(PROVIDERS.filter((provider) => provider.keyless)).toHaveLength(5);
+  it("needs no API keys anywhere", () => {
+    expect(PROVIDERS.every((provider) => provider.keyless)).toBe(true);
   });
 
   it("validates provider ids", () => {
     expect(isProviderId("met-no")).toBe(true);
+    expect(isProviderId("open-meteo-knmi")).toBe(true);
+    expect(isProviderId("openweathermap")).toBe(false);
     expect(isProviderId("met.no")).toBe(false);
   });
 });

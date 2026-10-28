@@ -2599,7 +2599,7 @@ input[type="search"]:focus {
 /* -------------------------------- wind ---------------------------------- */
 
 .wind-card {
-  padding: 18px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
 }
@@ -2607,15 +2607,17 @@ input[type="search"]:focus {
 .wind-body {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
+/* Compact: the tree is roughly half its previous size, so the card stays a
+   small block next to the sun arc instead of dominating the row. */
 .wind-art {
-  flex: 1 1 55%;
-  min-width: 120px;
-  max-width: 230px;
+  flex: 0 1 104px;
+  min-width: 74px;
+  max-width: 104px;
 }
 
 .wind-art svg {
@@ -2626,28 +2628,28 @@ input[type="search"]:focus {
 }
 
 .wind-readout {
-  flex: 1 1 45%;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   min-width: 0;
 }
 
 .wind-readout strong {
-  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-size: clamp(1.15rem, 1.9vw, 1.4rem);
   font-weight: 650;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
 
 .wind-readout span {
-  font-size: 0.84rem;
+  font-size: 0.78rem;
   color: var(--muted);
 }
 
 .wind-readout small {
-  margin-top: 6px;
-  font-size: 0.72rem;
+  margin-top: 3px;
+  font-size: 0.68rem;
   color: var(--muted);
 }
 
@@ -2745,6 +2747,164 @@ input[type="search"]:focus {
 
 .wind-card[data-motion="off"] * {
   animation: none !important;
+}
+
+/* ------------------------------- this day ------------------------------- */
+
+.history-card {
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.history-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  background: none;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.history-toggle-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.history-toggle-text strong {
+  font-size: 0.98rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.history-chevron {
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--muted);
+  transition: transform 0.25s var(--ease);
+}
+
+.history-card.is-open .history-chevron {
+  transform: rotate(180deg);
+}
+
+.history-body {
+  padding: 12px 18px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.history-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+}
+
+.history-tab {
+  flex: none;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s var(--ease),
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.history-tab:hover {
+  color: var(--text);
+}
+
+.history-tab.is-active {
+  background: var(--brand);
+  border-color: transparent;
+  color: #fff;
+}
+
+.history-panel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.history-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.history-main strong {
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.history-main span {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.history-main small {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.history-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, auto));
+  gap: 10px 20px;
+  margin: 0;
+}
+
+.history-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.history-stats dt {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.history-stats dd {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.history-empty {
+  margin: 0;
+  padding: 4px 0 2px;
+  font-size: 0.82rem;
+  color: var(--muted);
 }
 
 /* ------------------------------ responsive ------------------------------ */
@@ -2888,6 +3048,30 @@ input[type="search"]:focus {
     width: 7px;
     height: 7px;
     margin-left: -3.5px;
+  }
+
+  .history-toggle {
+    padding: 13px 14px;
+    gap: 10px;
+  }
+
+  .history-toggle .chip {
+    display: none;
+  }
+
+  .history-body {
+    padding: 10px 14px 14px;
+  }
+
+  .history-panel {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+  }
+
+  .history-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px 14px;
   }
 
   .hero {

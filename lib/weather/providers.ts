@@ -7,12 +7,15 @@ export interface ProviderMeta {
   model: string;
   /** Maximum forecast days the provider returns. */
   days: number;
+  /** Every provider here is free and keyless. */
   keyless: boolean;
-  keyEnv?: string;
-  keyUrl?: string;
   descriptionKey: MessageKey;
 }
 
+/**
+ * All providers are free and need no API key: Open-Meteo model runs and MET
+ * Norway. Paid services with keys were removed on purpose.
+ */
 export const PROVIDERS: readonly ProviderMeta[] = [
   {
     id: "open-meteo",
@@ -47,32 +50,52 @@ export const PROVIDERS: readonly ProviderMeta[] = [
     descriptionKey: "provider.open-meteo-gfs.desc",
   },
   {
+    id: "open-meteo-meteofrance",
+    name: "Open-Meteo",
+    model: "Météo-France",
+    days: 10,
+    keyless: true,
+    descriptionKey: "provider.open-meteo-meteofrance.desc",
+  },
+  {
+    id: "open-meteo-ukmo",
+    name: "Open-Meteo",
+    model: "UK Met Office",
+    days: 10,
+    keyless: true,
+    descriptionKey: "provider.open-meteo-ukmo.desc",
+  },
+  {
+    id: "open-meteo-jma",
+    name: "Open-Meteo",
+    model: "JMA",
+    days: 10,
+    keyless: true,
+    descriptionKey: "provider.open-meteo-jma.desc",
+  },
+  {
+    id: "open-meteo-gem",
+    name: "Open-Meteo",
+    model: "Canada GEM",
+    days: 10,
+    keyless: true,
+    descriptionKey: "provider.open-meteo-gem.desc",
+  },
+  {
+    id: "open-meteo-knmi",
+    name: "Open-Meteo",
+    model: "KNMI",
+    days: 10,
+    keyless: true,
+    descriptionKey: "provider.open-meteo-knmi.desc",
+  },
+  {
     id: "met-no",
     name: "MET Norway",
     model: "Locationforecast 2.0",
     days: 10,
     keyless: true,
     descriptionKey: "provider.met-no.desc",
-  },
-  {
-    id: "openweathermap",
-    name: "OpenWeatherMap",
-    model: "5-day / 3-hour",
-    days: 5,
-    keyless: false,
-    keyEnv: "OPENWEATHER_API_KEY",
-    keyUrl: "https://openweathermap.org/api",
-    descriptionKey: "provider.openweathermap.desc",
-  },
-  {
-    id: "visual-crossing",
-    name: "Visual Crossing",
-    model: "Timeline",
-    days: 15,
-    keyless: false,
-    keyEnv: "VISUAL_CROSSING_API_KEY",
-    keyUrl: "https://www.visualcrossing.com/weather-api",
-    descriptionKey: "provider.visual-crossing.desc",
   },
 ];
 

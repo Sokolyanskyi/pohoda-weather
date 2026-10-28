@@ -68,6 +68,12 @@ export function basePrefs(): Prefs {
   };
 }
 
+/** Respect the operating system on the very first visit; an explicit choice wins later. */
+function initialMotion(): MotionLevel {
+  if (typeof window === "undefined" || !window.matchMedia) return "full";
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "calm" : "full";
+}
+
 function asRecord(value: unknown): Record<string, unknown> {
   return value && typeof value === "object" ? (value as Record<string, unknown>) : {};
 }
@@ -167,6 +173,7 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
       locale: detectLocale(),
       theme: detectTheme(),
       place: guessPlace(),
+      motion: initialMotion(),
     };
     const next = normalize(stored, fallback);
     setPrefs(next);
@@ -212,6 +219,7 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
       locale: detectLocale(),
       theme: detectTheme(),
       place: guessPlace(),
+      motion: initialMotion(),
     });
   }, []);
 

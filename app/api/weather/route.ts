@@ -24,7 +24,6 @@ export async function GET(request: Request) {
   const provider = isProviderId(providerRaw) ? providerRaw : DEFAULT_PROVIDER;
   const daysRaw = Number(searchParams.get("days") ?? "7");
   const days = Math.max(1, Math.min(30, Number.isFinite(daysRaw) ? Math.floor(daysRaw) : 7));
-  const key = clean(searchParams.get("key"), 200);
 
   const place: Place = {
     id: clean(searchParams.get("id"), 160) ?? `geo:${coords.lat},${coords.lon}`,
@@ -38,13 +37,10 @@ export async function GET(request: Request) {
   };
 
   try {
-    const snapshot = await loadWeather({ provider, place, days, key });
-    const keyless = provider !== "openweathermap" && provider !== "visual-crossing";
+    const snapshot = await loadWeather({ provider, place, days });
     return NextResponse.json(snapshot, {
       headers: {
-        "Cache-Control": keyless
-          ? "public, s-maxage=300, stale-while-revalidate=900"
-          : "private, no-store",
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=900",
       },
     });
   } catch (error) {

@@ -17,9 +17,12 @@ export type ProviderId =
   | "open-meteo-ecmwf"
   | "open-meteo-icon"
   | "open-meteo-gfs"
-  | "met-no"
-  | "openweathermap"
-  | "visual-crossing";
+  | "open-meteo-meteofrance"
+  | "open-meteo-ukmo"
+  | "open-meteo-jma"
+  | "open-meteo-gem"
+  | "open-meteo-knmi"
+  | "met-no";
 
 export type TabId = "today" | "week" | "month";
 

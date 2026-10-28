@@ -230,12 +230,16 @@ export const pl = {
   "provider.open-meteo-icon.desc": "Model ICON Niemieckiej Służby Pogodowej (DWD).",
   "provider.open-meteo-gfs.desc":
     "Model GFS amerykańskiej Narodowej Służby Pogodowej (NOAA).",
+  "provider.open-meteo-meteofrance.desc":
+    "Model Météo-France (ARPEGE i AROME). Szczegółowa siatka dla Europy.",
+  "provider.open-meteo-ukmo.desc": "Model brytyjskiego Met Office.",
+  "provider.open-meteo-jma.desc":
+    "Model japońskiej agencji meteorologicznej (JMA).",
+  "provider.open-meteo-gem.desc": "Globalny model Kanady (GEM).",
+  "provider.open-meteo-knmi.desc":
+    "Model holenderskiego instytutu meteorologicznego (KNMI).",
   "provider.met-no.desc":
     "Norweski Instytut Meteorologiczny. Szczegółowe dane godzinowe, zwłaszcza dla północy Europy.",
-  "provider.openweathermap.desc":
-    "Popularny globalny serwis. Darmowy plan daje 5 dni co 3 godziny.",
-  "provider.visual-crossing.desc":
-    "Globalna prognoza na 15 dni w darmowym planie.",
 
   "footer.data": "Dane: {provider}",
   "footer.updated": "Zaktualizowano {time}",
@@ -260,4 +264,20 @@ export const pl = {
 
   "loader.title": "Czytamy niebo…",
   "loader.text": "Pobieramy najnowszą prognozę dla Twojego miejsca.",
+
+  "history.title": "Ten dzień",
+  "history.subtitle": "Archiwum pogody dla {date} i 10 poprzednich lat",
+  "history.years.one": "{n} rok temu",
+  "history.years.few": "{n} lata temu",
+  "history.years.many": "{n} lat temu",
+  "history.years.other": "{n} roku temu",
+  "history.warmer": "o {diff} cieplej niż dziś",
+  "history.colder": "o {diff} chłodniej niż dziś",
+  "history.same": "mniej więcej jak dziś",
+  "history.empty": "Brak danych archiwalnych dla tego dnia.",
+  "history.loading": "Wczytuję archiwum…",
+  "history.source": "Archiwum Open-Meteo",
+  "history.today": "Dziś",
+  "history.high": "Maksimum",
+  "history.low": "Minimum",
 } satisfies Record<MessageKey, string>;

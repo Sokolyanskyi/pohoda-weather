@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { ICON_PACKS, usePrefs, type IconPack } from "@/lib/client/prefs";
 import { APP_VERSION, REPO_URL } from "@/lib/config";
 import { LOCALES, LOCALE_META, type Locale, type MessageKey } from "@/lib/i18n";
 import { placeLabel, placeSecondary } from "@/lib/places";
 import { THEMES, THEME_META } from "@/lib/theme";
-import type { PrecipUnit, PressureUnit, ProviderId, TemperatureUnit, WindUnit } from "@/lib/types";
+import type { PrecipUnit, PressureUnit, TemperatureUnit, WindUnit } from "@/lib/types";
 import { PROVIDERS, PROVIDER_MAP } from "@/lib/weather/providers";
 import type { WeatherKind } from "@/lib/types";
 import { Modal } from "./Modal";
@@ -59,21 +58,8 @@ export function SettingsDialog({
   isDay,
 }: SettingsDialogProps) {
   const { prefs, update, t } = usePrefs();
-  const [draftKey, setDraftKey] = useState("");
-  const [keyFor, setKeyFor] = useState<ProviderId | null>(null);
 
   const activeProvider = PROVIDER_MAP[prefs.provider];
-  const savedKey = prefs.keys[prefs.provider] ?? "";
-  const editingKey = keyFor === prefs.provider ? draftKey : savedKey;
-
-  const saveKey = () => {
-    const nextKeys = { ...prefs.keys };
-    const value = draftKey.trim();
-    if (value) nextKeys[prefs.provider] = value;
-    else delete nextKeys[prefs.provider];
-    update({ keys: nextKeys });
-    setKeyFor(null);
-  };
 
   return (
     <Modal
@@ -128,9 +114,6 @@ export function SettingsDialog({
                 </span>
                 <span className="provider-side">
                   <span className="chip chip-soft">{t("settings.provider.days", { days: provider.days })}</span>
-                  {provider.keyless ? null : (
-                    <span className="chip chip-warn">{t("settings.provider.keyRequired")}</span>
-                  )}
                 </span>
               </button>
             );
@@ -139,52 +122,7 @@ export function SettingsDialog({
         <div className="provider-desc">
           <p>{t(activeProvider.descriptionKey)}</p>
         </div>
-        {activeProvider.keyless ? (
-          <p className="hint">{t("settings.provider.free")}</p>
-        ) : (
-          <div className="key-row">
-            <label className="field grow">
-              <span className="field-label">{t("settings.provider.key")}</span>
-              <input
-                type="text"
-                autoComplete="off"
-                spellCheck={false}
-                value={editingKey}
-                placeholder={t("settings.provider.keyPlaceholder")}
-                onFocus={() => {
-                  if (keyFor !== prefs.provider) {
-                    setKeyFor(prefs.provider);
-                    setDraftKey(savedKey);
-                  }
-                }}
-                onChange={(event) => {
-                  setKeyFor(prefs.provider);
-                  setDraftKey(event.target.value);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    event.preventDefault();
-                    saveKey();
-                  }
-                }}
-              />
-            </label>
-            <button type="button" className="btn btn-ghost" onClick={saveKey}>
-              {t("common.save")}
-            </button>
-            {activeProvider.keyUrl ? (
-              <a
-                className="link"
-                href={activeProvider.keyUrl}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {t("settings.provider.getKey")}
-              </a>
-            ) : null}
-            <p className="hint">{t("settings.provider.keyHint")}</p>
-          </div>
-        )}
+        <p className="hint">{t("settings.provider.free")}</p>
       </section>
 
       <section className="settings-block">

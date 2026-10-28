@@ -105,57 +105,6 @@ export function isNightSymbol(symbol: string | null | undefined): boolean {
   return Boolean(symbol && /_night$/.test(symbol));
 }
 
-const OWM_GROUP: Record<number, WeatherKind> = {
-  2: "thunder",
-  3: "drizzle",
-  5: "rain",
-  6: "snow",
-  7: "fog",
-  8: "clear",
-};
-
-/** OpenWeatherMap condition id. */
-export function kindFromOwm(id: number | null | undefined): WeatherKind {
-  if (!id) return "cloudy";
-  if (id === 511) return "sleet";
-  if (id === 611 || id === 612 || id === 613 || id === 615 || id === 616) return "sleet";
-  if (id === 502 || id === 503 || id === 504 || id === 522 || id === 531) return "heavy-rain";
-  if (id === 771) return "cloudy";
-  if (id === 800) return "clear";
-  if (id === 801 || id === 802) return "partly";
-  if (id === 803) return "cloudy";
-  if (id === 804) return "overcast";
-  if (id === 741 || id === 701 || id === 721) return "fog";
-  if (id === 906) return "hail";
-  return OWM_GROUP[Math.floor(id / 100)] ?? "cloudy";
-}
-
-const VC_ICONS: Record<string, WeatherKind> = {
-  "clear-day": "clear",
-  "clear-night": "clear",
-  "partly-cloudy-day": "partly",
-  "partly-cloudy-night": "partly",
-  cloudy: "cloudy",
-  "showers-day": "rain",
-  "showers-night": "rain",
-  rain: "rain",
-  sleet: "sleet",
-  snow: "snow",
-  "thunder-rain": "thunder",
-  "thunder-showers-day": "thunder",
-  "thunder-showers-night": "thunder",
-  hail: "hail",
-  fog: "fog",
-  wind: "cloudy",
-  tornado: "thunder",
-};
-
-/** Visual Crossing icon slug. */
-export function kindFromVisualCrossing(icon: string | null | undefined): WeatherKind {
-  if (!icon) return "cloudy";
-  return VC_ICONS[icon] ?? "cloudy";
-}
-
 const TEXT_HINTS: Array<[RegExp, WeatherKind]> = [
   [/thunder|storm|гроза|гроз|burz|gewitter|tormenta/i, "thunder"],
   [/hail|град|grad|hagel|granizo/i, "hail"],

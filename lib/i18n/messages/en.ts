@@ -226,12 +226,14 @@ export const en = {
     "European Centre for Medium-Range Weather Forecasts.",
   "provider.open-meteo-icon.desc": "German Weather Service (DWD) ICON model.",
   "provider.open-meteo-gfs.desc": "US National Weather Service (NOAA) GFS model.",
+  "provider.open-meteo-meteofrance.desc":
+    "Météo-France ARPEGE and AROME. Fine resolution over Europe.",
+  "provider.open-meteo-ukmo.desc": "UK Met Office global and regional models.",
+  "provider.open-meteo-jma.desc": "Japan Meteorological Agency global model.",
+  "provider.open-meteo-gem.desc": "Environment Canada global model (GEM).",
+  "provider.open-meteo-knmi.desc": "Royal Netherlands Meteorological Institute model.",
   "provider.met-no.desc":
     "Norwegian Meteorological Institute. Detailed hourly data, especially for northern Europe.",
-  "provider.openweathermap.desc":
-    "Popular global service. The free tier returns 5 days in 3-hour steps.",
-  "provider.visual-crossing.desc":
-    "Global timeline forecast with 15 days on the free tier.",
 
   "footer.data": "Data: {provider}",
   "footer.updated": "Updated {time}",
@@ -256,6 +258,22 @@ export const en = {
 
   "loader.title": "Reading the sky…",
   "loader.text": "Fetching the latest forecast for your place.",
+
+  "history.title": "This day",
+  "history.subtitle": "Weather archive for {date} and the ten years before",
+  "history.years.one": "{n} year ago",
+  "history.years.few": "{n} years ago",
+  "history.years.many": "{n} years ago",
+  "history.years.other": "{n} years ago",
+  "history.warmer": "{diff} warmer than today",
+  "history.colder": "{diff} colder than today",
+  "history.same": "About the same as today",
+  "history.empty": "No archive data for this date.",
+  "history.loading": "Loading the archive…",
+  "history.source": "Open-Meteo archive",
+  "history.today": "Today",
+  "history.high": "High",
+  "history.low": "Low",
 } as const;
 
 export type MessageKey = keyof typeof en;

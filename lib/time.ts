@@ -124,6 +124,16 @@ export function dayDiff(from: string, to: string): number {
   );
 }
 
+/** Same calendar day a number of years back. 29 February falls back to 28 February. */
+export function addYears(dateKey: string, years: number): string {
+  const [y, m, d] = dateKey.split("-").map(Number);
+  const targetYear = (y || 2000) + years;
+  const month = m || 1;
+  const lastDay = new Date(Date.UTC(targetYear, month, 0)).getUTCDate();
+  const day = Math.min(d || 1, lastDay);
+  return `${targetYear}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
 export function formatTime(
   iso: string | null | undefined,
   timeZone: string,
@@ -181,6 +191,20 @@ export function formatDayMonth(dateKey: string, locale: string): string {
 export function formatMonthYear(dateKey: string, locale: string): string {
   try {
     return new Intl.DateTimeFormat(locale, {
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(parseDateKeyUtcNoon(dateKey));
+  } catch {
+    return dateKey;
+  }
+}
+
+/** "28 October 2016" — used by the archive block. */
+export function formatArchiveDate(dateKey: string, locale: string): string {
+  try {
+    return new Intl.DateTimeFormat(locale, {
+      day: "numeric",
       month: "long",
       year: "numeric",
       timeZone: "UTC",

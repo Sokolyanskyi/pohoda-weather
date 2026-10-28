@@ -230,12 +230,16 @@ export const de = {
   "provider.open-meteo-icon.desc": "ICON-Modell des Deutschen Wetterdienstes (DWD).",
   "provider.open-meteo-gfs.desc":
     "GFS-Modell der US-amerikanischen Wetterbehörde NOAA.",
+  "provider.open-meteo-meteofrance.desc":
+    "Météo-France ARPEGE und AROME. Feines Raster für Europa.",
+  "provider.open-meteo-ukmo.desc": "Modell des britischen Met Office.",
+  "provider.open-meteo-jma.desc":
+    "Modell der japanischen Wetterbehörde (JMA).",
+  "provider.open-meteo-gem.desc": "Globales Modell Kanadas (GEM).",
+  "provider.open-meteo-knmi.desc":
+    "Modell des niederländischen Wetterinstituts (KNMI).",
   "provider.met-no.desc":
     "Norwegisches Meteorologisches Institut. Detaillierte Stundendaten, besonders für Nordeuropa.",
-  "provider.openweathermap.desc":
-    "Beliebter globaler Dienst. Der kostenlose Tarif liefert 5 Tage in 3-Stunden-Schritten.",
-  "provider.visual-crossing.desc":
-    "Globale Zeitachse mit 15 Tagen im kostenlosen Tarif.",
 
   "footer.data": "Daten: {provider}",
   "footer.updated": "Aktualisiert {time}",
@@ -260,4 +264,20 @@ export const de = {
 
   "loader.title": "Wir lesen den Himmel…",
   "loader.text": "Die neueste Vorhersage für deinen Ort wird geladen.",
+
+  "history.title": "Dieser Tag",
+  "history.subtitle": "Wetterarchiv für {date} und die zehn Jahre davor",
+  "history.years.one": "vor {n} Jahr",
+  "history.years.few": "vor {n} Jahren",
+  "history.years.many": "vor {n} Jahren",
+  "history.years.other": "vor {n} Jahren",
+  "history.warmer": "{diff} wärmer als heute",
+  "history.colder": "{diff} kälter als heute",
+  "history.same": "etwa wie heute",
+  "history.empty": "Für diesen Tag gibt es keine Archivdaten.",
+  "history.loading": "Archiv wird geladen…",
+  "history.source": "Open-Meteo-Archiv",
+  "history.today": "Heute",
+  "history.high": "Höchstwert",
+  "history.low": "Tiefstwert",
 } satisfies Record<MessageKey, string>;

@@ -25,8 +25,6 @@ function buildUrl(prefs: Prefs): string {
   if (prefs.place.country) params.set("country", prefs.place.country);
   if (prefs.place.countryCode) params.set("countryCode", prefs.place.countryCode);
   if (prefs.place.timezone) params.set("timezone", prefs.place.timezone);
-  const key = prefs.keys[prefs.provider];
-  if (key) params.set("key", key);
   return `/api/weather?${params.toString()}`;
 }
 

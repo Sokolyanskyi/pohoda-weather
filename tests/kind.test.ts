@@ -3,9 +3,7 @@ import {
   isStorm,
   isWet,
   kindFromMetSymbol,
-  kindFromOwm,
   kindFromText,
-  kindFromVisualCrossing,
   kindFromWmo,
   isNightSymbol,
   scenePreset,
@@ -45,30 +43,6 @@ describe("MET Norway symbols", () => {
   it("detects night symbols", () => {
     expect(isNightSymbol("clearsky_night")).toBe(true);
     expect(isNightSymbol("clearsky_day")).toBe(false);
-  });
-});
-
-describe("OpenWeatherMap ids", () => {
-  it("maps groups and special cases", () => {
-    expect(kindFromOwm(800)).toBe("clear");
-    expect(kindFromOwm(801)).toBe("partly");
-    expect(kindFromOwm(804)).toBe("overcast");
-    expect(kindFromOwm(500)).toBe("rain");
-    expect(kindFromOwm(502)).toBe("heavy-rain");
-    expect(kindFromOwm(511)).toBe("sleet");
-    expect(kindFromOwm(601)).toBe("snow");
-    expect(kindFromOwm(741)).toBe("fog");
-    expect(kindFromOwm(200)).toBe("thunder");
-  });
-});
-
-describe("Visual Crossing icons", () => {
-  it("maps the timeline icons", () => {
-    expect(kindFromVisualCrossing("clear-day")).toBe("clear");
-    expect(kindFromVisualCrossing("partly-cloudy-night")).toBe("partly");
-    expect(kindFromVisualCrossing("thunder-rain")).toBe("thunder");
-    expect(kindFromVisualCrossing("sleet")).toBe("sleet");
-    expect(kindFromVisualCrossing("unknown")).toBe("cloudy");
   });
 });
 

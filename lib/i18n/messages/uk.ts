@@ -230,12 +230,17 @@ export const uk = {
   "provider.open-meteo-icon.desc": "Модель ICON Німецької метеослужби (DWD).",
   "provider.open-meteo-gfs.desc":
     "Модель GFS Національної погодної служби США (NOAA).",
+  "provider.open-meteo-meteofrance.desc":
+    "Модель Météo-France (ARPEGE і AROME). Детальна сітка для Європи.",
+  "provider.open-meteo-ukmo.desc":
+    "Модель Метеослужби Великої Британії (UK Met Office).",
+  "provider.open-meteo-jma.desc":
+    "Модель Японського метеорологічного агентства (JMA).",
+  "provider.open-meteo-gem.desc": "Глобальна модель Канади (GEM).",
+  "provider.open-meteo-knmi.desc":
+    "Модель Нідерландського метеорологічного інституту (KNMI).",
   "provider.met-no.desc":
     "Норвезький метеорологічний інститут. Детальні погодинні дані, особливо для півночі Європи.",
-  "provider.openweathermap.desc":
-    "Популярний світовий сервіс. Безкоштовний тариф дає 5 днів із кроком 3 години.",
-  "provider.visual-crossing.desc":
-    "Світовий прогноз на 15 днів у безкоштовному тарифі.",
 
   "footer.data": "Дані: {provider}",
   "footer.updated": "Оновлено {time}",
@@ -260,4 +265,20 @@ export const uk = {
 
   "loader.title": "Читаємо небо…",
   "loader.text": "Отримуємо найсвіжіший прогноз для вашого місця.",
+
+  "history.title": "Цей день",
+  "history.subtitle": "Архів погоди за {date} і попередні 10 років",
+  "history.years.one": "{n} рік тому",
+  "history.years.few": "{n} роки тому",
+  "history.years.many": "{n} років тому",
+  "history.years.other": "{n} року тому",
+  "history.warmer": "на {diff} тепліше, ніж сьогодні",
+  "history.colder": "на {diff} холодніше, ніж сьогодні",
+  "history.same": "приблизно як сьогодні",
+  "history.empty": "За цей день немає даних в архіві.",
+  "history.loading": "Завантажую архів…",
+  "history.source": "Архів Open-Meteo",
+  "history.today": "Сьогодні",
+  "history.high": "Максимум",
+  "history.low": "Мінімум",
 } satisfies Record<MessageKey, string>;

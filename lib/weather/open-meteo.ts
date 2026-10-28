@@ -125,7 +125,17 @@ export function buildOpenMeteoUrl(place: Place, provider: ProviderId, days: numb
         ? "icon_seamless"
         : provider === "open-meteo-gfs"
           ? "gfs_seamless"
-          : null;
+          : provider === "open-meteo-meteofrance"
+            ? "meteofrance_seamless"
+            : provider === "open-meteo-ukmo"
+              ? "ukmo_seamless"
+              : provider === "open-meteo-jma"
+                ? "jma_seamless"
+                : provider === "open-meteo-gem"
+                  ? "gem_seamless"
+                  : provider === "open-meteo-knmi"
+                    ? "knmi_seamless"
+                    : null;
   if (model) params.set("models", model);
 
   return `https://api.open-meteo.com/v1/forecast?${params.toString()}`;

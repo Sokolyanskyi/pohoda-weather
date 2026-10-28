@@ -20,6 +20,7 @@ import type { WeatherSnapshot } from "@/lib/types";
 import type { MessageKey } from "@/lib/i18n";
 import type { ReactNode } from "react";
 import { SunCard } from "../SunCard";
+import { ThisDayCard } from "../ThisDayCard";
 import { WeatherIcon } from "../WeatherIcon";
 import { WindCard } from "../WindCard";
 
@@ -249,6 +250,15 @@ export function TodayView({ snapshot }: { snapshot: WeatherSnapshot }) {
         <SunCard day={today} timezone={timezone} />
         <WindCard current={current} />
       </div>
+
+      {today ? (
+        <ThisDayCard
+          date={today.date}
+          today={today}
+          lat={snapshot.place.lat}
+          lon={snapshot.place.lon}
+        />
+      ) : null}
     </div>
   );
 }

@@ -230,12 +230,17 @@ export const ru = {
   "provider.open-meteo-icon.desc": "Модель ICON Немецкой метеослужбы (DWD).",
   "provider.open-meteo-gfs.desc":
     "Модель GFS Национальной погодной службы США (NOAA).",
+  "provider.open-meteo-meteofrance.desc":
+    "Модель Météo-France (ARPEGE и AROME). Детальная сетка по Европе.",
+  "provider.open-meteo-ukmo.desc":
+    "Модель Метеослужбы Великобритании (UK Met Office).",
+  "provider.open-meteo-jma.desc":
+    "Модель Японского метеорологического агентства (JMA).",
+  "provider.open-meteo-gem.desc": "Глобальная модель Канады (GEM).",
+  "provider.open-meteo-knmi.desc":
+    "Модель Нидерландского метеорологического института (KNMI).",
   "provider.met-no.desc":
     "Норвежский метеорологический институт. Детальные почасовые данные, особенно для севера Европы.",
-  "provider.openweathermap.desc":
-    "Популярный мировой сервис. Бесплатный тариф даёт 5 дней с шагом 3 часа.",
-  "provider.visual-crossing.desc":
-    "Мировой прогноз на 15 дней в бесплатном тарифе.",
 
   "footer.data": "Данные: {provider}",
   "footer.updated": "Обновлено {time}",
@@ -260,4 +265,20 @@ export const ru = {
 
   "loader.title": "Читаем небо…",
   "loader.text": "Получаем свежий прогноз для вашего места.",
+
+  "history.title": "Этот день",
+  "history.subtitle": "Архив погоды за {date} и предыдущие 10 лет",
+  "history.years.one": "{n} год назад",
+  "history.years.few": "{n} года назад",
+  "history.years.many": "{n} лет назад",
+  "history.years.other": "{n} года назад",
+  "history.warmer": "на {diff} теплее, чем сегодня",
+  "history.colder": "на {diff} холоднее, чем сегодня",
+  "history.same": "примерно как сегодня",
+  "history.empty": "За этот день нет данных в архиве.",
+  "history.loading": "Загружаю архив…",
+  "history.source": "Архив Open-Meteo",
+  "history.today": "Сегодня",
+  "history.high": "Максимум",
+  "history.low": "Минимум",
 } satisfies Record<MessageKey, string>;

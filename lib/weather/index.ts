@@ -7,51 +7,28 @@ import {
   normalizeOpenMeteo,
   type OpenMeteoResponse,
 } from "@/lib/weather/open-meteo";
-import {
-  buildOwmUrls,
-  normalizeOwm,
-  type OwmForecastResponse,
-} from "@/lib/weather/openweather";
 import { PROVIDER_MAP, isProviderId } from "@/lib/weather/providers";
 import { resolveTimezone } from "@/lib/weather/timezone";
-import { normalizeVc, buildVcUrl, type VcResponse } from "@/lib/weather/visual-crossing";
 
 export interface LoadWeatherInput {
   provider: ProviderId;
   place: Place;
   days: number;
-  key?: string | null;
 }
 
 const USER_AGENT =
   "pohoda-weather/1.0 (+https://github.com/Sokolyanskyi/pohoda-weather)";
 
-function envKey(name: string | undefined): string | undefined {
-  if (!name) return undefined;
-  const value = process.env[name];
-  return value && value.trim() ? value.trim() : undefined;
-}
-
 export async function loadWeather({
   provider,
   place,
   days,
-  key,
 }: LoadWeatherInput): Promise<WeatherSnapshot> {
   if (!isProviderId(provider)) {
     throw new WeatherProviderError("invalid_request", "Unknown provider", 400);
   }
   const meta = PROVIDER_MAP[provider];
   const requestedDays = Math.max(1, Math.min(30, Math.floor(days) || 7));
-  const resolvedKey = key?.trim() || envKey(meta.keyEnv);
-
-  if (!meta.keyless && !resolvedKey) {
-    throw new WeatherProviderError(
-      "key_required",
-      "This provider needs an API key",
-      400,
-    );
-  }
 
   let snapshot: WeatherSnapshot;
 
@@ -64,29 +41,6 @@ export async function loadWeather({
     snapshot = normalizeMetNo({
       place,
       timezone,
-      days: Math.min(requestedDays, meta.days),
-      payload,
-    });
-  } else if (provider === "openweathermap") {
-    const timezone = await resolveTimezone(place);
-    const urls = buildOwmUrls(place, resolvedKey as string);
-    const [current, forecast] = await Promise.all([
-      fetchJson<Record<string, unknown>>(urls.current),
-      fetchJson<OwmForecastResponse>(urls.forecast),
-    ]);
-    snapshot = normalizeOwm({
-      place,
-      timezone,
-      days: Math.min(requestedDays, meta.days),
-      current: current as never,
-      forecast,
-    });
-  } else if (provider === "visual-crossing") {
-    const payload = await fetchJson<VcResponse>(buildVcUrl(place, resolvedKey as string), {
-      timeoutMs: 15_000,
-    });
-    snapshot = normalizeVc({
-      place,
       days: Math.min(requestedDays, meta.days),
       payload,
     });

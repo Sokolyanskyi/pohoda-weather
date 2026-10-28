@@ -12,6 +12,7 @@ Live demo: https://pohoda-weather.vercel.app
 - **Ranges, not just numbers.** Every day row shows a temperature band placed on the week's scale, so a cold snap or a warm spell is visible without reading a table.
 - **Honest about limits.** Free forecasts stop at 10–16 days. The 30-day tab fills the rest with ten-year climate averages and labels those days as `climate` instead of pretending they are a forecast.
 - **Weather you can see.** A full-screen scene (sun, moon, drifting clouds, canvas rain, snow, fog and lightning) reacts to the current condition, and eight icon packs are all animated.
+- **Ten years of the same day.** The “This day” block at the bottom compares today with the archive for the same date in each of the last ten years.
 
 ## Screenshots
 
@@ -27,6 +28,10 @@ Live demo: https://pohoda-weather.vercel.app
 | --- | --- |
 | ![Themes and icon packs](docs/desktop-appearance.png) | ![Daylight theme](docs/desktop-light.png) |
 
+| This day — ten years back | Phone — this day |
+| --- | --- |
+| ![This day archive](docs/desktop-history.png) | ![Mobile archive](docs/mobile-history.png) |
+
 | Phone — today | Phone — week |
 | --- | --- |
 | ![Mobile today](docs/mobile-today.png) | ![Mobile week](docs/mobile-week.png) |
@@ -41,10 +46,11 @@ Live demo: https://pohoda-weather.vercel.app
 - 30-day view split into a real forecast and a clearly marked climate section.
 - Sun card with an arc that tracks the actual position of the sun in real time, a filled trail from sunrise, and sunrise, sunset and daylight length.
 - Detail cards for wind and gusts, direction, humidity, pressure, UV index, visibility, cloud cover and dew point.
+- **“This day” archive block** at the bottom: ten tabs from one to ten years back, each with the weather type, high and low, precipitation, wind and how much warmer or colder that day was compared with today.
 
 ### Providers
 
-Seven sources, switchable in Settings:
+Ten free sources, switchable in Settings. Every one of them works without an API key or an account:
 
 | Provider | Model | Horizon | Key |
 | --- | --- | --- | --- |
@@ -52,11 +58,14 @@ Seven sources, switchable in Settings:
 | Open-Meteo | ECMWF IFS | 16 days | not needed |
 | Open-Meteo | DWD ICON | 16 days | not needed |
 | Open-Meteo | NOAA GFS | 16 days | not needed |
+| Open-Meteo | Météo-France | 10 days | not needed |
+| Open-Meteo | UK Met Office | 10 days | not needed |
+| Open-Meteo | JMA | 10 days | not needed |
+| Open-Meteo | Canada GEM | 10 days | not needed |
+| Open-Meteo | KNMI | 10 days | not needed |
 | MET Norway | Locationforecast 2.0 | 10 days | not needed |
-| OpenWeatherMap | 5-day / 3-hour | 5 days | optional |
-| Visual Crossing | Timeline | 15 days | optional |
 
-Keyless providers work out of the box. Keys for the commercial providers are optional, stay in the browser (`localStorage`) and are forwarded only to this app's own `/api/weather` route — never stored on a server and never sent to a third party by the client.
+Commercial providers that charge for their API were removed on purpose, so there is no key field, no `.env` file and nothing to configure.
 
 ### Places
 
@@ -70,7 +79,7 @@ Keyless providers work out of the box. Keys for the commercial providers are opt
 - **Eight animated icon packs:** outline, duotone, solid, clay, neon, pixel, emoji, glyph.
 - **Full-screen scenes** for clear, partly cloudy, overcast, fog, rain, snow and thunderstorms, with drifting colour fields, moving clouds, canvas particles for precipitation and a lightning flash for storms.
 - **A wind card with a tree and grass** that bend further and faster as the wind picks up.
-- **Motion levels:** full, calm, off. The system's reduced-motion preference is respected too.
+- **Motion levels:** full, calm, off. An explicit choice always wins; the system's reduced-motion preference only sets the default on the first visit.
 
 ### Language and units
 
@@ -111,27 +120,17 @@ Open http://localhost:3000.
 npm run build      # production build
 npm run start      # serve the production build
 npm run typecheck  # tsc --noEmit
-npm test           # 57 unit tests
+npm test           # 55 unit tests
 ```
-
-### Optional API keys
-
-Create `.env.local` if you want the server to fill in keys for everyone:
-
-```bash
-OPENWEATHER_API_KEY=
-VISUAL_CROSSING_API_KEY=
-```
-
-Visitors can also paste their own key in Settings; a key entered there takes precedence and never leaves the browser except in the request to this app's `/api/weather`.
 
 ## API
 
-The app talks to three internal routes so provider keys and rate limits stay on the server:
+The app talks to four internal routes so rate limits and caching stay on the server:
 
 | Route | Purpose |
 | --- | --- |
 | `GET /api/weather` | Normalised snapshot: current, hourly and daily points, plus climate-filled days |
+| `GET /api/history` | The same calendar day for each of the last ten years, from the Open-Meteo archive |
 | `GET /api/places` | Multilingual place search via Open-Meteo geocoding |
 | `GET /api/places/reverse` | Coordinates to a place name |
 
@@ -145,11 +144,19 @@ All responses are normalised to one `WeatherSnapshot` shape, so the UI does not 
 
 Archive responses are cached for 24 hours.
 
+## How the “This day” block works
+
+1. The card asks `/api/history` for the current place and today's date.
+2. The route fires ten single-day requests to the Open-Meteo archive API in parallel, one per year, and keeps only the days that came back complete.
+3. The client renders them as tabs — `1 year ago` … `10 years ago`, pluralised per locale — with the weather icon, high, low, precipitation, wind and the temperature difference against today.
+4. Results are cached at the edge for 24 hours, because a day in the past never changes.
+
 ## Project structure
 
 ```
 app/
   api/weather/         provider dispatch and normalisation
+  api/history/         ten-year archive for one calendar day
   api/places/          search and reverse geocoding
   layout.tsx           metadata, theme boot script, fonts
   page.tsx             app entry
@@ -158,9 +165,10 @@ components/
   WeatherScene.tsx     full-screen animated scene + canvas particles
   WeatherIcon.tsx      eight animated icon packs
   views/               Today, Week, Month
-  DayRow, SunCard, RangeBar, Modal, SettingsDialog, PlaceDialog, Toast
+  DayRow, SunCard, RangeBar, ThisDayCard, Modal, SettingsDialog, PlaceDialog, Toast
 lib/
   weather/             providers, normalisation, code maps, climate, sun
+  history.ts           Open-Meteo archive loader for the “This day” block
   i18n/                six catalogues and typed message keys
   client/              settings store, weather hook
   theme, units, time, format, places, types
@@ -176,11 +184,11 @@ The project is a standard Next.js app and deploys to Vercel without configuratio
 npx vercel --prod
 ```
 
-Set the two optional environment variables in the Vercel dashboard if you want server-side keys. No database, cron job or external storage is required.
+No API keys, database, cron job or external storage are required.
 
 ## Credits
 
-Weather data by [Open-Meteo](https://open-meteo.com/), [MET Norway](https://www.met.no/), [OpenWeatherMap](https://openweathermap.org/) and [Visual Crossing](https://www.visualcrossing.com/). Place search by Open-Meteo geocoding, which uses GeoNames data.
+Weather data by [Open-Meteo](https://open-meteo.com/) (including the ECMWF, DWD, NOAA, Météo-France, UK Met Office, JMA, GEM and KNMI model runs) and [MET Norway](https://www.met.no/). Place search by Open-Meteo geocoding, which uses GeoNames data.
 
 ## License
 

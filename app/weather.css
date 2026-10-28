@@ -789,8 +789,36 @@
   transform-box: view-box;
 }
 
+/* A slow bob keeps every pack visibly alive, even when the icon has no rain,
+   snow or lightning to move. */
+.wi-svgpack[data-motion="full"] .wi-svg {
+  animation: wiBob 5.2s ease-in-out infinite;
+}
+
+.wi-svgpack[data-motion="calm"] .wi-svg {
+  animation: wiBob 9s ease-in-out infinite;
+}
+
+@keyframes wiBob {
+  50% {
+    transform: translateY(-2.6px);
+  }
+}
+
+.wi-svgpack[data-motion="full"] .wi-sun {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: wiPulse 5s ease-in-out infinite;
+}
+
+@keyframes wiPulse {
+  50% {
+    transform: scale(1.05);
+  }
+}
+
 .wi-svgpack[data-motion="full"] .wi-rays {
-  animation: wiSpin 44s linear infinite;
+  animation: wiSpin 26s linear infinite;
 }
 
 .wi-svgpack[data-motion="calm"] .wi-rays {
@@ -798,7 +826,7 @@
 }
 
 .wi-svgpack[data-motion="full"] .wi-cloud {
-  animation: wiFloat 5.5s ease-in-out infinite;
+  animation: wiFloat 4.6s ease-in-out infinite;
 }
 
 .wi-svgpack[data-motion="calm"] .wi-cloud {
@@ -846,7 +874,7 @@
 
 @keyframes wiFloat {
   50% {
-    transform: translateY(-1.6px);
+    transform: translateY(-2.8px) rotate(-1.2deg);
   }
 }
 
@@ -916,13 +944,15 @@
   .scene-stars span,
   .scene-orb-core,
   .scene-flash,
-  .wi-svgpack *,
-  .wi-emoji-glyph,
-  .wi-pixel * {
+  .view {
     animation: none !important;
   }
 
-  .view {
+  /* The app has its own motion switch; an explicit "full" wins over the OS
+     preference, so a static icon means the switch is set to calm or off. */
+  .wi-svgpack[data-motion="calm"] *,
+  .wi-emoji[data-motion="calm"] *,
+  .wi-pixel[data-motion="calm"] * {
     animation: none !important;
   }
 }
