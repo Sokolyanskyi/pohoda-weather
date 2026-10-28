@@ -2517,12 +2517,14 @@ input[type="search"]:focus {
 .wc-avg {
   position: absolute;
   left: 50%;
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
   border-radius: 50%;
-  background: var(--bg);
-  border: 2px solid var(--wc-glow, #fb7185);
+  /* Just a shade darker than the bar it sits on: readable up close, invisible
+     at a glance, so the bar still reads as one solid range. */
+  background: color-mix(in srgb, var(--wc-glow, #fb7185) 58%, #000);
+  opacity: 0.85;
 }
 
 .wc-max,
@@ -3045,9 +3047,9 @@ input[type="search"]:focus {
   }
 
   .wc-avg {
-    width: 10px;
-    height: 10px;
-    margin-left: -5px;
+    width: 7px;
+    height: 7px;
+    margin-left: -3.5px;
   }
 
   .history-toggle {
