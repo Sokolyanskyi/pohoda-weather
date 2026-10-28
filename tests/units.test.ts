@@ -6,6 +6,7 @@ import {
   convertVisibility,
   convertWind,
   directionKey,
+  temperatureColor,
   temperatureTone,
   uvKey,
 } from "@/lib/units";
@@ -84,5 +85,35 @@ describe("temperature tone", () => {
     expect(temperatureTone(16)).toBe("mild");
     expect(temperatureTone(24)).toBe("warm");
     expect(temperatureTone(33)).toBe("hot");
+  });
+});
+
+describe("temperature colour", () => {
+  const hue = (celsius: number) => {
+    const match = /^hsl\((\d+) /.exec(temperatureColor(celsius));
+    if (!match) throw new Error(`unexpected colour for ${celsius}`);
+    return Number(match[1]);
+  };
+
+  it("keeps deep frost violet", () => {
+    expect(hue(-30)).toBeGreaterThanOrEqual(260);
+    expect(hue(-30)).toBeLessThanOrEqual(290);
+  });
+
+  it("is sky blue at freezing and stays cool just above it", () => {
+    expect(hue(0)).toBe(205);
+    expect(hue(6)).toBeGreaterThan(185);
+    expect(hue(6)).toBeLessThan(205);
+  });
+
+  it("turns amber in the twenties and red when hot", () => {
+    expect(hue(20)).toBeGreaterThan(40);
+    expect(hue(20)).toBeLessThan(70);
+    expect(hue(34)).toBeGreaterThanOrEqual(340);
+    expect(hue(45)).toBeGreaterThanOrEqual(340);
+  });
+
+  it("falls back to a neutral blue for bad input", () => {
+    expect(temperatureColor(Number.NaN)).toMatch(/^hsl\(/);
   });
 });

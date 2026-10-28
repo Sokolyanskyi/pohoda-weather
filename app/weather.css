@@ -20,17 +20,21 @@
     var(--sky-day-2) 58%,
     var(--sky-day-3) 100%
   );
-  background-size: 150% 150%;
+  /* The old version animated background-position, which repaints the whole
+     viewport on every frame. A slightly oversized layer moved with transform
+     is composited on the GPU instead. */
+  transform: scale(1.08);
   animation: skyShift 38s ease-in-out infinite alternate;
+  will-change: transform;
   transition: background 0.9s var(--ease);
 }
 
 @keyframes skyShift {
   from {
-    background-position: 50% 0%;
+    transform: scale(1.08) translate3d(0, -1.2%, 0);
   }
   to {
-    background-position: 50% 58%;
+    transform: scale(1.08) translate3d(0, 1.2%, 0);
   }
 }
 
@@ -233,7 +237,6 @@
 @keyframes orbBreathe {
   50% {
     transform: scale(1.04);
-    box-shadow: 0 0 80px 28px rgba(251, 191, 36, 0.42);
   }
 }
 
@@ -975,5 +978,23 @@
 
   .scene-vignette {
     opacity: 0.55;
+  }
+
+  /* Phones pay for every blurred, animated layer, so the scene keeps half the
+     stars and a softer aura. */
+  .scene-stars span:nth-child(even) {
+    display: none;
+  }
+
+  .scene-stars span {
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+  }
+
+  .scene-aura span {
+    filter: blur(46px);
+  }
+
+  .scene-cloud i {
+    filter: blur(6px);
   }
 }

@@ -9,7 +9,7 @@ Live demo: https://pohoda-weather.vercel.app
 ## Why another weather app
 
 - **Readable at a glance.** A large temperature, a short condition line, and the three numbers people actually check: rain chance, wind, humidity.
-- **Ranges, not just numbers.** Every day row shows a temperature band placed on the week's scale, so a cold snap or a warm spell is visible without reading a table.
+- **Ranges, not just numbers.** Every day row shows a temperature band placed on the week's scale, so a cold snap or a warm spell is visible without reading a table. Bands follow one colour ramp — violet well below freezing, sky blue at 0 °C, red in the heat — so the week reads as a temperature map.
 - **Honest about limits.** Free forecasts stop at 10–16 days. The 30-day tab fills the rest with ten-year climate averages and labels those days as `climate` instead of pretending they are a forecast.
 - **Weather you can see.** A full-screen scene (sun, moon, drifting clouds, canvas rain, snow, fog and lightning) reacts to the current condition, and eight icon packs are all animated.
 - **Ten years of the same day.** The “This day” block at the bottom compares today with the archive for the same date in each of the last ten years.

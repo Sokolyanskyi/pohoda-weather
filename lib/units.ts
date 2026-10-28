@@ -99,3 +99,57 @@ export function temperatureTone(celsius: number): "cold" | "cool" | "mild" | "wa
   if (celsius <= 28) return "warm";
   return "hot";
 }
+
+interface ColorStop {
+  t: number;
+  h: number;
+  s: number;
+  l: number;
+}
+
+/**
+ * Temperature colour ramp used by every temperature scale in the app:
+ * deep violet when it is well below freezing, sky blue around 0 °C, then
+ * green, amber, orange and finally red as it gets hot. Interpolated in HSL so
+ * the hue walks the short way round instead of turning grey halfway.
+ */
+const TEMP_STOPS: readonly ColorStop[] = [
+  { t: -30, h: 278, s: 60, l: 38 },
+  { t: -18, h: 272, s: 66, l: 46 },
+  { t: -8, h: 258, s: 76, l: 56 },
+  { t: 0, h: 205, s: 88, l: 58 },
+  /* Above freezing the ramp stays blue/cyan until ~10 °C, crosses green only
+     briefly and turns amber around 20 °C, so a mild autumn day never reads as
+     "green = warm". */
+  { t: 10, h: 192, s: 80, l: 54 },
+  { t: 15, h: 118, s: 58, l: 44 },
+  { t: 20, h: 52, s: 92, l: 56 },
+  { t: 26, h: 28, s: 92, l: 55 },
+  { t: 34, h: 356, s: 82, l: 50 },
+];
+
+function hueLerp(from: number, to: number, ratio: number): number {
+  const delta = ((to - from + 540) % 360) - 180;
+  return (from + delta * ratio + 360) % 360;
+}
+
+/** CSS colour for a Celsius temperature on the shared cold-to-hot ramp. */
+export function temperatureColor(celsius: number): string {
+  if (!Number.isFinite(celsius)) return "hsl(205 20% 55%)";
+  const first = TEMP_STOPS[0];
+  const last = TEMP_STOPS[TEMP_STOPS.length - 1];
+  if (celsius <= first.t) return `hsl(${first.h} ${first.s}% ${first.l}%)`;
+  if (celsius >= last.t) return `hsl(${last.h} ${last.s}% ${last.l}%)`;
+
+  for (let index = 1; index < TEMP_STOPS.length; index += 1) {
+    const right = TEMP_STOPS[index];
+    if (celsius > right.t) continue;
+    const left = TEMP_STOPS[index - 1];
+    const ratio = (celsius - left.t) / (right.t - left.t);
+    const h = Math.round(hueLerp(left.h, right.h, ratio));
+    const s = Math.round(left.s + (right.s - left.s) * ratio);
+    const l = Math.round(left.l + (right.l - left.l) * ratio);
+    return `hsl(${h} ${s}% ${l}%)`;
+  }
+  return `hsl(${last.h} ${last.s}% ${last.l}%)`;
+}

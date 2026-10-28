@@ -2,9 +2,10 @@
 
 import { usePrefs } from "@/lib/client/prefs";
 import { formatPercent, formatWind, tempValue } from "@/lib/format";
-import { directionKey } from "@/lib/units";
+import { directionKey, temperatureColor } from "@/lib/units";
 import { formatWeekday } from "@/lib/time";
 import type { DailyPoint } from "@/lib/types";
+import type { CSSProperties } from "react";
 import { WeatherIcon } from "./WeatherIcon";
 
 const PLOT = 152;
@@ -37,9 +38,14 @@ export function WeekChart({ days }: { days: DailyPoint[] }) {
             const height = Math.max(8, ((day.max - day.min) / span) * PLOT);
             const average = ((day.min + day.max) / 2 - low) / span;
             const direction = directionKey(day.windDirection);
+            const barStyle = {
+              "--wc-top": temperatureColor(day.max),
+              "--wc-bottom": temperatureColor(day.min),
+              "--wc-glow": temperatureColor((day.min + day.max) / 2),
+            } as CSSProperties;
 
             return (
-              <div className="wc-col" key={day.date}>
+              <div className="wc-col" key={day.date} style={barStyle}>
                 <div className="wc-plot">
                   <span
                     className="wc-bar"

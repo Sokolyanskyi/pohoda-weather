@@ -50,7 +50,9 @@ function useParticles(
     let height = 0;
     let frame = 0;
     let running = true;
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    // Phones report dpr 2–3; drawing rain at that density doubles the fill cost
+    // for no visible gain on 1 px strokes.
+    const dpr = Math.min(window.innerWidth < 700 ? 1.5 : 2, window.devicePixelRatio || 1);
 
     interface Drop {
       x: number;
