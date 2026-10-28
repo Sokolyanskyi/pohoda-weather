@@ -69,6 +69,21 @@ export const pl = {
   "sun.hours": "{h} godz. {m} min",
   "sun.arc": "Droga słońca",
 
+  "radar.open": "Radar",
+  "radar.title": "Radar opadów",
+  "radar.description": "Opady, wiatr i temperatura — {place}",
+  "radar.layers": "Warstwa radaru",
+  "radar.layer.radar": "Opady",
+  "radar.layer.wind": "Wiatr",
+  "radar.layer.temp": "Temperatura",
+  "radar.frame": "Radar opadów dla {place}",
+  "radar.loading": "Ładuję mapę…",
+  "radar.hint":
+    "Czas ustawisz na osi pod mapą: radar pokazuje ostatnie dwie godziny i najbliższe 30 minut, warstwy prognozy — do dziesięciu dni.",
+  "radar.source": "Mapa i dane — Windy.com",
+  "radar.openWindy": "Otwórz w Windy",
+  "radar.close": "Zamknij radar",
+
   "week.title": "Prognoza na 7 dni",
   "week.summary": "Tydzień w skrócie",
   "week.warmest": "Najcieplej",

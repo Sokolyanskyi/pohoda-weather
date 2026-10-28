@@ -69,6 +69,21 @@ export const de = {
   "sun.hours": "{h} Std. {m} Min.",
   "sun.arc": "Sonnenbahn",
 
+  "radar.open": "Radar",
+  "radar.title": "Wetterradar",
+  "radar.description": "Regen, Wind und Temperatur — {place}",
+  "radar.layers": "Radarebene",
+  "radar.layer.radar": "Regen",
+  "radar.layer.wind": "Wind",
+  "radar.layer.temp": "Temperatur",
+  "radar.frame": "Wetterradar für {place}",
+  "radar.loading": "Karte wird geladen…",
+  "radar.hint":
+    "Die Zeit steuert die Leiste unter der Karte: Das Radar zeigt die letzten zwei Stunden und die nächsten 30 Minuten, Prognoseebenen bis zu zehn Tage.",
+  "radar.source": "Karte und Daten von Windy.com",
+  "radar.openWindy": "In Windy öffnen",
+  "radar.close": "Radar schließen",
+
   "week.title": "7-Tage-Vorhersage",
   "week.summary": "Woche im Überblick",
   "week.warmest": "Wärmster Tag",

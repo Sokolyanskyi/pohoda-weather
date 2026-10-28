@@ -825,6 +825,43 @@ svg {
   }
 }
 
+.hero-top-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hero-radar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--brand) 42%, transparent);
+  background: color-mix(in srgb, var(--brand) 14%, transparent);
+  color: var(--text);
+  font-size: 0.76rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+
+.hero-radar:hover {
+  background: color-mix(in srgb, var(--brand) 26%, transparent);
+  border-color: color-mix(in srgb, var(--brand) 70%, transparent);
+}
+
+.hero-radar svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .hero-temp-row {
   display: flex;
   align-items: center;
@@ -2899,6 +2936,105 @@ input[type="search"]:focus {
   color: var(--muted);
 }
 
+/* --------------------------------- radar -------------------------------- */
+
+.radar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radar-layers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.radar-layer {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: color 0.15s var(--ease), background 0.15s var(--ease),
+    border-color 0.15s var(--ease);
+}
+
+.radar-layer svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.radar-layer:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.radar-layer[aria-selected="true"] {
+  color: var(--on-brand);
+  border-color: transparent;
+  background: linear-gradient(145deg, var(--brand), var(--brand-2));
+  box-shadow: 0 10px 22px -14px var(--brand);
+}
+
+.radar-frame-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.radar-frame {
+  display: block;
+  width: 100%;
+  height: clamp(320px, 50vh, 520px);
+  border: 0;
+}
+
+.radar-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--surface-solid);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.radar-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.radar-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.76rem;
+  color: var(--muted-2);
+}
+
+.radar-foot a {
+  color: var(--brand);
+  font-weight: 650;
+  white-space: nowrap;
+}
+
 /* ------------------------------ responsive ------------------------------ */
 
 @media (max-width: 900px) {
@@ -3203,6 +3339,19 @@ input[type="search"]:focus {
   .modal {
     border-radius: 20px;
     max-height: 92dvh;
+  }
+
+  .radar-frame {
+    height: 56vh;
+  }
+
+  .radar-layer {
+    padding: 7px 11px;
+    font-size: 0.78rem;
+  }
+
+  .radar-foot {
+    flex-wrap: wrap;
   }
 
   .modal-head {

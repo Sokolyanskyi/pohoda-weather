@@ -19,6 +19,8 @@ import { formatFullDate, formatHour, formatTime } from "@/lib/time";
 import type { WeatherSnapshot } from "@/lib/types";
 import type { MessageKey } from "@/lib/i18n";
 import type { ReactNode } from "react";
+import { useState } from "react";
+import { RadarDialog } from "../RadarDialog";
 import { SunCard } from "../SunCard";
 import { ThisDayCard } from "../ThisDayCard";
 import { WeatherIcon } from "../WeatherIcon";
@@ -56,6 +58,7 @@ function Meter({ value, tone }: { value: number; tone?: string }) {
 export function TodayView({ snapshot }: { snapshot: WeatherSnapshot }) {
   const { prefs, t, iconPack } = usePrefs();
   const now = useNow(30_000);
+  const [radarOpen, setRadarOpen] = useState(false);
   const { current, timezone, daily, hourly } = snapshot;
   const today = daily[0];
   const locale = prefs.locale;
@@ -74,10 +77,25 @@ export function TodayView({ snapshot }: { snapshot: WeatherSnapshot }) {
         <div className="hero-main">
           <div className="hero-top">
             <span className="eyebrow">{formatFullDate(now, timezone, locale)}</span>
-            <span className="hero-live">
-              <i aria-hidden="true" />
-              {t("hero.now")} · {formatTime(now.toISOString(), timezone, locale)}
-            </span>
+            <div className="hero-top-right">
+              <span className="hero-live">
+                <i aria-hidden="true" />
+                {t("hero.now")} · {formatTime(now.toISOString(), timezone, locale)}
+              </span>
+              <button
+                type="button"
+                className="hero-radar"
+                onClick={() => setRadarOpen(true)}
+                aria-haspopup="dialog"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <circle cx="12" cy="12" r="4.5" />
+                  <path d="M12 12 18.5 5.5" />
+                </svg>
+                {t("radar.open")}
+              </button>
+            </div>
           </div>
 
           <div className="hero-temp-row">
@@ -259,6 +277,12 @@ export function TodayView({ snapshot }: { snapshot: WeatherSnapshot }) {
           lon={snapshot.place.lon}
         />
       ) : null}
+
+      <RadarDialog
+        open={radarOpen}
+        onClose={() => setRadarOpen(false)}
+        place={snapshot.place}
+      />
     </div>
   );
 }

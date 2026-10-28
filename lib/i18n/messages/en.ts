@@ -67,6 +67,21 @@ export const en = {
   "sun.hours": "{h} h {m} min",
   "sun.arc": "Sun path",
 
+  "radar.open": "Radar",
+  "radar.title": "Weather radar",
+  "radar.description": "Rain, wind and temperature — {place}",
+  "radar.layers": "Radar layer",
+  "radar.layer.radar": "Rain",
+  "radar.layer.wind": "Wind",
+  "radar.layer.temp": "Temperature",
+  "radar.frame": "Weather radar for {place}",
+  "radar.loading": "Loading the map…",
+  "radar.hint":
+    "Use the timeline under the map: radar shows the last two hours and the next 30 minutes, forecast layers go up to ten days.",
+  "radar.source": "Map and data by Windy.com",
+  "radar.openWindy": "Open on Windy",
+  "radar.close": "Close radar",
+
   "week.title": "7-day forecast",
   "week.summary": "Week at a glance",
   "week.warmest": "Warmest",

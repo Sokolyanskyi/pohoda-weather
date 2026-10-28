@@ -36,6 +36,10 @@ Live demo: https://pohoda-weather.vercel.app
 | --- | --- |
 | ![Mobile today](docs/mobile-today.png) | ![Mobile week](docs/mobile-week.png) |
 
+| Weather radar | Phone — radar |
+| --- | --- |
+| ![Weather radar](docs/desktop-radar.png) | ![Mobile radar](docs/mobile-radar.png) |
+
 ## Features
 
 ### Forecast
@@ -47,6 +51,7 @@ Live demo: https://pohoda-weather.vercel.app
 - Sun card with an arc that tracks the actual position of the sun in real time, a filled trail from sunrise, and sunrise, sunset and daylight length.
 - Detail cards for wind and gusts, direction, humidity, pressure, UV index, visibility, cloud cover and dew point.
 - **“This day” archive block** at the bottom: ten tabs from one to ten years back, each with the weather type, high and low, precipitation, wind and how much warmer or colder that day was compared with today.
+- **Weather radar** from the hero card: a Windy map with live rain, wind and temperature layers, switched with one tap. The timeline under the map covers the last two hours and the next 30 minutes for radar, and up to ten days for the forecast layers.
 
 ### Providers
 
@@ -120,7 +125,7 @@ Open http://localhost:3000.
 npm run build      # production build
 npm run start      # serve the production build
 npm run typecheck  # tsc --noEmit
-npm test           # 55 unit tests
+npm test           # 59 unit tests
 ```
 
 ## API
@@ -165,7 +170,7 @@ components/
   WeatherScene.tsx     full-screen animated scene + canvas particles
   WeatherIcon.tsx      eight animated icon packs
   views/               Today, Week, Month
-  DayRow, SunCard, RangeBar, ThisDayCard, Modal, SettingsDialog, PlaceDialog, Toast
+  DayRow, SunCard, RangeBar, ThisDayCard, RadarDialog, Modal, SettingsDialog, PlaceDialog, Toast
 lib/
   weather/             providers, normalisation, code maps, climate, sun
   history.ts           Open-Meteo archive loader for the “This day” block
@@ -188,7 +193,7 @@ No API keys, database, cron job or external storage are required.
 
 ## Credits
 
-Weather data by [Open-Meteo](https://open-meteo.com/) (including the ECMWF, DWD, NOAA, Météo-France, UK Met Office, JMA, GEM and KNMI model runs) and [MET Norway](https://www.met.no/). Place search by Open-Meteo geocoding, which uses GeoNames data.
+Weather data by [Open-Meteo](https://open-meteo.com/) (including the ECMWF, DWD, NOAA, Météo-France, UK Met Office, JMA, GEM and KNMI model runs) and [MET Norway](https://www.met.no/). Place search by Open-Meteo geocoding, which uses GeoNames data. The radar dialog embeds [Windy.com](https://www.windy.com/) — map and radar data belong to Windy.
 
 ## License
 

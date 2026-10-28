@@ -69,6 +69,21 @@ export const ru = {
   "sun.hours": "{h} ч {m} мин",
   "sun.arc": "Путь солнца",
 
+  "radar.open": "Радар",
+  "radar.title": "Радар осадков",
+  "radar.description": "Осадки, ветер и температура — {place}",
+  "radar.layers": "Слой радара",
+  "radar.layer.radar": "Осадки",
+  "radar.layer.wind": "Ветер",
+  "radar.layer.temp": "Температура",
+  "radar.frame": "Радар осадков для {place}",
+  "radar.loading": "Загружаю карту…",
+  "radar.hint":
+    "Время — на шкале под картой: радар показывает последние два часа и ближайшие 30 минут, прогнозные слои — до десяти дней.",
+  "radar.source": "Карта и данные — Windy.com",
+  "radar.openWindy": "Открыть на Windy",
+  "radar.close": "Закрыть радар",
+
   "week.title": "Прогноз на 7 дней",
   "week.summary": "Неделя кратко",
   "week.warmest": "Теплее всего",

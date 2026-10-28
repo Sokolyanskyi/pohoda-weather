@@ -69,6 +69,21 @@ export const es = {
   "sun.hours": "{h} h {m} min",
   "sun.arc": "Trayectoria del sol",
 
+  "radar.open": "Radar",
+  "radar.title": "Radar meteorológico",
+  "radar.description": "Lluvia, viento y temperatura — {place}",
+  "radar.layers": "Capa del radar",
+  "radar.layer.radar": "Lluvia",
+  "radar.layer.wind": "Viento",
+  "radar.layer.temp": "Temperatura",
+  "radar.frame": "Radar meteorológico de {place}",
+  "radar.loading": "Cargando el mapa…",
+  "radar.hint":
+    "El tiempo se controla en la línea bajo el mapa: el radar muestra las últimas dos horas y los próximos 30 minutos, las capas de pronóstico hasta diez días.",
+  "radar.source": "Mapa y datos de Windy.com",
+  "radar.openWindy": "Abrir en Windy",
+  "radar.close": "Cerrar el radar",
+
   "week.title": "Pronóstico de 7 días",
   "week.summary": "La semana de un vistazo",
   "week.warmest": "Más cálido",

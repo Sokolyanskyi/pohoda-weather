@@ -69,6 +69,21 @@ export const uk = {
   "sun.hours": "{h} год {m} хв",
   "sun.arc": "Шлях сонця",
 
+  "radar.open": "Радар",
+  "radar.title": "Радар опадів",
+  "radar.description": "Опади, вітер і температура — {place}",
+  "radar.layers": "Шар радара",
+  "radar.layer.radar": "Опади",
+  "radar.layer.wind": "Вітер",
+  "radar.layer.temp": "Температура",
+  "radar.frame": "Радар опадів для {place}",
+  "radar.loading": "Завантажую карту…",
+  "radar.hint":
+    "Час — на шкалі під картою: радар показує останні дві години й найближчі 30 хвилин, прогнозні шари — до десяти днів.",
+  "radar.source": "Карта й дані — Windy.com",
+  "radar.openWindy": "Відкрити на Windy",
+  "radar.close": "Закрити радар",
+
   "week.title": "Прогноз на 7 днів",
   "week.summary": "Тиждень коротко",
   "week.warmest": "Найтепліше",
