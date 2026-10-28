@@ -1,0 +1,843 @@
+/* ==========================================================================
+   Pohoda — fullscreen animated weather scene and the eight icon packs.
+   ========================================================================== */
+
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+
+.scene-sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--sky-day-1) 0%,
+    var(--sky-day-2) 58%,
+    var(--sky-day-3) 100%
+  );
+  transition: background 0.9s var(--ease);
+}
+
+.scene[data-day="night"] .scene-sky {
+  background: linear-gradient(
+    180deg,
+    var(--sky-night-1) 0%,
+    var(--sky-night-2) 62%,
+    var(--sky-night-3) 100%
+  );
+}
+
+.scene-sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease);
+  background: linear-gradient(
+    180deg,
+    rgba(28, 38, 56, 0.5),
+    rgba(28, 38, 56, 0.22) 45%,
+    transparent 80%
+  );
+}
+
+.scene[data-preset="cloudy"] .scene-sky::after {
+  opacity: 0.55;
+}
+
+.scene[data-preset="rain"] .scene-sky::after,
+.scene[data-preset="storm"] .scene-sky::after {
+  opacity: 0.75;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 24, 38, 0.72),
+    rgba(22, 32, 48, 0.4) 55%,
+    transparent 90%
+  );
+}
+
+.scene[data-preset="snow"] .scene-sky::after {
+  opacity: 0.35;
+}
+
+.scene[data-preset="fog"] .scene-sky::after {
+  opacity: 0.45;
+  background: linear-gradient(
+    180deg,
+    rgba(120, 130, 145, 0.4),
+    rgba(120, 130, 145, 0.2) 60%,
+    transparent
+  );
+}
+
+/* Light themes keep the sky readable: the scrim stays soft so dark text
+   sitting directly on the scene keeps its contrast. */
+[data-scheme="light"] .scene-stars {
+  opacity: 0.5;
+}
+
+[data-scheme="light"] .scene[data-preset="cloudy"] .scene-sky::after {
+  opacity: 0.3;
+}
+
+[data-scheme="light"] .scene[data-preset="rain"] .scene-sky::after,
+[data-scheme="light"] .scene[data-preset="storm"] .scene-sky::after {
+  opacity: 0.45;
+}
+
+[data-scheme="light"] .scene[data-preset="snow"] .scene-sky::after {
+  opacity: 0.2;
+}
+
+[data-scheme="light"] .scene[data-preset="fog"] .scene-sky::after {
+  opacity: 0.28;
+}
+
+/* --------------------------------- orb ---------------------------------- */
+
+.scene-orb {
+  position: absolute;
+  top: clamp(34px, 6vw, 84px);
+  right: clamp(14px, 9vw, 130px);
+  width: clamp(110px, 17vw, 230px);
+  aspect-ratio: 1;
+  transition: opacity 0.8s var(--ease);
+}
+
+.scene-orb-core {
+  position: absolute;
+  inset: 24%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #fff8d8, #fbbf24 62%, #f59e0b);
+  box-shadow: 0 0 60px 22px rgba(251, 191, 36, 0.35);
+  animation: orbBreathe 9s ease-in-out infinite;
+}
+
+.scene-moon .scene-orb-core {
+  background: radial-gradient(circle at 34% 30%, #ffffff, #dce6f6 58%, #a9b8d4);
+  box-shadow: 0 0 54px 16px rgba(190, 210, 245, 0.28);
+}
+
+.scene-orb-halo {
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.3), transparent 68%);
+}
+
+.scene-moon .scene-orb-halo {
+  background: radial-gradient(circle, rgba(200, 220, 255, 0.22), transparent 68%);
+}
+
+.scene[data-preset="partly"] .scene-orb {
+  opacity: 0.8;
+}
+
+.scene[data-preset="cloudy"] .scene-orb,
+.scene[data-preset="rain"] .scene-orb,
+.scene[data-preset="snow"] .scene-orb,
+.scene[data-preset="storm"] .scene-orb,
+.scene[data-preset="fog"] .scene-orb {
+  opacity: 0.22;
+}
+
+@keyframes orbBreathe {
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 80px 28px rgba(251, 191, 36, 0.42);
+  }
+}
+
+/* -------------------------------- clouds -------------------------------- */
+
+.scene-clouds {
+  position: absolute;
+  inset: 0;
+}
+
+.scene-cloud {
+  position: absolute;
+  width: clamp(240px, 34vw, 460px);
+  height: clamp(80px, 12vw, 150px);
+  animation: cloudDrift linear infinite;
+  will-change: translate;
+}
+
+.scene-cloud i {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  background: var(--cloud);
+  filter: blur(8px);
+}
+
+.scene-cloud i:nth-child(1) {
+  left: 0;
+  width: 46%;
+  height: 78%;
+}
+
+.scene-cloud i:nth-child(2) {
+  left: 26%;
+  width: 48%;
+  height: 100%;
+}
+
+.scene-cloud i:nth-child(3) {
+  right: 0;
+  width: 42%;
+  height: 68%;
+}
+
+@keyframes cloudDrift {
+  from {
+    translate: -35vw 0;
+  }
+  to {
+    translate: 120vw 0;
+  }
+}
+
+/* -------------------------------- stars --------------------------------- */
+
+.scene-stars {
+  position: absolute;
+  inset: 0;
+}
+
+.scene-stars span {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+  animation: twinkle ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* --------------------------------- fog ---------------------------------- */
+
+.scene-fog {
+  position: absolute;
+  inset: 40% 0 0;
+  overflow: hidden;
+}
+
+.scene-fog span {
+  position: absolute;
+  left: -20%;
+  width: 140%;
+  height: 34%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--cloud) 70%, transparent),
+    transparent 70%
+  );
+  filter: blur(16px);
+  animation: fogRoll 26s ease-in-out infinite alternate;
+}
+
+.scene-fog span:nth-child(1) {
+  top: 0;
+  opacity: 0.5;
+}
+
+.scene-fog span:nth-child(2) {
+  top: 26%;
+  opacity: 0.38;
+  animation-duration: 34s;
+  animation-delay: -8s;
+}
+
+.scene-fog span:nth-child(3) {
+  top: 56%;
+  opacity: 0.3;
+  animation-duration: 42s;
+  animation-delay: -16s;
+}
+
+@keyframes fogRoll {
+  from {
+    translate: -6% 0;
+  }
+  to {
+    translate: 8% 0;
+  }
+}
+
+/* ------------------------------- particles ------------------------------ */
+
+.scene-particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.85;
+}
+
+.scene-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 62% 12%, #ffffff, rgba(210, 225, 255, 0.4) 38%, transparent 70%);
+  opacity: 0;
+  animation: lightning 11s ease-out infinite;
+  mix-blend-mode: screen;
+}
+
+@keyframes lightning {
+  0%,
+  86%,
+  100% {
+    opacity: 0;
+  }
+  87% {
+    opacity: 0.75;
+  }
+  88% {
+    opacity: 0.08;
+  }
+  89.5% {
+    opacity: 0.55;
+  }
+  91% {
+    opacity: 0;
+  }
+}
+
+/* -------------------------------- haze ---------------------------------- */
+
+.scene-haze {
+  position: absolute;
+  inset: auto 0 0;
+  height: 45%;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--bg) 62%, transparent));
+}
+
+.scene-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 50% 0%,
+    transparent 40%,
+    color-mix(in srgb, var(--bg) 45%, transparent) 100%
+  );
+  opacity: 0.7;
+}
+
+/* ------------------------------ motion mode ----------------------------- */
+
+.scene[data-motion="calm"] .scene-cloud,
+.scene[data-motion="calm"] .scene-fog span {
+  animation-duration: 150s;
+}
+
+.scene[data-motion="calm"] .scene-orb-core {
+  animation-duration: 18s;
+}
+
+.scene[data-motion="calm"] .scene-flash {
+  animation-duration: 20s;
+}
+
+.scene[data-motion="off"] *,
+.scene[data-motion="off"] *::before,
+.scene[data-motion="off"] *::after {
+  animation: none !important;
+}
+
+.scene[data-motion="off"] .scene-flash {
+  opacity: 0;
+}
+
+.scene[data-motion="off"] .scene-particles {
+  display: none;
+}
+
+/* ==========================================================================
+   Icons
+   ========================================================================== */
+
+.wi {
+  display: inline-block;
+  line-height: 0;
+  flex: none;
+  vertical-align: middle;
+}
+
+.wi-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wi-svgpack {
+  --wi-cloud: color-mix(in srgb, var(--brand) 18%, transparent);
+  --wi-line: var(--brand);
+  --wi-stroke: 1.7;
+  --wi-sun: var(--icon-sun);
+  --wi-ray: var(--icon-sun);
+  --wi-moon: var(--icon-moon);
+  --wi-drop: var(--icon-drop);
+  --wi-drop-w: 2.4;
+  --wi-bolt: var(--icon-bolt);
+  --wi-star: var(--icon-star);
+}
+
+.wi-svgpack .wi-cloud path {
+  fill: var(--wi-cloud);
+  stroke: var(--wi-line);
+  stroke-width: var(--wi-stroke);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.wi-svgpack .wi-cloud-back {
+  opacity: 0.55;
+}
+
+.wi-svgpack .wi-sun > circle {
+  fill: var(--wi-sun);
+  stroke: var(--wi-line);
+  stroke-width: calc(var(--wi-stroke) * 0.6);
+}
+
+.wi-svgpack .wi-rays line {
+  stroke: var(--wi-ray);
+  stroke-width: var(--wi-stroke);
+  stroke-linecap: round;
+}
+
+.wi-svgpack .wi-moon > circle {
+  fill: var(--wi-moon);
+  stroke: var(--wi-line);
+  stroke-width: calc(var(--wi-stroke) * 0.6);
+}
+
+.wi-svgpack .wi-stars circle {
+  fill: var(--wi-star);
+}
+
+.wi-svgpack .wi-drop {
+  stroke: var(--wi-drop);
+  stroke-width: var(--wi-drop-w);
+  stroke-linecap: round;
+}
+
+.wi-svgpack .wi-flake path {
+  stroke: var(--wi-drop);
+  stroke-width: calc(var(--wi-stroke) * 0.85);
+  stroke-linecap: round;
+  fill: none;
+}
+
+.wi-svgpack .wi-fog line {
+  stroke: var(--wi-line);
+  stroke-width: var(--wi-stroke);
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+
+.wi-svgpack .wi-bolt path {
+  fill: var(--wi-bolt);
+  stroke: var(--wi-line);
+  stroke-width: calc(var(--wi-stroke) * 0.6);
+  stroke-linejoin: round;
+}
+
+.wi-svgpack .wi-hail circle {
+  fill: var(--wi-drop);
+  stroke: var(--wi-line);
+  stroke-width: calc(var(--wi-stroke) * 0.5);
+}
+
+.wi-halo {
+  fill: none;
+  stroke: var(--wi-line);
+  stroke-width: 1;
+  opacity: 0.22;
+}
+
+/* ------------------------------- packs ---------------------------------- */
+
+.wi-svgpack[data-pack="outline"] {
+  --wi-cloud: transparent;
+  --wi-line: currentColor;
+  --wi-sun: transparent;
+  --wi-ray: currentColor;
+  --wi-moon: transparent;
+  --wi-drop: currentColor;
+  --wi-drop-w: 2.2;
+  --wi-bolt: transparent;
+  --wi-star: currentColor;
+  --wi-stroke: 2.3;
+  opacity: 0.92;
+}
+
+.wi-svgpack[data-pack="duotone"] {
+  --wi-cloud: color-mix(in srgb, var(--brand) 20%, transparent);
+  --wi-line: color-mix(in srgb, var(--brand) 65%, var(--text));
+  --wi-sun: #fbbf24;
+  --wi-ray: #f59e0b;
+  --wi-moon: var(--icon-moon);
+  --wi-drop: var(--icon-drop);
+  --wi-bolt: #f59e0b;
+  --wi-stroke: 1.5;
+}
+
+.wi-svgpack[data-pack="solid"] {
+  --wi-cloud: var(--icon-cloud);
+  --wi-line: transparent;
+  --wi-sun: var(--icon-sun);
+  --wi-ray: var(--icon-sun);
+  --wi-moon: var(--icon-moon);
+  --wi-drop: var(--icon-drop);
+  --wi-drop-w: 3.4;
+  --wi-bolt: var(--icon-bolt);
+  --wi-star: var(--icon-star);
+  --wi-stroke: 0;
+}
+
+.wi-svgpack[data-pack="solid"] .wi-cloud path {
+  opacity: 0.92;
+}
+
+.wi-svgpack[data-pack="clay"] {
+  --wi-cloud: #cfdcef;
+  --wi-line: rgba(84, 104, 138, 0.3);
+  --wi-sun: #fcd34d;
+  --wi-ray: #fbbf24;
+  --wi-moon: #dfe7f3;
+  --wi-drop: #38bdf8;
+  --wi-drop-w: 3.4;
+  --wi-bolt: #fdba74;
+  --wi-star: #fde68a;
+  --wi-stroke: 1.2;
+}
+
+.wi-svgpack[data-pack="clay"] .wi-svg {
+  filter: drop-shadow(0 4px 5px rgba(3, 10, 24, 0.28));
+}
+
+.wi-svgpack[data-pack="neon"] {
+  --wi-cloud: color-mix(in srgb, var(--brand) 22%, transparent);
+  --wi-line: var(--brand);
+  --wi-sun: var(--brand);
+  --wi-ray: var(--brand-2);
+  --wi-moon: var(--brand-2);
+  --wi-drop: var(--brand-2);
+  --wi-drop-w: 2.6;
+  --wi-bolt: var(--brand-2);
+  --wi-star: var(--brand-2);
+  --wi-stroke: 1.5;
+}
+
+.wi-svgpack[data-pack="neon"] .wi-svg {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--brand) 60%, transparent));
+}
+
+.wi-svgpack[data-pack="glyph"] {
+  --wi-cloud: color-mix(in srgb, currentColor 12%, transparent);
+  --wi-line: currentColor;
+  --wi-sun: transparent;
+  --wi-ray: currentColor;
+  --wi-moon: transparent;
+  --wi-drop: currentColor;
+  --wi-bolt: currentColor;
+  --wi-star: currentColor;
+  --wi-stroke: 1.5;
+  opacity: 0.9;
+}
+
+/* ------------------------------- pixel ---------------------------------- */
+
+.wi-pixel .wi-svg {
+  image-rendering: pixelated;
+}
+
+.wi-px-sun {
+  fill: var(--icon-sun);
+}
+
+.wi-px-moon {
+  fill: var(--icon-moon);
+}
+
+.wi-px-cloud {
+  fill: var(--icon-cloud);
+}
+
+.wi-px-star {
+  fill: var(--icon-star);
+}
+
+.wi-px-drop {
+  fill: var(--icon-drop);
+}
+
+.wi-px-flake {
+  fill: var(--icon-cloud);
+}
+
+.wi-px-bolt-fill {
+  fill: var(--icon-bolt);
+}
+
+.wi-px-fog {
+  fill: var(--icon-cloud);
+  opacity: 0.55;
+}
+
+.wi-pixel[data-motion="full"] .wi-px-drop,
+.wi-pixel[data-motion="full"] .wi-px-flake {
+  animation: pxFall 1.5s steps(3) infinite;
+}
+
+.wi-pixel[data-motion="full"] .wi-px-drop:nth-child(2),
+.wi-pixel[data-motion="full"] .wi-px-flake:nth-child(2) {
+  animation-delay: 0.45s;
+}
+
+.wi-pixel[data-motion="full"] .wi-px-drop:nth-child(3),
+.wi-pixel[data-motion="full"] .wi-px-flake:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+.wi-pixel[data-motion="full"] .wi-px-bolt {
+  animation: pxFlash 3.2s steps(2) infinite;
+}
+
+.wi-pixel[data-motion="calm"] .wi-px-bolt {
+  animation: pxFlash 6s steps(2) infinite;
+}
+
+@keyframes pxFall {
+  0% {
+    transform: translateY(-2px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(3px);
+    opacity: 0;
+  }
+}
+
+@keyframes pxFlash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* ------------------------------- emoji ---------------------------------- */
+
+.wi-emoji {
+  display: inline-grid;
+  place-items: center;
+}
+
+.wi-emoji-glyph {
+  line-height: 1;
+  filter: drop-shadow(0 6px 12px rgba(2, 8, 20, 0.25));
+}
+
+.wi-emoji[data-motion="full"] .wi-emoji-glyph {
+  animation: emojiFloat 4.5s ease-in-out infinite;
+}
+
+.wi-emoji[data-motion="calm"] .wi-emoji-glyph {
+  animation: emojiFloat 9s ease-in-out infinite;
+}
+
+@keyframes emojiFloat {
+  50% {
+    transform: translateY(-4%) rotate(-2deg);
+  }
+}
+
+/* ----------------------------- icon motion ------------------------------ */
+
+.wi-rays {
+  transform-origin: 32px 30px;
+  transform-box: view-box;
+}
+
+.wi-svgpack[data-motion="full"] .wi-rays {
+  animation: wiSpin 44s linear infinite;
+}
+
+.wi-svgpack[data-motion="calm"] .wi-rays {
+  animation: wiSpin 90s linear infinite;
+}
+
+.wi-svgpack[data-motion="full"] .wi-cloud {
+  animation: wiFloat 5.5s ease-in-out infinite;
+}
+
+.wi-svgpack[data-motion="calm"] .wi-cloud {
+  animation: wiFloat 9s ease-in-out infinite;
+}
+
+.wi-svgpack[data-motion="full"] .wi-drop {
+  animation: wiFall 1.15s linear infinite;
+}
+
+.wi-svgpack[data-motion="calm"] .wi-drop {
+  animation: wiFall 2.4s linear infinite;
+}
+
+.wi-svgpack[data-motion="full"] .wi-flake {
+  animation: wiFlake 3.6s linear infinite;
+}
+
+.wi-svgpack[data-motion="calm"] .wi-flake {
+  animation: wiFlake 6s linear infinite;
+}
+
+.wi-svgpack[data-motion="full"] .wi-bolt {
+  animation: wiBolt 3.4s ease-in-out infinite;
+}
+
+.wi-svgpack[data-motion="calm"] .wi-bolt {
+  animation: wiBolt 5.5s ease-in-out infinite;
+}
+
+.wi-svgpack[data-motion="full"] .wi-stars circle {
+  animation: wiTwinkle 3.2s ease-in-out infinite;
+}
+
+.wi-svgpack[data-motion="off"] *,
+.wi[data-motion="off"] * {
+  animation: none !important;
+}
+
+@keyframes wiSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wiFloat {
+  50% {
+    transform: translateY(-1.6px);
+  }
+}
+
+@keyframes wiFall {
+  0% {
+    transform: translateY(-1px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+}
+
+@keyframes wiFlake {
+  0% {
+    transform: translateY(-1px) rotate(0deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(5px) rotate(90deg);
+    opacity: 0;
+  }
+}
+
+@keyframes wiBolt {
+  0%,
+  58%,
+  100% {
+    opacity: 1;
+  }
+  62% {
+    opacity: 0.2;
+  }
+  66% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.35;
+  }
+  74% {
+    opacity: 1;
+  }
+}
+
+@keyframes wiTwinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* --------------------------- reduced motion ----------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-cloud,
+  .scene-fog span,
+  .scene-stars span,
+  .scene-orb-core,
+  .scene-flash,
+  .wi-svgpack *,
+  .wi-emoji-glyph,
+  .wi-pixel * {
+    animation: none !important;
+  }
+
+  .view {
+    animation: none !important;
+  }
+}
+
+/* --------------------------- narrow screens ----------------------------- */
+
+@media (max-width: 640px) {
+  .scene-orb {
+    top: 20px;
+    right: -10px;
+    width: 150px;
+    opacity: 0.75;
+  }
+
+  .scene-cloud {
+    width: 260px;
+    height: 88px;
+    filter: blur(1px);
+  }
+
+  .scene-vignette {
+    opacity: 0.55;
+  }
+}
