@@ -7,7 +7,7 @@ import { useNow } from "@/lib/client/use-weather";
 import { daylightMinutes, sunProgress } from "@/lib/time";
 import type { DailyPoint } from "@/lib/types";
 
-const ARC = { left: 12, right: 88, top: 10, bottom: 50 };
+const ARC = { left: 8, right: 92, top: 10, bottom: 50 };
 
 function arcPoint(progress: number): { x: number; y: number } {
   const x = ARC.left + (ARC.right - ARC.left) * progress;
@@ -37,8 +37,13 @@ export function SunCard({ day, timezone }: { day: DailyPoint | undefined; timezo
       </header>
 
       <div className="sun-arc">
-        <svg viewBox="0 0 100 60" aria-hidden="true">
-          <path className="sun-path" d={path} />
+        <svg
+          className="sun-arc-svg"
+          viewBox="0 0 100 60"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path className="sun-path" d={path} vectorEffect="non-scaling-stroke" />
           {progress !== null ? (
             <path
               className="sun-progress"
@@ -46,30 +51,43 @@ export function SunCard({ day, timezone }: { day: DailyPoint | undefined; timezo
               pathLength={1}
               strokeDasharray={1}
               strokeDashoffset={1 - progress}
+              vectorEffect="non-scaling-stroke"
             />
           ) : null}
-          <line className="sun-horizon" x1="6" y1={ARC.bottom} x2="94" y2={ARC.bottom} />
-          <circle className="sun-edge" cx={ARC.left} cy={ARC.bottom} r="1.7" />
-          <circle className="sun-edge" cx={ARC.right} cy={ARC.bottom} r="1.7" />
-          {progress !== null ? (
-            <g className="sun-dot" style={{ transform: `translate(${point.x}px, ${point.y}px)` }}>
-              <circle r="9" className="sun-dot-halo" />
-              <g className="sun-dot-rays">
-                {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
-                  <line
-                    key={angle}
-                    x1="0"
-                    y1="-6.4"
-                    x2="0"
-                    y2="-9.4"
-                    transform={`rotate(${angle})`}
-                  />
-                ))}
-              </g>
-              <circle r="3.4" className="sun-dot-core" />
-            </g>
-          ) : null}
+          <line
+            className="sun-horizon"
+            x1="4"
+            y1={ARC.bottom}
+            x2="96"
+            y2={ARC.bottom}
+            vectorEffect="non-scaling-stroke"
+          />
         </svg>
+        <span className="sun-edge sun-edge-rise" aria-hidden="true" />
+        <span className="sun-edge sun-edge-set" aria-hidden="true" />
+        {progress !== null ? (
+          <svg
+            className="sun-dot"
+            viewBox="-13 -13 26 26"
+            style={{ left: `${point.x}%`, top: `${(point.y / 60) * 100}%` }}
+            aria-hidden="true"
+          >
+            <circle r="9" className="sun-dot-halo" />
+            <g className="sun-dot-rays">
+              {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
+                <line
+                  key={angle}
+                  x1="0"
+                  y1="-6.4"
+                  x2="0"
+                  y2="-9.4"
+                  transform={`rotate(${angle})`}
+                />
+              ))}
+            </g>
+            <circle r="3.4" className="sun-dot-core" />
+          </svg>
+        ) : null}
         <span className="sun-label sun-label-rise">{formatTime(day?.sunrise, timezone, prefs.locale)}</span>
         <span className="sun-label sun-label-set">{formatTime(day?.sunset, timezone, prefs.locale)}</span>
       </div>

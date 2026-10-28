@@ -1204,7 +1204,7 @@ svg {
 
 .two-col {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: 12px;
   margin-top: 12px;
 }
@@ -1215,11 +1215,12 @@ svg {
 
 .sun-arc {
   position: relative;
-  margin: 8px 0 2px;
-  height: 120px;
+  margin: 10px 0 2px;
+  height: 150px;
 }
 
-.sun-arc svg {
+.sun-arc-svg {
+  display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
@@ -1243,8 +1244,22 @@ svg {
 }
 
 .sun-edge {
-  fill: var(--icon-sun);
+  position: absolute;
+  top: 83.333%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--icon-sun);
   opacity: 0.85;
+}
+
+.sun-edge-rise {
+  left: 8%;
+}
+
+.sun-edge-set {
+  left: 92%;
 }
 
 .sun-horizon {
@@ -1253,7 +1268,12 @@ svg {
 }
 
 .sun-dot {
-  transition: transform 2s linear;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  overflow: visible;
+  transition: left 2s linear, top 2s linear;
 }
 
 .sun-dot-halo {
@@ -2628,25 +2648,26 @@ input[type="search"]:focus {
 /* -------------------------------- wind ---------------------------------- */
 
 .wind-card {
-  padding: 14px 16px;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .wind-body {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 8px;
   flex: 1;
-  margin-top: 2px;
+  margin-top: 6px;
 }
 
-/* Compact: the tree is roughly half its previous size, so the card stays a
-   small block next to the sun arc instead of dominating the row. */
 .wind-art {
-  flex: 0 1 104px;
-  min-width: 74px;
-  max-width: 104px;
+  flex: 0 1 auto;
+  width: min(190px, 100%);
+  max-width: 190px;
 }
 
 .wind-art svg {
@@ -2657,15 +2678,15 @@ input[type="search"]:focus {
 }
 
 .wind-readout {
-  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  align-items: center;
+  gap: 2px;
   min-width: 0;
 }
 
 .wind-readout strong {
-  font-size: clamp(1.15rem, 1.9vw, 1.4rem);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
   font-weight: 650;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
@@ -2749,28 +2770,28 @@ input[type="search"]:focus {
 
 @keyframes treeSway {
   from {
-    transform: rotate(calc(var(--wind-strength, 0.3) * -2.4deg));
+    transform: rotate(calc(var(--wind-strength, 0.3) * -5.5deg));
   }
   to {
-    transform: rotate(calc(var(--wind-strength, 0.3) * 3.2deg));
+    transform: rotate(calc(var(--wind-strength, 0.3) * 7deg));
   }
 }
 
 @keyframes crownSway {
   from {
-    transform: skewX(calc(var(--wind-strength, 0.3) * -3deg));
+    transform: skewX(calc(var(--wind-strength, 0.3) * -7deg));
   }
   to {
-    transform: skewX(calc(var(--wind-strength, 0.3) * 4deg));
+    transform: skewX(calc(var(--wind-strength, 0.3) * 9deg));
   }
 }
 
 @keyframes grassSway {
   from {
-    transform: skewX(calc(var(--wind-strength, 0.3) * -9deg));
+    transform: skewX(calc(var(--wind-strength, 0.3) * -14deg));
   }
   to {
-    transform: skewX(calc(var(--wind-strength, 0.3) * 12deg));
+    transform: skewX(calc(var(--wind-strength, 0.3) * 18deg));
   }
 }
 
@@ -3278,7 +3299,7 @@ input[type="search"]:focus {
   }
 
   .sun-arc {
-    height: 96px;
+    height: 118px;
   }
 
   .view-head {

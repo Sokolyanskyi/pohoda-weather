@@ -11,8 +11,8 @@ export function WindCard({ current }: { current: CurrentWeather }) {
   const speed = current.windSpeed ?? 0;
   // 0..1 drives how far the tree and the grass bend; the period shrinks as
   // the wind picks up so a gale looks faster, not just wider.
-  const strength = Math.max(0.08, Math.min(1, speed / 42));
-  const duration = (4.4 - strength * 2.9).toFixed(2);
+  const strength = Math.max(0.28, Math.min(1, speed / 38));
+  const duration = (3.4 - strength * 1.7).toFixed(2);
   const direction = directionKey(current.windDirection);
 
   return (
