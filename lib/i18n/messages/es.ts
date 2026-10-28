@@ -34,6 +34,7 @@ export const es = {
   "metric.clouds": "Nubosidad",
   "metric.dewPoint": "Punto de rocío",
   "metric.precipitation": "Precipitación",
+  "metric.precipChance": "Probabilidad de lluvia",
   "metric.direction": "Dirección",
 
   "uv.low": "Bajo",

@@ -34,6 +34,7 @@ export const pl = {
   "metric.clouds": "Zachmurzenie",
   "metric.dewPoint": "Punkt rosy",
   "metric.precipitation": "Opady",
+  "metric.precipChance": "Szansa na deszcz",
   "metric.direction": "Kierunek",
 
   "uv.low": "Niski",

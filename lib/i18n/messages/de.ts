@@ -34,6 +34,7 @@ export const de = {
   "metric.clouds": "Bewölkung",
   "metric.dewPoint": "Taupunkt",
   "metric.precipitation": "Niederschlag",
+  "metric.precipChance": "Regenchance",
   "metric.direction": "Richtung",
 
   "uv.low": "Niedrig",

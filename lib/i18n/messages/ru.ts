@@ -34,6 +34,7 @@ export const ru = {
   "metric.clouds": "Облачность",
   "metric.dewPoint": "Точка росы",
   "metric.precipitation": "Осадки",
+  "metric.precipChance": "Вероятность дождя",
   "metric.direction": "Направление",
 
   "uv.low": "Низкий",

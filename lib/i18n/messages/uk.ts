@@ -34,6 +34,7 @@ export const uk = {
   "metric.clouds": "Хмарність",
   "metric.dewPoint": "Точка роси",
   "metric.precipitation": "Опади",
+  "metric.precipChance": "Ймовірність дощу",
   "metric.direction": "Напрямок",
 
   "uv.low": "Низький",

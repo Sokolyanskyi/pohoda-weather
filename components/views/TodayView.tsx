@@ -123,7 +123,7 @@ export function TodayView({ snapshot }: { snapshot: WeatherSnapshot }) {
               </svg>
             </span>
             <span>
-              <small>{t("metric.precipitation")}</small>
+              <small>{t("metric.precipChance")}</small>
               <strong>{formatPercent(rainChance, locale)}</strong>
             </span>
           </div>
@@ -266,14 +266,20 @@ export function TodayView({ snapshot }: { snapshot: WeatherSnapshot }) {
               const low = Math.min(...window.map((item) => item.min));
               const high = Math.max(...window.map((item) => item.max));
               const span = Math.max(1, high - low);
-              const height = ((day.max - low) / span) * 100;
+              const bottom = ((day.min - low) / span) * 100;
+              const height = ((day.max - day.min) / span) * 100;
               return (
                 <span
                   key={day.date}
                   className="insight-bar"
                   data-tone={temperatureTone((day.min + day.max) / 2)}
                 >
-                  <i style={{ height: `${Math.max(12, Math.min(100, height))}%` }} />
+                  <i
+                    style={{
+                      bottom: `${Math.max(0, Math.min(100, bottom))}%`,
+                      height: `${Math.max(8, Math.min(100, height))}%`,
+                    }}
+                  />
                   <small>{formatWeekday(day.date, locale, "narrow")}</small>
                 </span>
               );

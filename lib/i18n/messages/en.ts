@@ -32,6 +32,7 @@ export const en = {
   "metric.clouds": "Cloud cover",
   "metric.dewPoint": "Dew point",
   "metric.precipitation": "Precipitation",
+  "metric.precipChance": "Rain chance",
   "metric.direction": "Direction",
 
   "uv.low": "Low",
