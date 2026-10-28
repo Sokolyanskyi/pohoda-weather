@@ -2503,26 +2503,26 @@ input[type="search"]:focus {
 .wc-bar {
   position: absolute;
   left: 50%;
-  width: 6px;
-  margin-left: -3px;
+  width: 14px;
+  margin-left: -7px;
   border-radius: 999px;
   background: linear-gradient(
     180deg,
     var(--wc-top, #fb7185) 0%,
     var(--wc-bottom, #fdba74) 100%
   );
-  box-shadow: 0 0 14px color-mix(in srgb, var(--wc-glow, #fb7185) 42%, transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--wc-glow, #fb7185) 42%, transparent);
 }
 
 .wc-avg {
   position: absolute;
   left: 50%;
-  width: 8px;
-  height: 8px;
-  margin-left: -4px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
   border-radius: 50%;
   background: var(--bg);
-  border: 1.5px solid var(--wc-glow, #fb7185);
+  border: 2px solid var(--wc-glow, #fb7185);
 }
 
 .wc-max,
@@ -3040,14 +3040,14 @@ input[type="search"]:focus {
   }
 
   .wc-bar {
-    width: 5px;
-    margin-left: -2.5px;
+    width: 11px;
+    margin-left: -5.5px;
   }
 
   .wc-avg {
-    width: 7px;
-    height: 7px;
-    margin-left: -3.5px;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
   }
 
   .history-toggle {
