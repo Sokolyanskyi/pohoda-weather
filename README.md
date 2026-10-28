@@ -37,9 +37,9 @@ Live demo: https://pohoda-weather.vercel.app
 
 - Current conditions with feels-like temperature, daily high and low.
 - 24-hour hourly strip with precipitation probability.
-- 7-day view with a summary strip (warmest, coldest, total precipitation, windiest day) and expandable rows for every day.
+- 7-day view with a chart of vertical temperature ranges (high and low on every bar), rain chance, wind and weekday, plus a summary strip and expandable rows for every day.
 - 30-day view split into a real forecast and a clearly marked climate section.
-- Sun card with an arc that tracks the actual position of the sun, plus sunrise, sunset and daylight length.
+- Sun card with an arc that tracks the actual position of the sun in real time, a filled trail from sunrise, and sunrise, sunset and daylight length.
 - Detail cards for wind and gusts, direction, humidity, pressure, UV index, visibility, cloud cover and dew point.
 
 ### Providers
@@ -68,7 +68,8 @@ Keyless providers work out of the box. Keys for the commercial providers are opt
 
 - **Ten colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `aurora`, `nebula`, `ocean`, `ember` (dark).
 - **Eight animated icon packs:** outline, duotone, solid, clay, neon, pixel, emoji, glyph.
-- **Full-screen scenes** for clear, partly cloudy, overcast, fog, rain, snow and thunderstorms, with canvas particles for precipitation and a lightning flash for storms.
+- **Full-screen scenes** for clear, partly cloudy, overcast, fog, rain, snow and thunderstorms, with drifting colour fields, moving clouds, canvas particles for precipitation and a lightning flash for storms.
+- **A wind card with a tree and grass** that bend further and faster as the wind picks up.
 - **Motion levels:** full, calm, off. The system's reduced-motion preference is respected too.
 
 ### Language and units
@@ -82,6 +83,7 @@ Keyless providers work out of the box. Keys for the commercial providers are opt
 ### Platform
 
 - Responsive from 360 px phones to wide desktops.
+- The header stays pinned while the page scrolls.
 - Installable PWA with a manifest and maskable icons.
 - Theme is applied before first paint, so there is no flash of the wrong colours.
 - Settings persist in `localStorage` under `pohoda.prefs.v1`.

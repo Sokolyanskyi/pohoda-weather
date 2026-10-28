@@ -6,6 +6,7 @@ import { formatDayMonth, formatWeekday } from "@/lib/time";
 import { formatPrecip, formatTemp, formatWind } from "@/lib/format";
 import type { WeatherSnapshot } from "@/lib/types";
 import { DayRow } from "../DayRow";
+import { WeekChart } from "../WeekChart";
 
 export function WeekView({ snapshot }: { snapshot: WeatherSnapshot }) {
   const { prefs, t } = usePrefs();
@@ -31,6 +32,8 @@ export function WeekView({ snapshot }: { snapshot: WeatherSnapshot }) {
           <h2>{t("week.title")}</h2>
         </div>
       </div>
+
+      <WeekChart days={days} />
 
       <div className="summary-grid">
         <article className="card summary">

@@ -20,7 +20,84 @@
     var(--sky-day-2) 58%,
     var(--sky-day-3) 100%
   );
+  background-size: 150% 150%;
+  animation: skyShift 38s ease-in-out infinite alternate;
   transition: background 0.9s var(--ease);
+}
+
+@keyframes skyShift {
+  from {
+    background-position: 50% 0%;
+  }
+  to {
+    background-position: 50% 58%;
+  }
+}
+
+/* Soft colour fields that drift behind the cards. They give the scene depth
+   even when the sky itself is a flat colour. */
+.scene-aura {
+  position: absolute;
+  inset: -12%;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.scene-aura span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--brand) 58%, transparent),
+    transparent 70%
+  );
+  animation: auraDrift 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.scene-aura span:nth-child(1) {
+  width: 52vw;
+  height: 52vw;
+  top: -14%;
+  left: -8%;
+}
+
+.scene-aura span:nth-child(2) {
+  width: 46vw;
+  height: 46vw;
+  right: -6%;
+  bottom: -18%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--brand-2) 52%, transparent),
+    transparent 70%
+  );
+  animation-duration: 38s;
+  animation-delay: -8s;
+}
+
+.scene-aura span:nth-child(3) {
+  width: 38vw;
+  height: 38vw;
+  top: 30%;
+  left: 46%;
+  opacity: 0.55;
+  animation-duration: 46s;
+  animation-delay: -18s;
+}
+
+@keyframes auraDrift {
+  from {
+    transform: translate3d(-4%, -3%, 0) scale(0.95);
+  }
+  to {
+    transform: translate3d(6%, 5%, 0) scale(1.12);
+  }
+}
+
+[data-scheme="light"] .scene-aura {
+  opacity: 0.18;
 }
 
 .scene[data-day="night"] .scene-sky {
@@ -107,6 +184,13 @@
   width: clamp(110px, 17vw, 230px);
   aspect-ratio: 1;
   transition: opacity 0.8s var(--ease);
+  animation: orbFloat 24s ease-in-out infinite alternate;
+}
+
+@keyframes orbFloat {
+  to {
+    translate: -16px 12px;
+  }
 }
 
 .scene-orb-core {
@@ -347,6 +431,18 @@
   animation-duration: 150s;
 }
 
+.scene[data-motion="calm"] .scene-sky {
+  animation-duration: 160s;
+}
+
+.scene[data-motion="calm"] .scene-aura span {
+  animation-duration: 160s;
+}
+
+.scene[data-motion="calm"] .scene-orb {
+  animation-duration: 90s;
+}
+
 .scene[data-motion="calm"] .scene-orb-core {
   animation-duration: 18s;
 }
@@ -568,6 +664,16 @@
 
 .wi-pixel .wi-svg {
   image-rendering: pixelated;
+}
+
+.wi-pixel[data-motion="full"] .wi-svg {
+  animation: pxBob 2.8s steps(2, end) infinite;
+}
+
+@keyframes pxBob {
+  50% {
+    transform: translateY(-1px);
+  }
 }
 
 .wi-px-sun {

@@ -15,12 +15,13 @@ import {
   temperatureTone,
   uvKey,
 } from "@/lib/units";
-import { formatFullDate, formatHour, formatTime, formatWeekday } from "@/lib/time";
+import { formatFullDate, formatHour, formatTime } from "@/lib/time";
 import type { WeatherSnapshot } from "@/lib/types";
 import type { MessageKey } from "@/lib/i18n";
 import type { ReactNode } from "react";
 import { SunCard } from "../SunCard";
 import { WeatherIcon } from "../WeatherIcon";
+import { WindCard } from "../WindCard";
 
 function DetailCard({
   label,
@@ -88,9 +89,9 @@ export function TodayView({ snapshot }: { snapshot: WeatherSnapshot }) {
               className="hero-icon"
             />
             <div className="hero-temp-wrap">
-              <span className="hero-temp">{tempValue(current.temperature, prefs.temperature, locale)}°</span>
+              <span className="hero-temp">{tempValue(current.temperature, prefs.temperature, locale)}</span>
               <span className="hero-unit">
-                {prefs.temperature === "f" ? "F" : "C"}
+                °{prefs.temperature === "f" ? "F" : "C"}
               </span>
             </div>
           </div>
@@ -246,46 +247,7 @@ export function TodayView({ snapshot }: { snapshot: WeatherSnapshot }) {
 
       <div className="two-col">
         <SunCard day={today} timezone={timezone} />
-        <article className="card insight">
-          <header className="card-head">
-            <h3>{t("week.summary")}</h3>
-            <span className="chip chip-soft">{formatWeekday(today?.date ?? "", locale, "short")}</span>
-          </header>
-          <p className="insight-text">
-            {today
-              ? `${t(`cond.${today.kind}` as MessageKey)} · ${formatTemp(today.min, prefs.temperature, locale)} … ${formatTemp(
-                  today.max,
-                  prefs.temperature,
-                  locale,
-                )}`
-              : t("common.loading")}
-          </p>
-          <div className="insight-bars">
-            {daily.slice(0, 5).map((day) => {
-              const window = daily.slice(0, 5);
-              const low = Math.min(...window.map((item) => item.min));
-              const high = Math.max(...window.map((item) => item.max));
-              const span = Math.max(1, high - low);
-              const bottom = ((day.min - low) / span) * 100;
-              const height = ((day.max - day.min) / span) * 100;
-              return (
-                <span
-                  key={day.date}
-                  className="insight-bar"
-                  data-tone={temperatureTone((day.min + day.max) / 2)}
-                >
-                  <i
-                    style={{
-                      bottom: `${Math.max(0, Math.min(100, bottom))}%`,
-                      height: `${Math.max(8, Math.min(100, height))}%`,
-                    }}
-                  />
-                  <small>{formatWeekday(day.date, locale, "narrow")}</small>
-                </span>
-              );
-            })}
-          </div>
-        </article>
+        <WindCard current={current} />
       </div>
     </div>
   );

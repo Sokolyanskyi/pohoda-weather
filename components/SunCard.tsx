@@ -21,10 +21,11 @@ function arcPoint(progress: number): { x: number; y: number } {
 
 export function SunCard({ day, timezone }: { day: DailyPoint | undefined; timezone: string }) {
   const { prefs, t } = usePrefs();
-  const now = useNow(60_000);
+  const now = useNow(15_000);
   const progress = day ? sunProgress(day.sunrise, day.sunset, now) : null;
   const minutes = day ? daylightMinutes(day.sunrise, day.sunset) : null;
   const point = arcPoint(progress ?? 0);
+  const path = `M${ARC.left} ${ARC.bottom} Q50 ${ARC.bottom - (ARC.bottom - ARC.top) * 2} ${ARC.right} ${ARC.bottom}`;
 
   return (
     <article className="card sun-card">
@@ -37,15 +38,35 @@ export function SunCard({ day, timezone }: { day: DailyPoint | undefined; timezo
 
       <div className="sun-arc">
         <svg viewBox="0 0 100 60" aria-hidden="true">
-          <path
-            className="sun-path"
-            d={`M${ARC.left} ${ARC.bottom} Q50 ${ARC.bottom - (ARC.bottom - ARC.top) * 2} ${ARC.right} ${ARC.bottom}`}
-          />
+          <path className="sun-path" d={path} />
+          {progress !== null ? (
+            <path
+              className="sun-progress"
+              d={path}
+              pathLength={1}
+              strokeDasharray={1}
+              strokeDashoffset={1 - progress}
+            />
+          ) : null}
           <line className="sun-horizon" x1="6" y1={ARC.bottom} x2="94" y2={ARC.bottom} />
+          <circle className="sun-edge" cx={ARC.left} cy={ARC.bottom} r="1.7" />
+          <circle className="sun-edge" cx={ARC.right} cy={ARC.bottom} r="1.7" />
           {progress !== null ? (
             <g className="sun-dot" style={{ transform: `translate(${point.x}px, ${point.y}px)` }}>
-              <circle r="4.6" className="sun-dot-halo" />
-              <circle r="2.6" className="sun-dot-core" />
+              <circle r="9" className="sun-dot-halo" />
+              <g className="sun-dot-rays">
+                {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
+                  <line
+                    key={angle}
+                    x1="0"
+                    y1="-6.4"
+                    x2="0"
+                    y2="-9.4"
+                    transform={`rotate(${angle})`}
+                  />
+                ))}
+              </g>
+              <circle r="3.4" className="sun-dot-core" />
             </g>
           ) : null}
         </svg>

@@ -184,6 +184,11 @@ export function WeatherScene({ kind, isDay, motion }: SceneProps) {
       aria-hidden="true"
     >
       <div className="scene-sky" />
+      <div className="scene-aura">
+        <span />
+        <span />
+        <span />
+      </div>
       {!isDay ? (
         <div className="scene-stars">
           {STARS.slice(0, preset === "clear" ? 64 : 34).map((star, index) => (
