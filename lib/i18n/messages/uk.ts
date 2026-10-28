@@ -60,7 +60,7 @@ export const uk = {
 
   "details.title": "Деталі на сьогодні",
 
-  "sun.title": "Сонце",
+  "sun.title": "Сонце і місяць",
   "sun.sunrise": "Схід",
   "sun.sunset": "Захід",
   "sun.daylight": "Світловий день",
@@ -68,6 +68,15 @@ export const uk = {
   "sun.down": "Сонце зайшло",
   "sun.hours": "{h} год {m} хв",
   "sun.arc": "Шлях сонця",
+
+  "moon.phase.new": "Молодик",
+  "moon.phase.waxingCrescent": "Молодий серп",
+  "moon.phase.firstQuarter": "Перша чверть",
+  "moon.phase.waxingGibbous": "Прибуваючий місяць",
+  "moon.phase.full": "Повня",
+  "moon.phase.waningGibbous": "Спадний місяць",
+  "moon.phase.lastQuarter": "Остання чверть",
+  "moon.phase.waningCrescent": "Спадний серп",
 
   "radar.open": "Радар",
   "radar.title": "Радар опадів",

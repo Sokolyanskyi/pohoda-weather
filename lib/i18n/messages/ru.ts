@@ -60,7 +60,7 @@ export const ru = {
 
   "details.title": "Детали на сегодня",
 
-  "sun.title": "Солнце",
+  "sun.title": "Солнце и луна",
   "sun.sunrise": "Восход",
   "sun.sunset": "Закат",
   "sun.daylight": "Световой день",
@@ -68,6 +68,15 @@ export const ru = {
   "sun.down": "Солнце село",
   "sun.hours": "{h} ч {m} мин",
   "sun.arc": "Путь солнца",
+
+  "moon.phase.new": "Новолуние",
+  "moon.phase.waxingCrescent": "Растущий серп",
+  "moon.phase.firstQuarter": "Первая четверть",
+  "moon.phase.waxingGibbous": "Растущая луна",
+  "moon.phase.full": "Полнолуние",
+  "moon.phase.waningGibbous": "Убывающая луна",
+  "moon.phase.lastQuarter": "Последняя четверть",
+  "moon.phase.waningCrescent": "Убывающий серп",
 
   "radar.open": "Радар",
   "radar.title": "Радар осадков",

@@ -58,7 +58,7 @@ export const en = {
 
   "details.title": "Today's details",
 
-  "sun.title": "Sun",
+  "sun.title": "Sun & moon",
   "sun.sunrise": "Sunrise",
   "sun.sunset": "Sunset",
   "sun.daylight": "Daylight",
@@ -66,6 +66,15 @@ export const en = {
   "sun.down": "Sun has set",
   "sun.hours": "{h} h {m} min",
   "sun.arc": "Sun path",
+
+  "moon.phase.new": "New moon",
+  "moon.phase.waxingCrescent": "Waxing crescent",
+  "moon.phase.firstQuarter": "First quarter",
+  "moon.phase.waxingGibbous": "Waxing gibbous",
+  "moon.phase.full": "Full moon",
+  "moon.phase.waningGibbous": "Waning gibbous",
+  "moon.phase.lastQuarter": "Last quarter",
+  "moon.phase.waningCrescent": "Waning crescent",
 
   "radar.open": "Radar",
   "radar.title": "Weather radar",

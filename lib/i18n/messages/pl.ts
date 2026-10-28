@@ -60,7 +60,7 @@ export const pl = {
 
   "details.title": "Szczegóły na dziś",
 
-  "sun.title": "Słońce",
+  "sun.title": "Słońce i księżyc",
   "sun.sunrise": "Wschód",
   "sun.sunset": "Zachód",
   "sun.daylight": "Dzień",
@@ -68,6 +68,15 @@ export const pl = {
   "sun.down": "Słońce zaszło",
   "sun.hours": "{h} godz. {m} min",
   "sun.arc": "Droga słońca",
+
+  "moon.phase.new": "Nów",
+  "moon.phase.waxingCrescent": "Przybywający sierp",
+  "moon.phase.firstQuarter": "Pierwsza kwadra",
+  "moon.phase.waxingGibbous": "Przybywający księżyc",
+  "moon.phase.full": "Pełnia",
+  "moon.phase.waningGibbous": "Ubywający księżyc",
+  "moon.phase.lastQuarter": "Ostatnia kwadra",
+  "moon.phase.waningCrescent": "Ubywający sierp",
 
   "radar.open": "Radar",
   "radar.title": "Radar opadów",

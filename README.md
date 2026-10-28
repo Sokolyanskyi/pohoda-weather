@@ -48,7 +48,7 @@ Live demo: https://pohoda-weather.vercel.app
 - 24-hour hourly strip with precipitation probability.
 - 7-day view with a chart of vertical temperature ranges (high and low on every bar), rain chance, wind and weekday, plus a summary strip and expandable rows for every day.
 - 30-day view split into a real forecast and a clearly marked climate section.
-- Sun card with an arc that tracks the actual position of the sun in real time, a filled trail from sunrise, and sunrise, sunset and daylight length.
+- Sun and moon card: an arc that tracks the sun in real time with a filled trail from sunrise, then switches to the moon after sunset — its current phase (eight names, from new moon to waning crescent), a soft glow and the night path from sunset to the next sunrise. Sunrise, sunset and daylight length stay below.
 - Detail cards for wind and gusts, direction, humidity, pressure, UV index, visibility, cloud cover and dew point.
 - **“This day” archive block** at the bottom: ten tabs from one to ten years back, each with the weather type, high and low, precipitation, wind and how much warmer or colder that day was compared with today.
 - **Weather radar** from the hero card: a Windy map with live rain, wind and temperature layers, switched with one tap. The timeline under the map covers the last two hours and the next 30 minutes for radar, and up to ten days for the forecast layers.

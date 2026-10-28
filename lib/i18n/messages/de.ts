@@ -60,7 +60,7 @@ export const de = {
 
   "details.title": "Details für heute",
 
-  "sun.title": "Sonne",
+  "sun.title": "Sonne und Mond",
   "sun.sunrise": "Sonnenaufgang",
   "sun.sunset": "Sonnenuntergang",
   "sun.daylight": "Tageslicht",
@@ -68,6 +68,15 @@ export const de = {
   "sun.down": "Sonne ist untergegangen",
   "sun.hours": "{h} Std. {m} Min.",
   "sun.arc": "Sonnenbahn",
+
+  "moon.phase.new": "Neumond",
+  "moon.phase.waxingCrescent": "Zunehmende Sichel",
+  "moon.phase.firstQuarter": "Erstes Viertel",
+  "moon.phase.waxingGibbous": "Zunehmender Mond",
+  "moon.phase.full": "Vollmond",
+  "moon.phase.waningGibbous": "Abnehmender Mond",
+  "moon.phase.lastQuarter": "Letztes Viertel",
+  "moon.phase.waningCrescent": "Abnehmende Sichel",
 
   "radar.open": "Radar",
   "radar.title": "Wetterradar",

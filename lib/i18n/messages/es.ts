@@ -60,7 +60,7 @@ export const es = {
 
   "details.title": "Detalles de hoy",
 
-  "sun.title": "Sol",
+  "sun.title": "Sol y luna",
   "sun.sunrise": "Amanecer",
   "sun.sunset": "Atardecer",
   "sun.daylight": "Luz diurna",
@@ -68,6 +68,15 @@ export const es = {
   "sun.down": "El sol se ha puesto",
   "sun.hours": "{h} h {m} min",
   "sun.arc": "Trayectoria del sol",
+
+  "moon.phase.new": "Luna nueva",
+  "moon.phase.waxingCrescent": "Luna creciente",
+  "moon.phase.firstQuarter": "Cuarto creciente",
+  "moon.phase.waxingGibbous": "Gibosa creciente",
+  "moon.phase.full": "Luna llena",
+  "moon.phase.waningGibbous": "Gibosa menguante",
+  "moon.phase.lastQuarter": "Cuarto menguante",
+  "moon.phase.waningCrescent": "Luna menguante",
 
   "radar.open": "Radar",
   "radar.title": "Radar meteorológico",

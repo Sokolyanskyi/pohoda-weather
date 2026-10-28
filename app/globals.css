@@ -1274,10 +1274,13 @@ svg {
   margin: -13px 0 0 -13px;
   overflow: visible;
   transition: left 2s linear, top 2s linear;
+  animation: sunFloat 6s ease-in-out infinite;
 }
 
 .sun-dot-halo {
   fill: color-mix(in srgb, var(--icon-sun) 26%, transparent);
+  transform-origin: center;
+  animation: sunHalo 4.5s ease-in-out infinite;
 }
 
 .sun-dot-core {
@@ -1291,14 +1294,81 @@ svg {
   stroke-linecap: round;
   opacity: 0.7;
   transform-origin: center;
-  animation: sunPulse 5s ease-in-out infinite;
+  animation: sunSpin 36s linear infinite;
 }
 
-@keyframes sunPulse {
-  50% {
-    opacity: 0.35;
-    transform: scale(1.16);
+@keyframes sunSpin {
+  to {
+    transform: rotate(360deg);
   }
+}
+
+@keyframes sunHalo {
+  50% {
+    opacity: 0.45;
+    transform: scale(1.24);
+  }
+}
+
+@keyframes sunFloat {
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* -------------------------------- moon ---------------------------------- */
+
+.moon-dot {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  overflow: visible;
+  transition: left 2s linear, top 2s linear;
+  animation: moonFloat 7s ease-in-out infinite;
+}
+
+.moon-halo {
+  fill: color-mix(in srgb, var(--icon-moon) 14%, transparent);
+  transform-origin: center;
+  animation: moonGlow 5s ease-in-out infinite;
+}
+
+.moon-disc {
+  fill: color-mix(in srgb, var(--icon-moon) 18%, transparent);
+  stroke: color-mix(in srgb, var(--icon-moon) 40%, transparent);
+  stroke-width: 0.6;
+}
+
+.moon-lit {
+  fill: var(--icon-moon);
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--icon-moon) 55%, transparent));
+}
+
+.moon-craters circle {
+  fill: color-mix(in srgb, var(--icon-moon) 55%, #000);
+  opacity: 0.16;
+}
+
+@keyframes moonGlow {
+  50% {
+    opacity: 0.4;
+    transform: scale(1.14);
+  }
+}
+
+@keyframes moonFloat {
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.sun-card[data-motion="off"] .sun-dot,
+.sun-card[data-motion="off"] .sun-dot-halo,
+.sun-card[data-motion="off"] .sun-dot-rays,
+.sun-card[data-motion="off"] .moon-dot,
+.sun-card[data-motion="off"] .moon-halo {
+  animation: none;
 }
 
 .sun-label {

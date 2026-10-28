@@ -265,7 +265,7 @@ export function TodayView({ snapshot }: { snapshot: WeatherSnapshot }) {
       </section>
 
       <div className="two-col">
-        <SunCard day={today} timezone={timezone} />
+        <SunCard day={today} nextDay={daily[1]} timezone={timezone} />
         <WindCard current={current} />
       </div>
 

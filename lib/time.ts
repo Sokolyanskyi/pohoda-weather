@@ -252,6 +252,55 @@ export function sunProgress(
   return progress;
 }
 
+/** Mean length of the lunar month, in days. */
+const SYNODIC_MONTH = 29.53058867;
+/** Known new moon: 6 January 2000, 18:14 UTC. */
+const NEW_MOON_REFERENCE = Date.UTC(2000, 0, 6, 18, 14);
+
+export interface MoonPhase {
+  /** 0 = new, 0.25 = first quarter, 0.5 = full, 0.75 = last quarter. */
+  phase: number;
+  /** Illuminated fraction of the disc, 0..1. */
+  illumination: number;
+  /** True while the lit side grows (new → full). */
+  waxing: boolean;
+}
+
+/** Current lunar phase for an instant. */
+export function moonPhase(date: Date = new Date()): MoonPhase {
+  const days = (date.getTime() - NEW_MOON_REFERENCE) / 86_400_000;
+  let phase = (days % SYNODIC_MONTH) / SYNODIC_MONTH;
+  if (phase < 0) phase += 1;
+  return {
+    phase,
+    illumination: (1 - Math.cos(2 * Math.PI * phase)) / 2,
+    waxing: phase < 0.5,
+  };
+}
+
+export type MoonPhaseName =
+  | "new"
+  | "waxingCrescent"
+  | "firstQuarter"
+  | "waxingGibbous"
+  | "full"
+  | "waningGibbous"
+  | "lastQuarter"
+  | "waningCrescent";
+
+/** Bucket a phase position into one of the eight familiar names. */
+export function moonPhaseName(phase: number): MoonPhaseName {
+  const p = ((phase % 1) + 1) % 1;
+  if (p < 0.0625 || p >= 0.9375) return "new";
+  if (p < 0.1875) return "waxingCrescent";
+  if (p < 0.3125) return "firstQuarter";
+  if (p < 0.4375) return "waxingGibbous";
+  if (p < 0.5625) return "full";
+  if (p < 0.6875) return "waningGibbous";
+  if (p < 0.8125) return "lastQuarter";
+  return "waningCrescent";
+}
+
 export type AgoUnit = "minute" | "hour" | "day";
 
 export function agoParts(

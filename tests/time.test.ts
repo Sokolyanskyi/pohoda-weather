@@ -5,6 +5,8 @@ import {
   dayDiff,
   daylightMinutes,
   localToUtcIso,
+  moonPhase,
+  moonPhaseName,
   sunProgress,
   todayKey,
   tzOffsetMs,
@@ -72,5 +74,31 @@ describe("sun helpers", () => {
     const { sunrise, sunset } = sunTimes("2026-12-21", 78.22, 15.65);
     expect(sunrise).toBeNull();
     expect(sunset).toBeNull();
+  });
+});
+
+describe("moon helpers", () => {
+  it("starts at a new moon on the reference instant", () => {
+    const moon = moonPhase(new Date("2000-01-06T18:14:00Z"));
+    expect(moon.phase).toBeCloseTo(0, 3);
+    expect(moon.illumination).toBeLessThan(0.01);
+    expect(moonPhaseName(moon.phase)).toBe("new");
+  });
+
+  it("reaches a full moon half a lunar month later", () => {
+    const moon = moonPhase(new Date("2000-01-22T00:00:00Z"));
+    expect(moon.illumination).toBeGreaterThan(0.99);
+    expect(moon.waxing).toBe(false);
+    expect(moonPhaseName(moon.phase)).toBe("full");
+  });
+
+  it("keeps the phase and illumination in range for a whole month", () => {
+    for (let day = 0; day < 30; day += 1) {
+      const moon = moonPhase(new Date(Date.UTC(2026, 9, 1 + day, 12)));
+      expect(moon.phase).toBeGreaterThanOrEqual(0);
+      expect(moon.phase).toBeLessThan(1);
+      expect(moon.illumination).toBeGreaterThanOrEqual(0);
+      expect(moon.illumination).toBeLessThanOrEqual(1);
+    }
   });
 });
