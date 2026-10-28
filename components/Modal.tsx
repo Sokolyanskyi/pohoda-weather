@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 interface ModalProps {
   open: boolean;
@@ -65,8 +66,9 @@ export function Modal({
   }, [open, onClose]);
 
   if (!open) return null;
+  if (typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div className="modal-layer">
       <div className="modal-backdrop" onClick={onClose} />
       <div
@@ -91,6 +93,7 @@ export function Modal({
         <div className="modal-body">{children}</div>
         {footer ? <div className="modal-foot">{footer}</div> : null}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
