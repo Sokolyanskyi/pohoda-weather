@@ -41,6 +41,10 @@ export const ICON_PACKS = [
   "pixel",
   "emoji",
   "glyph",
+  "meteo-fill",
+  "meteo-flat",
+  "meteo-line",
+  "meteo-mono",
 ] as const;
 
 export type IconPack = (typeof ICON_PACKS)[number];

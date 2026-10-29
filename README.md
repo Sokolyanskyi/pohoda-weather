@@ -11,7 +11,7 @@ Live demo: https://pohoda-weather.vercel.app
 - **Readable at a glance.** A large temperature, a short condition line, and the three numbers people actually check: rain chance, wind, humidity.
 - **Ranges, not just numbers.** Every day row shows a temperature band placed on the week's scale, so a cold snap or a warm spell is visible without reading a table. Bands follow one colour ramp — violet well below freezing, sky blue at 0 °C, red in the heat — so the week reads as a temperature map.
 - **Honest about limits.** Free forecasts stop at 10–16 days. The 30-day tab fills the rest with ten-year climate averages and labels those days as `climate` instead of pretending they are a forecast.
-- **Weather you can see.** A full-screen scene (sun, moon, drifting clouds, canvas rain, snow, fog and lightning) reacts to the current condition, and fourteen icon packs are all animated.
+- **Weather you can see.** A full-screen scene (sun, moon, drifting clouds, canvas rain, snow, fog and lightning) reacts to the current condition, and eighteen icon packs are all animated.
 - **Ten years of the same day.** The “This day” block at the bottom compares today with the archive for the same date in each of the last ten years.
 
 ## Screenshots
@@ -26,7 +26,7 @@ Live demo: https://pohoda-weather.vercel.app
 
 | Colour schemes | Icon packs |
 | --- | --- |
-| ![Twenty-one colour schemes](docs/desktop-appearance.png) | ![Fourteen animated icon packs](docs/desktop-icons.png) |
+| ![Twenty-one colour schemes](docs/desktop-appearance.png) | ![Eighteen icon packs](docs/desktop-icons.png) |
 
 | Light theme | Black theme |
 | --- | --- |
@@ -89,7 +89,8 @@ Commercial providers that charge for their API were removed on purpose, so there
 ### Appearance
 
 - **Twenty-one colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `black`, `ink-red`, `ink-green`, `ink-blue`, `ink-cyan`, `ink-lime`, `ink-violet`, `ink-pink`, `ink-orange`, `ink-gold`, `ink-teal`, `aurora`, `nebula`, `ocean`, `ember` (dark). The ten `ink-*` schemes are the black palette with a coloured accent instead of white.
-- **Fourteen animated icon packs:** outline, duotone, solid, clay, neon, glass, sticker, sketch, candy, retro, pulse, pixel, emoji, glyph.
+- **Fourteen hand-drawn animated icon packs:** outline, duotone, solid, clay, neon, glass, sticker, sketch, candy, retro, pulse, pixel, emoji, glyph.
+- **Four ready-made Meteocons sets:** `meteo-fill`, `meteo-flat`, `meteo-line`, `meteo-mono` — the [Meteocons](https://meteocons.com) library by Bas Milius (MIT), vendored as animated SVG plus static copies for the calm and off motion levels.
 - **Full-screen scenes** for clear, partly cloudy, overcast, fog, rain, snow and thunderstorms, with drifting colour fields, moving clouds, canvas particles for precipitation and a lightning flash for storms.
 - **A wind card with a tree and grass** that bend further and faster as the wind picks up.
 - **Motion levels:** full, calm, off. An explicit choice always wins; the system's reduced-motion preference only sets the default on the first visit.
@@ -177,7 +178,7 @@ app/
 components/
   AppShell.tsx         layout, tabs, dialogs, loading and error states
   WeatherScene.tsx     full-screen animated scene + canvas particles
-  WeatherIcon.tsx      fourteen animated icon packs
+  WeatherIcon.tsx      eighteen icon packs, four of them Meteocons
   views/               Today, Week, Month
   DayRow, SunCard, RangeBar, ThisDayCard, RadarDialog, Modal, SettingsDialog, PlaceDialog, Toast
 lib/
@@ -203,6 +204,8 @@ No API keys, database, cron job or external storage are required.
 ## Credits
 
 Weather data by [Open-Meteo](https://open-meteo.com/) (including the ECMWF, DWD, NOAA, Météo-France, UK Met Office, JMA, GEM and KNMI model runs) and [MET Norway](https://www.met.no/). Place search by Open-Meteo geocoding, which uses GeoNames data. The radar dialog embeds [Windy.com](https://www.windy.com/) — map and radar data belong to Windy.
+
+Weather icons: [Meteocons](https://meteocons.com) by Bas Milius, MIT — the four `meteo-*` packs. The licence text ships with the files in `public/meteocons/LICENSE`.
 
 ## License
 

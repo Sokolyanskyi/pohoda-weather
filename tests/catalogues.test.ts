@@ -56,10 +56,11 @@ describe("providers", () => {
 });
 
 describe("icon packs and locales", () => {
-  it("ships fourteen icon packs", () => {
-    expect(ICON_PACKS).toHaveLength(14);
+  it("ships eighteen icon packs", () => {
+    expect(ICON_PACKS).toHaveLength(18);
     expect(isIconPack("pixel")).toBe(true);
     expect(isIconPack("glass")).toBe(true);
+    expect(isIconPack("meteo-line")).toBe(true);
     expect(isIconPack("flat")).toBe(false);
   });
 

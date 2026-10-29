@@ -858,6 +858,17 @@
 
 /* ------------------------------- pixel ---------------------------------- */
 
+/* ------------------------- ready-made Meteocons -------------------------- */
+
+/* Meteocons carry their own SMIL animation inside the SVG file, so the
+   wrapper only handles sizing. Calm and off load the static copies. */
+.wi-meteo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .wi-pixel .wi-svg {
   image-rendering: pixelated;
 }

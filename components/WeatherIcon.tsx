@@ -326,6 +326,30 @@ const EMOJI: Record<WeatherKind, [string, string]> = {
   hail: ["⛈️", "⛈️"],
 };
 
+/* Meteocons by Bas Milius (MIT): ready-made animated SVG sets. The files are
+   vendored under public/meteocons, one folder per style and variant. */
+const METEOCON_STYLES: Partial<Record<IconPack, string>> = {
+  "meteo-fill": "fill",
+  "meteo-flat": "flat",
+  "meteo-line": "line",
+  "meteo-mono": "monochrome",
+};
+
+const METEOCONS: Record<WeatherKind, [string, string]> = {
+  clear: ["clear-day", "clear-night"],
+  partly: ["partly-cloudy-day", "partly-cloudy-night"],
+  cloudy: ["cloudy", "cloudy"],
+  overcast: ["overcast", "overcast"],
+  fog: ["fog-day", "fog-night"],
+  drizzle: ["drizzle", "drizzle"],
+  rain: ["rain", "rain"],
+  "heavy-rain": ["overcast-rain", "overcast-rain"],
+  snow: ["snow", "snow"],
+  sleet: ["sleet", "sleet"],
+  thunder: ["thunderstorms", "thunderstorms"],
+  hail: ["hail", "hail"],
+};
+
 export function WeatherIcon({
   kind,
   isDay = true,
@@ -365,6 +389,33 @@ export function WeatherIcon({
         aria-label={label}
       >
         <PixelIcon kind={kind} isDay={isDay} />
+      </span>
+    );
+  }
+
+  const meteoStyle = METEOCON_STYLES[pack];
+  if (meteoStyle) {
+    const [dayFile, nightFile] = METEOCONS[kind];
+    // The static copies exist so the motion setting can really stop the
+    // SMIL animations inside the SVG; an <img> cannot pause them from CSS.
+    const variant = motion === "full" ? "animated" : "static";
+    return (
+      <span
+        className={`wi wi-meteo ${className}`}
+        data-pack={pack}
+        data-motion={motion}
+        data-kind={kind}
+        style={style}
+        role="img"
+        aria-label={label}
+      >
+        <img
+          src={`/meteocons/${meteoStyle}/${variant}/${isDay ? dayFile : nightFile}.svg`}
+          alt=""
+          width={size}
+          height={size}
+          draggable={false}
+        />
       </span>
     );
   }
