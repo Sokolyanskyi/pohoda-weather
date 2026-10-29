@@ -250,6 +250,12 @@ export const ru = {
   "theme.ink-orange": "Оранжевая",
   "theme.ink-gold": "Золотая",
   "theme.ink-teal": "Бирюзовая",
+  "theme.ink-indigo": "Индиго",
+  "theme.ink-fuchsia": "Фуксия",
+  "theme.ink-viridian": "Виридиан",
+  "theme.ink-bronze": "Бронза",
+  "theme.ink-amber": "Янтарь",
+  "theme.ink-mulberry": "Мульберри",
 
   "pack.outline": "Контур",
   "pack.duotone": "Двухтон",

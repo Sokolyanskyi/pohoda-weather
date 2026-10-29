@@ -247,6 +247,12 @@ export const en = {
   "theme.ink-orange": "Orange",
   "theme.ink-gold": "Gold",
   "theme.ink-teal": "Teal",
+  "theme.ink-indigo": "Indigo",
+  "theme.ink-fuchsia": "Fuchsia",
+  "theme.ink-viridian": "Viridian",
+  "theme.ink-bronze": "Bronze",
+  "theme.ink-amber": "Amber",
+  "theme.ink-mulberry": "Mulberry",
 
   "pack.outline": "Outline",
   "pack.duotone": "Duotone",

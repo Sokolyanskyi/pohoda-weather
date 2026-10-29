@@ -396,6 +396,67 @@
   --icon-bolt: #2dd4bf;
 }
 
+
+[data-theme="ink-indigo"] {
+  --brand: #6366f1;
+  --brand-2: #818cf8;
+  --brand-soft: rgba(99, 102, 241, 0.16);
+  --on-brand: #08080a;
+  --ring: rgba(99, 102, 241, 0.5);
+  --icon-sun: #818cf8;
+  --icon-bolt: #818cf8;
+}
+
+[data-theme="ink-fuchsia"] {
+  --brand: #d946ef;
+  --brand-2: #e879f9;
+  --brand-soft: rgba(217, 70, 239, 0.16);
+  --on-brand: #08080a;
+  --ring: rgba(217, 70, 239, 0.5);
+  --icon-sun: #e879f9;
+  --icon-bolt: #e879f9;
+}
+
+[data-theme="ink-viridian"] {
+  --brand: #0f9b8e;
+  --brand-2: #2dd4bf;
+  --brand-soft: rgba(15, 155, 142, 0.16);
+  --on-brand: #08080a;
+  --ring: rgba(15, 155, 142, 0.5);
+  --icon-sun: #2dd4bf;
+  --icon-bolt: #2dd4bf;
+}
+
+[data-theme="ink-bronze"] {
+  --brand: #a16207;
+  --brand-2: #d97706;
+  --brand-soft: rgba(161, 98, 7, 0.16);
+  --on-brand: #08080a;
+  --ring: rgba(161, 98, 7, 0.5);
+  --icon-sun: #d97706;
+  --icon-bolt: #d97706;
+}
+
+[data-theme="ink-amber"] {
+  --brand: #f59e0b;
+  --brand-2: #fbbf24;
+  --brand-soft: rgba(245, 158, 11, 0.16);
+  --on-brand: #08080a;
+  --ring: rgba(245, 158, 11, 0.5);
+  --icon-sun: #fbbf24;
+  --icon-bolt: #fbbf24;
+}
+
+[data-theme="ink-mulberry"] {
+  --brand: #8e4585;
+  --brand-2: #a97fb5;
+  --brand-soft: rgba(142, 69, 133, 0.16);
+  --on-brand: #08080a;
+  --ring: rgba(142, 69, 133, 0.5);
+  --icon-sun: #a97fb5;
+  --icon-bolt: #a97fb5;
+}
+
 [data-theme="aurora"] {
   color-scheme: dark;
   --bg: #04120f;

@@ -26,7 +26,7 @@ Live demo: https://pohoda-weather.vercel.app
 
 | Colour schemes | Icon packs |
 | --- | --- |
-| ![Twenty-one colour schemes](docs/desktop-appearance.png) | ![Eighteen icon packs](docs/desktop-icons.png) |
+| ![Twenty-seven colour schemes](docs/desktop-appearance.png) | ![Eighteen icon packs](docs/desktop-icons.png) |
 
 | Light theme | Black theme |
 | --- | --- |
@@ -88,7 +88,7 @@ Commercial providers that charge for their API were removed on purpose, so there
 
 ### Appearance
 
-- **Twenty-one colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `black`, `ink-red`, `ink-green`, `ink-blue`, `ink-cyan`, `ink-lime`, `ink-violet`, `ink-pink`, `ink-orange`, `ink-gold`, `ink-teal`, `aurora`, `nebula`, `ocean`, `ember` (dark). The ten `ink-*` schemes are the black palette with a coloured accent instead of white.
+- **Twenty-seven colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `black`, `ink-red`, `ink-green`, `ink-blue`, `ink-cyan`, `ink-lime`, `ink-violet`, `ink-pink`, `ink-orange`, `ink-gold`, `ink-teal`, `ink-indigo`, `ink-fuchsia`, `ink-viridian`, `ink-bronze`, `ink-amber`, `ink-mulberry`, `aurora`, `nebula`, `ocean`, `ember` (dark). The sixteen `ink-*` schemes are the black palette with a coloured accent instead of white.
 - **Fourteen hand-drawn animated icon packs:** outline, duotone, solid, clay, neon, glass, sticker, sketch, candy, retro, pulse, pixel, emoji, glyph.
 - **Four ready-made Meteocons sets:** `meteo-fill`, `meteo-flat`, `meteo-line`, `meteo-mono` — the [Meteocons](https://meteocons.com) library by Bas Milius (MIT), vendored as animated SVG plus static copies for the calm and off motion levels.
 - **Full-screen scenes** for clear, partly cloudy, overcast, fog, rain, snow and thunderstorms, with drifting colour fields, moving clouds, canvas particles for precipitation and a lightning flash for storms.

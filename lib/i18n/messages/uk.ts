@@ -250,6 +250,12 @@ export const uk = {
   "theme.ink-orange": "Помаранчева",
   "theme.ink-gold": "Золота",
   "theme.ink-teal": "Бірюзова",
+  "theme.ink-indigo": "Індіго",
+  "theme.ink-fuchsia": "Фуксія",
+  "theme.ink-viridian": "Вірідіан",
+  "theme.ink-bronze": "Бронза",
+  "theme.ink-amber": "Янтар",
+  "theme.ink-mulberry": "Мульберрі",
 
   "pack.outline": "Контур",
   "pack.duotone": "Двотон",

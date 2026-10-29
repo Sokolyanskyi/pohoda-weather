@@ -250,6 +250,12 @@ export const es = {
   "theme.ink-orange": "Naranja",
   "theme.ink-gold": "Dorado",
   "theme.ink-teal": "Turquesa",
+  "theme.ink-indigo": "Añil",
+  "theme.ink-fuchsia": "Fucsia",
+  "theme.ink-viridian": "Viridiano",
+  "theme.ink-bronze": "Bronce",
+  "theme.ink-amber": "Ámbar",
+  "theme.ink-mulberry": "Mora",
 
   "pack.outline": "Contorno",
   "pack.duotone": "Dúo",
