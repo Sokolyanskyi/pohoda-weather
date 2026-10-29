@@ -357,7 +357,7 @@ export function SettingsDialog({
         ) : null}
       </section>
 
-      `<section className="settings-block">
+      <section className="settings-block">
         <SettingsToggle
           title={t("settings.appearance.icons")}
           sub={t(`pack.${prefs.iconPack}` as MessageKey)}
