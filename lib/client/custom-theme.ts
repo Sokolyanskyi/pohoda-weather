@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 
+import type { SavedTheme } from "@/lib/types";
+
 export interface CustomTheme {
   /** Page background, any CSS colour. */
   bg: string;
@@ -10,6 +12,8 @@ export interface CustomTheme {
   /** Card / surface colour. */
   card: string;
 }
+
+export type { SavedTheme };
 
 export const DEFAULT_CUSTOM_THEME: CustomTheme = {
   bg: "#000000",
@@ -27,6 +31,49 @@ export function isCustomTheme(value: unknown): value is CustomTheme {
 
 export function normalizeCustomTheme(value: unknown): CustomTheme | null {
   return isCustomTheme(value) ? { bg: value.bg, accent: value.accent, card: value.card } : null;
+}
+
+export function isSavedTheme(value: unknown): value is SavedTheme {
+  if (!value || typeof value !== "object") return false;
+  const raw = value as Record<string, unknown>;
+  return (
+    typeof raw.id === "string" &&
+    raw.id.length > 0 &&
+    raw.id.length <= 64 &&
+    typeof raw.name === "string" &&
+    raw.name.trim().length > 0 &&
+    raw.name.length <= 40 &&
+    HEX.test(String(raw.bg)) &&
+    HEX.test(String(raw.accent)) &&
+    HEX.test(String(raw.card))
+  );
+}
+
+export function normalizeSavedTheme(value: unknown): SavedTheme | null {
+  if (!isSavedTheme(value)) return null;
+  const raw = value as SavedTheme;
+  return {
+    id: raw.id,
+    name: raw.name.trim(),
+    bg: raw.bg,
+    accent: raw.accent,
+    card: raw.card,
+  };
+}
+
+export function normalizeSavedThemes(value: unknown): SavedTheme[] {
+  if (!Array.isArray(value)) return [];
+  const out: SavedTheme[] = [];
+  const seen = new Set<string>();
+  for (const item of value) {
+    const normalized = normalizeSavedTheme(item);
+    if (!normalized) continue;
+    if (seen.has(normalized.id)) continue;
+    seen.add(normalized.id);
+    out.push(normalized);
+    if (out.length >= 30) break;
+  }
+  return out;
 }
 
 function mix(hex: string, alphaPercent: number): string {

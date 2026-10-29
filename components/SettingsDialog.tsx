@@ -104,6 +104,8 @@ export function SettingsDialog({
   // starts folded and the summary line still shows what is selected.
   const [themesOpen, setThemesOpen] = useState(false);
   const [customOpen, setCustomOpen] = useState(false);
+  const [customName, setCustomName] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [iconsOpen, setIconsOpen] = useState(false);
   const [providersOpen, setProvidersOpen] = useState(false);
 
@@ -208,19 +210,80 @@ export function SettingsDialog({
                 return (
                   <label key={key} className="custom-theme-field">
                     <span>{label}</span>
-                    <input
-                      type="color"
-                      value={value}
-                      onChange={(e) => {
-                        const base = prefs.customTheme ?? DEFAULT_CUSTOM_THEME;
-                        const next: CustomTheme = { ...base, [key]: e.target.value };
-                        update({ customTheme: next, theme: "custom" });
-                      }}
-                    />
-                    <code>{value}</code>
+                    <div className="custom-color-row">
+                      <input
+                        type="color"
+                        value={value}
+                        onChange={(e) => {
+                          const base = prefs.customTheme ?? DEFAULT_CUSTOM_THEME;
+                          const next: CustomTheme = { ...base, [key]: e.target.value };
+                          update({ customTheme: next, theme: "custom" });
+                          if (!customName) setCustomName("Моя тема");
+                        }}
+                      />
+                      <input
+                        type="text"
+                        className="custom-hex"
+                        value={value}
+                        maxLength={7}
+                        onChange={(e) => {
+                          const v = e.target.value.trim();
+                          if (!/^#[0-9a-fA-F]{6}$/.test(v)) return;
+                          const base = prefs.customTheme ?? DEFAULT_CUSTOM_THEME;
+                          const next: CustomTheme = { ...base, [key]: v };
+                          update({ customTheme: next, theme: "custom" });
+                        }}
+                      />
+                    </div>
                   </label>
                 );
               })}
+            </div>
+            <div className="custom-theme-name-row">
+              <input
+                type="text"
+                className="custom-name-input"
+                value={customName}
+                onChange={(e) => setCustomName(e.target.value)}
+                placeholder={t("settings.appearance.customTheme")}
+                maxLength={40}
+              />
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => {
+                  const draft = prefs.customTheme ?? DEFAULT_CUSTOM_THEME;
+                  if (editingId) {
+                    const next = prefs.savedThemes.map((th) =>
+                      th.id === editingId
+                        ? { ...th, name: customName.trim() || th.name, bg: draft.bg, accent: draft.accent, card: draft.card }
+                        : th,
+                    );
+                    update({ savedThemes: next });
+                  } else {
+                    const id = `custom-${Date.now()}`;
+                    const name = customName.trim() || "Моя тема";
+                    update({
+                      savedThemes: [...prefs.savedThemes, { id, name, bg: draft.bg, accent: draft.accent, card: draft.card }],
+                    });
+                    setEditingId(id);
+                  }
+                }}
+              >
+                {editingId ? "Сохранить изменения" : "Сохранить тему"}
+              </button>
+              {editingId ? (
+                <button
+                  type="button"
+                  className="btn btn-ghost"
+                  onClick={() => {
+                    setEditingId(null);
+                    setCustomName("");
+                  }}
+                >
+                  Новая
+                </button>
+              ) : null}
             </div>
             <div
               className="custom-theme-preview"
@@ -232,17 +295,69 @@ export function SettingsDialog({
               <span style={{ color: prefs.customTheme?.accent ?? DEFAULT_CUSTOM_THEME.accent }}>
                 ● Акцент
               </span>
-              <span
-                style={{
-                  background: prefs.customTheme?.card ?? DEFAULT_CUSTOM_THEME.card,
-                }}
-              />
+              <span style={{ background: prefs.customTheme?.card ?? DEFAULT_CUSTOM_THEME.card }} />
             </div>
+            {prefs.savedThemes.length > 0 ? (
+              <div className="saved-themes">
+                <h4 className="saved-themes-title">Сохранённые</h4>
+                {prefs.savedThemes.map((theme) => (
+                  <div key={theme.id} className="saved-theme-row">
+                    <span
+                      className="saved-theme-swatch"
+                      style={{
+                        background: theme.bg,
+                        borderColor: theme.accent,
+                      }}
+                    >
+                      <span style={{ background: theme.card }} />
+                    </span>
+                    <span className="saved-theme-name">{theme.name}</span>
+                    <div className="saved-theme-actions">
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-sm"
+                        onClick={() => {
+                          update({ customTheme: { bg: theme.bg, accent: theme.accent, card: theme.card }, theme: "custom" });
+                          setCustomName(theme.name);
+                          setEditingId(theme.id);
+                        }}
+                      >
+                        Применить
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-sm"
+                        onClick={() => {
+                          update({ customTheme: { bg: theme.bg, accent: theme.accent, card: theme.card }, theme: "custom" });
+                          setCustomName(theme.name);
+                          setEditingId(theme.id);
+                        }}
+                      >
+                        Изменить
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-sm"
+                        onClick={() => {
+                          update({ savedThemes: prefs.savedThemes.filter((t) => t.id !== theme.id) });
+                          if (editingId === theme.id) {
+                            setEditingId(null);
+                            setCustomName("");
+                          }
+                        }}
+                      >
+                        Удалить
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </div>
         ) : null}
       </section>
 
-      <section className="settings-block">
+      `<section className="settings-block">
         <SettingsToggle
           title={t("settings.appearance.icons")}
           sub={t(`pack.${prefs.iconPack}` as MessageKey)}

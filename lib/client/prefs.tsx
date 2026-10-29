@@ -19,6 +19,7 @@ import {
   clearCustomTheme,
   isCustomTheme,
   normalizeCustomTheme,
+  normalizeSavedThemes,
 } from "@/lib/client/custom-theme";
 import type {
   MotionLevel,
@@ -27,6 +28,7 @@ import type {
   Prefs,
   PressureUnit,
   ProviderId,
+  SavedTheme,
   TemperatureUnit,
   WindUnit,
 } from "@/lib/types";
@@ -72,6 +74,7 @@ export function basePrefs(): Prefs {
     locale: "en",
     theme: "daylight",
     customTheme: null,
+    savedThemes: [],
     iconPack: "duotone",
     provider: "open-meteo",
     place: FALLBACK_PLACE,
@@ -138,6 +141,7 @@ function normalize(input: unknown, fallback: Prefs): Prefs {
     theme:
       raw.theme === "custom" ? "custom" : isTheme(raw.theme) ? raw.theme : fallback.theme,
     customTheme: normalizeCustomTheme(raw.customTheme) ?? fallback.customTheme,
+    savedThemes: normalizeSavedThemes(raw.savedThemes),
     iconPack: isIconPack(raw.iconPack) ? raw.iconPack : fallback.iconPack,
     provider: isProviderId(raw.provider) ? raw.provider : fallback.provider,
     place,

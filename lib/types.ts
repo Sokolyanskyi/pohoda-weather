@@ -116,6 +116,14 @@ export interface WeatherSnapshot {
   notes: string[];
 }
 
+export interface SavedTheme {
+  id: string;
+  name: string;
+  bg: string;
+  accent: string;
+  card: string;
+}
+
 export interface Prefs {
   locale: string;
   theme: string;
@@ -125,6 +133,8 @@ export interface Prefs {
     accent: string;
     card: string;
   } | null;
+  /** Saved user-built themes. */
+  savedThemes: SavedTheme[];
   iconPack: string;
   provider: ProviderId;
   place: Place;
