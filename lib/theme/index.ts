@@ -8,11 +8,16 @@ export const THEMES = [
   "midnight",
   "graphite",
   "black",
-  "onyx",
-  "void",
-  "crimson",
-  "plum",
-  "jade",
+  "ink-red",
+  "ink-green",
+  "ink-blue",
+  "ink-cyan",
+  "ink-lime",
+  "ink-violet",
+  "ink-pink",
+  "ink-orange",
+  "ink-gold",
+  "ink-teal",
   "aurora",
   "nebula",
   "ocean",
@@ -70,30 +75,55 @@ export const THEME_META: Record<ThemeId, ThemeMeta> = {
     barColor: "#000000",
     preview: { bg: "#000000", card: "#0d0d0d", accent: "#f4f4f5", line: "#262626" },
   },
-  onyx: {
+  "ink-red": {
     scheme: "dark",
-    barColor: "#050505",
-    preview: { bg: "#050505", card: "#141210", accent: "#fb923c", line: "#2d241c" },
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#ef4444", line: "#262626" },
   },
-  void: {
+  "ink-green": {
     scheme: "dark",
-    barColor: "#02040a",
-    preview: { bg: "#02040a", card: "#0b1220", accent: "#38bdf8", line: "#182c45" },
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#22c55e", line: "#262626" },
   },
-  crimson: {
+  "ink-blue": {
     scheme: "dark",
-    barColor: "#080304",
-    preview: { bg: "#080304", card: "#1b0b0e", accent: "#f43f5e", line: "#3a1a20" },
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#3b82f6", line: "#262626" },
   },
-  plum: {
+  "ink-cyan": {
     scheme: "dark",
-    barColor: "#07030b",
-    preview: { bg: "#07030b", card: "#180d22", accent: "#e879f9", line: "#33203f" },
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#22d3ee", line: "#262626" },
   },
-  jade: {
+  "ink-lime": {
     scheme: "dark",
-    barColor: "#020806",
-    preview: { bg: "#020806", card: "#081a16", accent: "#2dd4bf", line: "#14332c" },
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#a3e635", line: "#262626" },
+  },
+  "ink-violet": {
+    scheme: "dark",
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#a855f7", line: "#262626" },
+  },
+  "ink-pink": {
+    scheme: "dark",
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#ec4899", line: "#262626" },
+  },
+  "ink-orange": {
+    scheme: "dark",
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#f97316", line: "#262626" },
+  },
+  "ink-gold": {
+    scheme: "dark",
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#eab308", line: "#262626" },
+  },
+  "ink-teal": {
+    scheme: "dark",
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#14b8a6", line: "#262626" },
   },
   aurora: {
     scheme: "dark",

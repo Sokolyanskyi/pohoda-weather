@@ -5,11 +5,11 @@ import { ICON_PACKS, isIconPack } from "@/lib/client/prefs";
 import { LOCALES } from "@/lib/i18n";
 
 describe("themes", () => {
-  it("ships sixteen schemes, twelve of them dark", () => {
-    expect(THEMES).toHaveLength(16);
+  it("ships twenty-one schemes, seventeen of them dark", () => {
+    expect(THEMES).toHaveLength(21);
     const dark = THEMES.filter((theme) => isDarkTheme(theme));
     const light = THEMES.filter((theme) => !isDarkTheme(theme));
-    expect(dark).toHaveLength(12);
+    expect(dark).toHaveLength(17);
     expect(light).toHaveLength(4);
   });
 

@@ -26,7 +26,7 @@ Live demo: https://pohoda-weather.vercel.app
 
 | Colour schemes | Icon packs |
 | --- | --- |
-| ![Sixteen colour schemes](docs/desktop-appearance.png) | ![Fourteen animated icon packs](docs/desktop-icons.png) |
+| ![Twenty-one colour schemes](docs/desktop-appearance.png) | ![Fourteen animated icon packs](docs/desktop-icons.png) |
 
 | Light theme | Black theme |
 | --- | --- |
@@ -88,7 +88,7 @@ Commercial providers that charge for their API were removed on purpose, so there
 
 ### Appearance
 
-- **Sixteen colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `black`, `onyx`, `void`, `crimson`, `plum`, `jade`, `aurora`, `nebula`, `ocean`, `ember` (dark).
+- **Twenty-one colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `black`, `ink-red`, `ink-green`, `ink-blue`, `ink-cyan`, `ink-lime`, `ink-violet`, `ink-pink`, `ink-orange`, `ink-gold`, `ink-teal`, `aurora`, `nebula`, `ocean`, `ember` (dark). The ten `ink-*` schemes are the black palette with a coloured accent instead of white.
 - **Fourteen animated icon packs:** outline, duotone, solid, clay, neon, glass, sticker, sketch, candy, retro, pulse, pixel, emoji, glyph.
 - **Full-screen scenes** for clear, partly cloudy, overcast, fog, rain, snow and thunderstorms, with drifting colour fields, moving clouds, canvas particles for precipitation and a lightning flash for storms.
 - **A wind card with a tree and grass** that bend further and faster as the wind picks up.
