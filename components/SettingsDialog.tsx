@@ -293,7 +293,7 @@ export function SettingsDialog({
               }}
             >
               <span style={{ color: prefs.customTheme?.accent ?? DEFAULT_CUSTOM_THEME.accent }}>
-                ● Акцент
+                Акцент
               </span>
               <span style={{ background: prefs.customTheme?.card ?? DEFAULT_CUSTOM_THEME.card }} />
             </div>
