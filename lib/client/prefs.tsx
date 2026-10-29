@@ -14,6 +14,12 @@ import { PREFS_STORAGE_KEY } from "@/lib/client/storage";
 import { detectLocale, isLocale, translate, type MessageKey, type MessageVars } from "@/lib/i18n";
 import { FALLBACK_PLACE, guessPlace, samePlace } from "@/lib/places";
 import { applyTheme, detectTheme, isTheme, type ThemeId } from "@/lib/theme";
+import {
+  applyCustomTheme,
+  clearCustomTheme,
+  isCustomTheme,
+  normalizeCustomTheme,
+} from "@/lib/client/custom-theme";
 import type {
   MotionLevel,
   Place,
@@ -65,6 +71,7 @@ export function basePrefs(): Prefs {
   return {
     locale: "en",
     theme: "daylight",
+    customTheme: null,
     iconPack: "duotone",
     provider: "open-meteo",
     place: FALLBACK_PLACE,
@@ -128,7 +135,9 @@ function normalize(input: unknown, fallback: Prefs): Prefs {
 
   return {
     locale: isLocale(raw.locale) ? raw.locale : fallback.locale,
-    theme: isTheme(raw.theme) ? raw.theme : fallback.theme,
+    theme:
+      raw.theme === "custom" ? "custom" : isTheme(raw.theme) ? raw.theme : fallback.theme,
+    customTheme: normalizeCustomTheme(raw.customTheme) ?? fallback.customTheme,
     iconPack: isIconPack(raw.iconPack) ? raw.iconPack : fallback.iconPack,
     provider: isProviderId(raw.provider) ? raw.provider : fallback.provider,
     place,
@@ -153,7 +162,7 @@ function normalize(input: unknown, fallback: Prefs): Prefs {
 interface PrefsContextValue {
   prefs: Prefs;
   ready: boolean;
-  theme: ThemeId;
+  theme: string;
   iconPack: IconPack;
   update: (patch: Partial<Prefs>) => void;
   setPlace: (place: Place) => void;
@@ -187,7 +196,12 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
     };
     const next = normalize(stored, fallback);
     setPrefs(next);
-    applyTheme(next.theme as ThemeId);
+    if (next.theme === "custom" && next.customTheme) {
+      applyCustomTheme(next.customTheme);
+    } else {
+      clearCustomTheme();
+      applyTheme(next.theme as ThemeId);
+    }
     setReady(true);
   }, []);
 
@@ -198,7 +212,12 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
     } catch {
       // Storage can be full or blocked; the app still works in memory.
     }
-    applyTheme(prefs.theme as ThemeId);
+    if (prefs.theme === "custom" && prefs.customTheme) {
+      applyCustomTheme(prefs.customTheme);
+    } else {
+      clearCustomTheme();
+      applyTheme(prefs.theme as ThemeId);
+    }
     if (typeof document !== "undefined") {
       document.documentElement.lang = prefs.locale;
     }

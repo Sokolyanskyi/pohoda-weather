@@ -161,6 +161,11 @@ export const uk = {
   "settings.appearance.iconsText":
     "Анімовані набори. Попередній перегляд відповідає погоді сьогодні.",
   "settings.appearance.motion": "Анімація",
+  "settings.appearance.customTheme": "Своя тема",
+  "settings.appearance.customThemeText": "Зберіть тему з трьох кольорів.",
+  "settings.appearance.customBg": "Фон",
+  "settings.appearance.customAccent": "Акцент",
+  "settings.appearance.customCard": "Картки",
   "settings.appearance.motionFull": "Повна",
   "settings.appearance.motionCalm": "Спокійна",
   "settings.appearance.motionOff": "Вимкнена",

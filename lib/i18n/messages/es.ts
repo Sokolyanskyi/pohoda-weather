@@ -161,6 +161,11 @@ export const es = {
   "settings.appearance.iconsText":
     "Sets animados. La vista previa sigue el tiempo de hoy.",
   "settings.appearance.motion": "Animación",
+  "settings.appearance.customTheme": "Tema propio",
+  "settings.appearance.customThemeText": "Crea un tema con tres colores.",
+  "settings.appearance.customBg": "Fondo",
+  "settings.appearance.customAccent": "Acento",
+  "settings.appearance.customCard": "Tarjetas",
   "settings.appearance.motionFull": "Completa",
   "settings.appearance.motionCalm": "Tranquila",
   "settings.appearance.motionOff": "Desactivada",

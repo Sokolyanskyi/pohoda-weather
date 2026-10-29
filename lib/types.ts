@@ -119,6 +119,12 @@ export interface WeatherSnapshot {
 export interface Prefs {
   locale: string;
   theme: string;
+  /** User-built theme (bg / accent / card), used when theme === "custom". */
+  customTheme: {
+    bg: string;
+    accent: string;
+    card: string;
+  } | null;
   iconPack: string;
   provider: ProviderId;
   place: Place;

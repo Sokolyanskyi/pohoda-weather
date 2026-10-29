@@ -161,6 +161,11 @@ export const de = {
   "settings.appearance.iconsText":
     "Animierte Sätze. Die Vorschau zeigt das heutige Wetter.",
   "settings.appearance.motion": "Animation",
+  "settings.appearance.customTheme": "Eigene Farben",
+  "settings.appearance.customThemeText": "Baue ein Theme aus drei Farben.",
+  "settings.appearance.customBg": "Hintergrund",
+  "settings.appearance.customAccent": "Akzent",
+  "settings.appearance.customCard": "Karten",
   "settings.appearance.motionFull": "Voll",
   "settings.appearance.motionCalm": "Ruhig",
   "settings.appearance.motionOff": "Aus",

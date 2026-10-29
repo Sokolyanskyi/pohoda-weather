@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 import { ICON_PACKS, usePrefs, type IconPack } from "@/lib/client/prefs";
+import {
+  DEFAULT_CUSTOM_THEME,
+  type CustomTheme,
+} from "@/lib/client/custom-theme";
 import { APP_VERSION, REPO_URL } from "@/lib/config";
 import { LOCALES, LOCALE_META, type Locale, type MessageKey } from "@/lib/i18n";
 import { placeLabel, placeSecondary } from "@/lib/places";
@@ -99,6 +103,7 @@ export function SettingsDialog({
   // Themes, icon packs and providers are long lists, so every one of them
   // starts folded and the summary line still shows what is selected.
   const [themesOpen, setThemesOpen] = useState(false);
+  const [customOpen, setCustomOpen] = useState(false);
   const [iconsOpen, setIconsOpen] = useState(false);
   const [providersOpen, setProvidersOpen] = useState(false);
 
@@ -166,6 +171,72 @@ export function SettingsDialog({
                   </button>
                 );
               })}
+            </div>
+          </div>
+        ) : null}
+      </section>
+
+      <section className="settings-block">
+        <SettingsToggle
+          title={t("settings.appearance.customTheme")}
+          sub={
+            prefs.theme === "custom"
+              ? t("settings.appearance.customThemeText")
+              : t(`theme.${prefs.theme}` as MessageKey)
+          }
+          open={customOpen}
+          controls="settings-custom"
+          showLabel={t("settings.toggle.show")}
+          hideLabel={t("settings.toggle.hide")}
+          onToggle={() => setCustomOpen((value) => !value)}
+        />
+        {customOpen ? (
+          <div id="settings-custom" className="settings-collapse">
+            <p className="hint">{t("settings.appearance.customThemeText")}</p>
+            <div className="custom-theme-grid">
+              {(["bg", "accent", "card"] as const).map((key) => {
+                const fallback = DEFAULT_CUSTOM_THEME;
+                const value =
+                  prefs.customTheme?.[key] ??
+                  (key === "bg" ? fallback.bg : key === "accent" ? fallback.accent : fallback.card);
+                const label =
+                  key === "bg"
+                    ? t("settings.appearance.customBg")
+                    : key === "accent"
+                      ? t("settings.appearance.customAccent")
+                      : t("settings.appearance.customCard");
+                return (
+                  <label key={key} className="custom-theme-field">
+                    <span>{label}</span>
+                    <input
+                      type="color"
+                      value={value}
+                      onChange={(e) => {
+                        const base = prefs.customTheme ?? DEFAULT_CUSTOM_THEME;
+                        const next: CustomTheme = { ...base, [key]: e.target.value };
+                        update({ customTheme: next, theme: "custom" });
+                      }}
+                    />
+                    <code>{value}</code>
+                  </label>
+                );
+              })}
+            </div>
+            <div
+              className="custom-theme-preview"
+              style={{
+                background: prefs.customTheme?.bg ?? DEFAULT_CUSTOM_THEME.bg,
+                borderColor: prefs.customTheme?.accent ?? DEFAULT_CUSTOM_THEME.accent,
+              }}
+            >
+              <span style={{ color: prefs.customTheme?.accent ?? DEFAULT_CUSTOM_THEME.accent }}>
+                ● Акцент
+              </span>
+              <span
+                style={{
+                  background: prefs.customTheme?.card ?? DEFAULT_CUSTOM_THEME.card,
+                }}
+              />
             </div>
           </div>
         ) : null}

@@ -161,6 +161,11 @@ export const pl = {
   "settings.appearance.iconsText":
     "Animowane zestawy. Podgląd odpowiada dzisiejszej pogodzie.",
   "settings.appearance.motion": "Animacja",
+  "settings.appearance.customTheme": "Własny motyw",
+  "settings.appearance.customThemeText": "Zbuduj motyw z trzech kolorów.",
+  "settings.appearance.customBg": "Tło",
+  "settings.appearance.customAccent": "Akcent",
+  "settings.appearance.customCard": "Karty",
   "settings.appearance.motionFull": "Pełna",
   "settings.appearance.motionCalm": "Spokojna",
   "settings.appearance.motionOff": "Wyłączona",

@@ -161,6 +161,11 @@ export const ru = {
   "settings.appearance.iconsText":
     "Анимированные наборы. Предпросмотр соответствует погоде сегодня.",
   "settings.appearance.motion": "Анимация",
+  "settings.appearance.customTheme": "Своя тема",
+  "settings.appearance.customThemeText": "Соберите тему из трёх цветов.",
+  "settings.appearance.customBg": "Фон",
+  "settings.appearance.customAccent": "Акцент",
+  "settings.appearance.customCard": "Карточки",
   "settings.appearance.motionFull": "Полная",
   "settings.appearance.motionCalm": "Спокойная",
   "settings.appearance.motionOff": "Выключена",

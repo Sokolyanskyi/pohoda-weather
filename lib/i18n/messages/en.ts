@@ -158,6 +158,11 @@ export const en = {
   "settings.appearance.iconsText":
     "Animated sets. The preview follows today's weather.",
   "settings.appearance.motion": "Animation",
+  "settings.appearance.customTheme": "Custom theme",
+  "settings.appearance.customThemeText": "Build your own from three colours.",
+  "settings.appearance.customBg": "Background",
+  "settings.appearance.customAccent": "Accent",
+  "settings.appearance.customCard": "Cards",
   "settings.appearance.motionFull": "Full",
   "settings.appearance.motionCalm": "Calm",
   "settings.appearance.motionOff": "Off",
