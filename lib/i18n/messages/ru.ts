@@ -149,6 +149,8 @@ export const ru = {
   "settings.provider.keyOptional":
     "Необязательно — ключ владельца приложения может уже работать.",
   "settings.provider.free": "Без ключа",
+  "settings.provider.show": "Все поставщики",
+  "settings.provider.hide": "Свернуть",
 
   "settings.language.title": "Язык",
   "settings.language.text": "Применяется сразу и запоминается на этом устройстве.",
@@ -237,6 +239,7 @@ export const ru = {
   "theme.nebula": "Туманность",
   "theme.ocean": "Океан",
   "theme.ember": "Уголь",
+  "theme.black": "Чёрная",
 
   "pack.outline": "Контур",
   "pack.duotone": "Двухтон",

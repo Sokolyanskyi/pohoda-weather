@@ -149,6 +149,8 @@ export const es = {
   "settings.provider.keyOptional":
     "Opcional: puede que ya haya una clave del propietario activa.",
   "settings.provider.free": "Sin clave",
+  "settings.provider.show": "Todos los proveedores",
+  "settings.provider.hide": "Contraer",
 
   "settings.language.title": "Idioma",
   "settings.language.text": "Se aplica al instante y se recuerda en este dispositivo.",
@@ -237,6 +239,7 @@ export const es = {
   "theme.nebula": "Nebulosa",
   "theme.ocean": "Océano",
   "theme.ember": "Brasa",
+  "theme.black": "Negro",
 
   "pack.outline": "Contorno",
   "pack.duotone": "Dúo",

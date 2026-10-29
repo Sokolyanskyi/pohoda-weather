@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { usePrefs } from "@/lib/client/prefs";
 import { formatDaylight } from "@/lib/format";
 import { formatTime } from "@/lib/time";
 import { useNow } from "@/lib/client/use-weather";
+import { arcGeometry, arcPath, arcPoint, arcSegment } from "@/lib/arc";
 import {
   daylightMinutes,
   moonPhase,
@@ -13,18 +15,7 @@ import {
 import type { DailyPoint } from "@/lib/types";
 import type { MessageKey } from "@/lib/i18n";
 
-const ARC = { left: 8, right: 92, top: 10, bottom: 50 };
 const MS_DAY = 86_400_000;
-
-function arcPoint(progress: number): { x: number; y: number } {
-  const x = ARC.left + (ARC.right - ARC.left) * progress;
-  const controlY = ARC.bottom - (ARC.bottom - ARC.top) * 2;
-  const y =
-    (1 - progress) ** 2 * ARC.bottom +
-    2 * (1 - progress) * progress * controlY +
-    progress ** 2 * ARC.bottom;
-  return { x, y };
-}
 
 /** SVG path for the lit part of the moon at a given phase. */
 function moonLitPath(phase: number, radius: number): string {
@@ -69,6 +60,40 @@ function nightArc(now: Date, day: DailyPoint | undefined, nextDay: DailyPoint | 
   };
 }
 
+/** Rendered size of the arc box, so the drawing can stay in real pixels. */
+function useArcBox() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [box, setBox] = useState<{ width: number; height: number } | null>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const measure = () => {
+      const rect = element.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return;
+      setBox((current) =>
+        current &&
+        Math.abs(current.width - rect.width) < 0.5 &&
+        Math.abs(current.height - rect.height) < 0.5
+          ? current
+          : { width: rect.width, height: rect.height },
+      );
+    };
+
+    measure();
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", measure);
+      return () => window.removeEventListener("resize", measure);
+    }
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, box] as const;
+}
+
 export function SunCard({
   day,
   nextDay,
@@ -80,11 +105,13 @@ export function SunCard({
 }) {
   const { prefs, t } = usePrefs();
   const now = useNow(15_000);
+  const [arcRef, box] = useArcBox();
   const progress = day ? sunProgress(day.sunrise, day.sunset, now) : null;
   const night = progress === null;
   const nightInfo = nightArc(now, day, nextDay);
-  const point = arcPoint(night ? nightInfo.progress : (progress ?? 0));
-  const path = `M${ARC.left} ${ARC.bottom} Q50 ${ARC.bottom - (ARC.bottom - ARC.top) * 2} ${ARC.right} ${ARC.bottom}`;
+  const position = night ? nightInfo.progress : (progress ?? 0);
+  const geometry = box ? arcGeometry(box.width, box.height) : null;
+  const point = geometry ? arcPoint(geometry, position) : null;
   const minutes = day ? daylightMinutes(day.sunrise, day.sunset) : null;
 
   const moon = moonPhase(now);
@@ -99,80 +126,75 @@ export function SunCard({
         <span className="chip chip-soft">{night ? t(phaseKey) : t("sun.up")}</span>
       </header>
 
-      <div className="sun-arc">
-        <svg
-          className="sun-arc-svg"
-          viewBox="0 0 100 60"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path className="sun-path" d={path} vectorEffect="non-scaling-stroke" />
-          {!night && progress !== null ? (
-            <path
-              className="sun-progress"
-              d={path}
-              pathLength={1}
-              strokeDasharray={1}
-              strokeDashoffset={1 - progress}
-              vectorEffect="non-scaling-stroke"
+      <div className="sun-arc" ref={arcRef}>
+        {geometry && box ? (
+          <svg
+            className="sun-arc-svg"
+            viewBox={`0 0 ${box.width} ${box.height}`}
+            aria-hidden="true"
+          >
+            <path className="sun-path" d={arcPath(geometry)} />
+            {!night && progress !== null ? (
+              <path className="sun-progress" d={arcSegment(geometry, progress)} />
+            ) : null}
+            <line
+              className="sun-horizon"
+              x1={box.width * 0.04}
+              y1={geometry.y0}
+              x2={box.width * 0.96}
+              y2={geometry.y0}
             />
-          ) : null}
-          <line
-            className="sun-horizon"
-            x1="4"
-            y1={ARC.bottom}
-            x2="96"
-            y2={ARC.bottom}
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
+          </svg>
+        ) : null}
         <span className="sun-edge sun-edge-rise" aria-hidden="true" />
         <span className="sun-edge sun-edge-set" aria-hidden="true" />
 
-        {night ? (
-          <svg
-            className="moon-dot"
-            viewBox="-16 -16 32 32"
-            style={{ left: `${point.x}%`, top: `${(point.y / 60) * 100}%` }}
-            aria-hidden="true"
-          >
-            <defs>
-              <clipPath id="moon-lit-clip">
-                <path d={moonLitPath(moon.phase, 9)} />
-              </clipPath>
-            </defs>
-            <circle className="moon-halo" r="15" />
-            <circle className="moon-disc" r="9" />
-            <path className="moon-lit" d={moonLitPath(moon.phase, 9)} />
-            <g className="moon-craters" clipPath="url(#moon-lit-clip)">
-              <circle cx="-2.6" cy="-2.2" r="1.6" />
-              <circle cx="2.9" cy="1.4" r="1.1" />
-              <circle cx="-0.8" cy="3.7" r="0.9" />
-              <circle cx="3.3" cy="-3.6" r="0.7" />
-            </g>
-          </svg>
-        ) : progress !== null ? (
-          <svg
-            className="sun-dot"
-            viewBox="-13 -13 26 26"
-            style={{ left: `${point.x}%`, top: `${(point.y / 60) * 100}%` }}
-            aria-hidden="true"
-          >
-            <circle r="9" className="sun-dot-halo" />
-            <g className="sun-dot-rays">
-              {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
-                <line
-                  key={angle}
-                  x1="0"
-                  y1="-6.4"
-                  x2="0"
-                  y2="-9.4"
-                  transform={`rotate(${angle})`}
-                />
-              ))}
-            </g>
-            <circle r="3.4" className="sun-dot-core" />
-          </svg>
+        {box && point ? (
+          night ? (
+            <svg
+              className="moon-dot"
+              viewBox="-16 -16 32 32"
+              style={{ left: `${(point.x / box.width) * 100}%`, top: `${(point.y / box.height) * 100}%` }}
+              aria-hidden="true"
+            >
+              <defs>
+                <clipPath id="moon-lit-clip">
+                  <path d={moonLitPath(moon.phase, 9)} />
+                </clipPath>
+              </defs>
+              <circle className="moon-halo" r="15" />
+              <circle className="moon-disc" r="9" />
+              <path className="moon-lit" d={moonLitPath(moon.phase, 9)} />
+              <g className="moon-craters" clipPath="url(#moon-lit-clip)">
+                <circle cx="-2.6" cy="-2.2" r="1.6" />
+                <circle cx="2.9" cy="1.4" r="1.1" />
+                <circle cx="-0.8" cy="3.7" r="0.9" />
+                <circle cx="3.3" cy="-3.6" r="0.7" />
+              </g>
+            </svg>
+          ) : (
+            <svg
+              className="sun-dot"
+              viewBox="-13 -13 26 26"
+              style={{ left: `${(point.x / box.width) * 100}%`, top: `${(point.y / box.height) * 100}%` }}
+              aria-hidden="true"
+            >
+              <circle r="9" className="sun-dot-halo" />
+              <g className="sun-dot-rays">
+                {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
+                  <line
+                    key={angle}
+                    x1="0"
+                    y1="-6.4"
+                    x2="0"
+                    y2="-9.4"
+                    transform={`rotate(${angle})`}
+                  />
+                ))}
+              </g>
+              <circle r="3.4" className="sun-dot-core" />
+            </svg>
+          )
         ) : null}
 
         <span className="sun-label sun-label-rise">{startLabel}</span>

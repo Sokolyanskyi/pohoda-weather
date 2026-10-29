@@ -146,6 +146,8 @@ export const en = {
   "settings.provider.getKey": "Get a key",
   "settings.provider.keyOptional": "Optional — an owner-provided key may already be active.",
   "settings.provider.free": "No key needed",
+  "settings.provider.show": "All providers",
+  "settings.provider.hide": "Collapse",
 
   "settings.language.title": "Language",
   "settings.language.text": "Applies immediately and is remembered on this device.",
@@ -234,6 +236,7 @@ export const en = {
   "theme.nebula": "Nebula",
   "theme.ocean": "Ocean",
   "theme.ember": "Ember",
+  "theme.black": "Black",
 
   "pack.outline": "Outline",
   "pack.duotone": "Duotone",

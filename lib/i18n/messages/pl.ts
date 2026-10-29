@@ -149,6 +149,8 @@ export const pl = {
   "settings.provider.keyOptional":
     "Opcjonalnie — klucz właściciela aplikacji może być już aktywny.",
   "settings.provider.free": "Bez klucza",
+  "settings.provider.show": "Wszyscy dostawcy",
+  "settings.provider.hide": "Zwiń",
 
   "settings.language.title": "Język",
   "settings.language.text": "Zmienia się od razu i jest zapamiętywany na tym urządzeniu.",
@@ -237,6 +239,7 @@ export const pl = {
   "theme.nebula": "Mgławica",
   "theme.ocean": "Ocean",
   "theme.ember": "Żar",
+  "theme.black": "Czarny",
 
   "pack.outline": "Kontur",
   "pack.duotone": "Dwuton",

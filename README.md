@@ -28,6 +28,10 @@ Live demo: https://pohoda-weather.vercel.app
 | --- | --- |
 | ![Themes and icon packs](docs/desktop-appearance.png) | ![Daylight theme](docs/desktop-light.png) |
 
+| Black theme | Weather providers |
+| --- | --- |
+| ![Black theme](docs/desktop-black.png) | ![Weather providers](docs/desktop-providers.png) | |
+
 | This day — ten years back | Phone — this day |
 | --- | --- |
 | ![This day archive](docs/desktop-history.png) | ![Mobile archive](docs/mobile-history.png) |
@@ -80,7 +84,7 @@ Commercial providers that charge for their API were removed on purpose, so there
 
 ### Appearance
 
-- **Ten colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `aurora`, `nebula`, `ocean`, `ember` (dark).
+- **Eleven colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `black`, `aurora`, `nebula`, `ocean`, `ember` (dark).
 - **Eight animated icon packs:** outline, duotone, solid, clay, neon, pixel, emoji, glyph.
 - **Full-screen scenes** for clear, partly cloudy, overcast, fog, rain, snow and thunderstorms, with drifting colour fields, moving clouds, canvas particles for precipitation and a lightning flash for storms.
 - **A wind card with a tree and grass** that bend further and faster as the wind picks up.

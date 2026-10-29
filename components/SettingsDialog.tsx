@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { ICON_PACKS, usePrefs, type IconPack } from "@/lib/client/prefs";
 import { APP_VERSION, REPO_URL } from "@/lib/config";
 import { LOCALES, LOCALE_META, type Locale, type MessageKey } from "@/lib/i18n";
@@ -58,6 +59,9 @@ export function SettingsDialog({
   isDay,
 }: SettingsDialogProps) {
   const { prefs, update, t } = usePrefs();
+  // Providers take a lot of room, so the list starts folded and the summary
+  // line still shows which one is in use.
+  const [providersOpen, setProvidersOpen] = useState(false);
 
   const activeProvider = PROVIDER_MAP[prefs.provider];
 
@@ -74,79 +78,6 @@ export function SettingsDialog({
         </button>
       }
     >
-      <section className="settings-block">
-        <div className="settings-heading">
-          <h3>{t("settings.place.title")}</h3>
-          <p>{t("settings.place.text")}</p>
-        </div>
-        <div className="place-current">
-          <div>
-            <span className="eyebrow">{t("settings.place.current")}</span>
-            <strong>{placeLabel(prefs.place)}</strong>
-            {placeSecondary(prefs.place) ? <small>{placeSecondary(prefs.place)}</small> : null}
-          </div>
-          <button type="button" className="btn btn-ghost" onClick={onOpenPlace}>
-            {t("settings.place.change")}
-          </button>
-        </div>
-      </section>
-
-      <section className="settings-block">
-        <div className="settings-heading">
-          <h3>{t("settings.provider.title")}</h3>
-          <p>{t("settings.provider.text")}</p>
-        </div>
-        <div className="provider-list" role="radiogroup" aria-label={t("a11y.provider")}>
-          {PROVIDERS.map((provider) => {
-            const selected = provider.id === prefs.provider;
-            return (
-              <button
-                key={provider.id}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                className={selected ? "provider is-active" : "provider"}
-                onClick={() => update({ provider: provider.id })}
-              >
-                <span className="provider-main">
-                  <strong>{provider.name}</strong>
-                  <small>{provider.model}</small>
-                </span>
-                <span className="provider-side">
-                  <span className="chip chip-soft">{t("settings.provider.days", { days: provider.days })}</span>
-                </span>
-              </button>
-            );
-          })}
-        </div>
-        <div className="provider-desc">
-          <p>{t(activeProvider.descriptionKey)}</p>
-        </div>
-        <p className="hint">{t("settings.provider.free")}</p>
-      </section>
-
-      <section className="settings-block">
-        <div className="settings-heading">
-          <h3>{t("settings.language.title")}</h3>
-          <p>{t("settings.language.text")}</p>
-        </div>
-        <div className="option-grid lang-grid" role="radiogroup" aria-label={t("a11y.language")}>
-          {LOCALES.map((locale: Locale) => (
-            <button
-              key={locale}
-              type="button"
-              role="radio"
-              aria-checked={prefs.locale === locale}
-              className={prefs.locale === locale ? "option is-active" : "option"}
-              onClick={() => update({ locale })}
-            >
-              <span>{LOCALE_META[locale].nativeName}</span>
-              <small>{LOCALE_META[locale].englishName}</small>
-            </button>
-          ))}
-        </div>
-      </section>
-
       <section className="settings-block">
         <div className="settings-heading">
           <h3>{t("settings.appearance.title")}</h3>
@@ -225,6 +156,103 @@ export function SettingsDialog({
             { value: "off", label: t("settings.appearance.motionOff") },
           ]}
         />
+      </section>
+
+      <section className="settings-block">
+        <div className="settings-heading">
+          <h3>{t("settings.language.title")}</h3>
+          <p>{t("settings.language.text")}</p>
+        </div>
+        <div className="option-grid lang-grid" role="radiogroup" aria-label={t("a11y.language")}>
+          {LOCALES.map((locale: Locale) => (
+            <button
+              key={locale}
+              type="button"
+              role="radio"
+              aria-checked={prefs.locale === locale}
+              className={prefs.locale === locale ? "option is-active" : "option"}
+              onClick={() => update({ locale })}
+            >
+              <span>{LOCALE_META[locale].nativeName}</span>
+              <small>{LOCALE_META[locale].englishName}</small>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="settings-block">
+        <div className="settings-heading">
+          <h3>{t("settings.place.title")}</h3>
+          <p>{t("settings.place.text")}</p>
+        </div>
+        <div className="place-current">
+          <div>
+            <span className="eyebrow">{t("settings.place.current")}</span>
+            <strong>{placeLabel(prefs.place)}</strong>
+            {placeSecondary(prefs.place) ? <small>{placeSecondary(prefs.place)}</small> : null}
+          </div>
+          <button type="button" className="btn btn-ghost" onClick={onOpenPlace}>
+            {t("settings.place.change")}
+          </button>
+        </div>
+      </section>
+
+      <section className="settings-block">
+        <button
+          type="button"
+          className="settings-toggle"
+          aria-expanded={providersOpen}
+          aria-controls="settings-providers"
+          onClick={() => setProvidersOpen((value) => !value)}
+        >
+          <span className="settings-toggle-text">
+            <span className="settings-toggle-title">{t("settings.provider.title")}</span>
+            <span className="settings-toggle-sub">
+              {providersOpen
+                ? t("settings.provider.text")
+                : `${activeProvider.name} · ${activeProvider.model}`}
+            </span>
+          </span>
+          <span className="settings-toggle-action">
+            {providersOpen ? t("settings.provider.hide") : t("settings.provider.show")}
+          </span>
+          <svg className="settings-chevron" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+
+        {providersOpen ? (
+          <div id="settings-providers" className="settings-collapse">
+            <div className="provider-list" role="radiogroup" aria-label={t("a11y.provider")}>
+              {PROVIDERS.map((provider) => {
+                const selected = provider.id === prefs.provider;
+                return (
+                  <button
+                    key={provider.id}
+                    type="button"
+                    role="radio"
+                    aria-checked={selected}
+                    className={selected ? "provider is-active" : "provider"}
+                    onClick={() => update({ provider: provider.id })}
+                    title={`${provider.name} · ${provider.model}`}
+                  >
+                    <span className="provider-main">
+                      <strong>{provider.model}</strong>
+                      <small>{provider.name}</small>
+                    </span>
+                    <span className="provider-side">
+                      <span className="chip chip-soft">{t("settings.provider.days", { days: provider.days })}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="provider-desc">
+              <p>{t(activeProvider.descriptionKey)}</p>
+            </div>
+            <p className="hint">{t("settings.provider.free")}</p>
+          </div>
+        ) : null}
       </section>
 
       <section className="settings-block">

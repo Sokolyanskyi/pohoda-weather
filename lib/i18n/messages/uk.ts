@@ -149,6 +149,8 @@ export const uk = {
   "settings.provider.keyOptional":
     "Необов'язково — ключ власника застосунку може вже працювати.",
   "settings.provider.free": "Без ключа",
+  "settings.provider.show": "Усі постачальники",
+  "settings.provider.hide": "Згорнути",
 
   "settings.language.title": "Мова",
   "settings.language.text": "Застосовується одразу й запам'ятовується на цьому пристрої.",
@@ -237,6 +239,7 @@ export const uk = {
   "theme.nebula": "Туманність",
   "theme.ocean": "Океан",
   "theme.ember": "Вугілля",
+  "theme.black": "Чорна",
 
   "pack.outline": "Контур",
   "pack.duotone": "Двотон",

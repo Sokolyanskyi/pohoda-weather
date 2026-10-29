@@ -7,6 +7,7 @@ export const THEMES = [
   "blossom",
   "midnight",
   "graphite",
+  "black",
   "aurora",
   "nebula",
   "ocean",
@@ -58,6 +59,11 @@ export const THEME_META: Record<ThemeId, ThemeMeta> = {
     scheme: "dark",
     barColor: "#0b0b0d",
     preview: { bg: "#0b0b0d", card: "#17171b", accent: "#a3e635", line: "#2c2c34" },
+  },
+  black: {
+    scheme: "dark",
+    barColor: "#000000",
+    preview: { bg: "#000000", card: "#0d0d0d", accent: "#f4f4f5", line: "#262626" },
   },
   aurora: {
     scheme: "dark",

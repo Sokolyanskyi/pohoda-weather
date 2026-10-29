@@ -149,6 +149,8 @@ export const de = {
   "settings.provider.keyOptional":
     "Optional – ein Schlüssel des Betreibers kann bereits aktiv sein.",
   "settings.provider.free": "Kein Schlüssel nötig",
+  "settings.provider.show": "Alle Anbieter",
+  "settings.provider.hide": "Einklappen",
 
   "settings.language.title": "Sprache",
   "settings.language.text": "Wird sofort angewendet und auf diesem Gerät gespeichert.",
@@ -237,6 +239,7 @@ export const de = {
   "theme.nebula": "Nebel",
   "theme.ocean": "Ozean",
   "theme.ember": "Glut",
+  "theme.black": "Schwarz",
 
   "pack.outline": "Kontur",
   "pack.duotone": "Zweiton",
