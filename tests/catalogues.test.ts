@@ -5,11 +5,11 @@ import { ICON_PACKS, isIconPack } from "@/lib/client/prefs";
 import { LOCALES } from "@/lib/i18n";
 
 describe("themes", () => {
-  it("ships eleven schemes, seven of them dark", () => {
-    expect(THEMES).toHaveLength(11);
+  it("ships sixteen schemes, twelve of them dark", () => {
+    expect(THEMES).toHaveLength(16);
     const dark = THEMES.filter((theme) => isDarkTheme(theme));
     const light = THEMES.filter((theme) => !isDarkTheme(theme));
-    expect(dark).toHaveLength(7);
+    expect(dark).toHaveLength(12);
     expect(light).toHaveLength(4);
   });
 
@@ -56,9 +56,10 @@ describe("providers", () => {
 });
 
 describe("icon packs and locales", () => {
-  it("ships eight icon packs", () => {
-    expect(ICON_PACKS).toHaveLength(8);
+  it("ships fourteen icon packs", () => {
+    expect(ICON_PACKS).toHaveLength(14);
     expect(isIconPack("pixel")).toBe(true);
+    expect(isIconPack("glass")).toBe(true);
     expect(isIconPack("flat")).toBe(false);
   });
 

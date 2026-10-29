@@ -149,8 +149,8 @@ export const uk = {
   "settings.provider.keyOptional":
     "Необов'язково — ключ власника застосунку може вже працювати.",
   "settings.provider.free": "Без ключа",
-  "settings.provider.show": "Усі постачальники",
-  "settings.provider.hide": "Згорнути",
+  "settings.toggle.show": "Розгорнути",
+  "settings.toggle.hide": "Згорнути",
 
   "settings.language.title": "Мова",
   "settings.language.text": "Застосовується одразу й запам'ятовується на цьому пристрої.",
@@ -159,7 +159,7 @@ export const uk = {
   "settings.appearance.theme": "Кольорова тема",
   "settings.appearance.icons": "Іконки погоди",
   "settings.appearance.iconsText":
-    "Вісім анімованих наборів. Попередній перегляд відповідає погоді сьогодні.",
+    "Анімовані набори. Попередній перегляд відповідає погоді сьогодні.",
   "settings.appearance.motion": "Анімація",
   "settings.appearance.motionFull": "Повна",
   "settings.appearance.motionCalm": "Спокійна",
@@ -240,6 +240,11 @@ export const uk = {
   "theme.ocean": "Океан",
   "theme.ember": "Вугілля",
   "theme.black": "Чорна",
+  "theme.onyx": "Онікс",
+  "theme.void": "Безодня",
+  "theme.crimson": "Багряна",
+  "theme.plum": "Слива",
+  "theme.jade": "Нефрит",
 
   "pack.outline": "Контур",
   "pack.duotone": "Двотон",
@@ -249,6 +254,12 @@ export const uk = {
   "pack.pixel": "Пікселі",
   "pack.emoji": "Емодзі",
   "pack.glyph": "Гліф",
+  "pack.glass": "Скло",
+  "pack.sticker": "Стікер",
+  "pack.sketch": "Начерк",
+  "pack.candy": "Карамель",
+  "pack.retro": "Ретро",
+  "pack.pulse": "Пульс",
 
   "provider.open-meteo.desc":
     "Суміш моделей ECMWF, ICON і GFS. Найкращий загальний вибір.",

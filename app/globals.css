@@ -265,6 +265,181 @@
   --icon-sun: #fbbf24;
 }
 
+[data-theme="onyx"] {
+  color-scheme: dark;
+  --bg: #050505;
+  --surface: rgba(24, 21, 18, 0.72);
+  --surface-2: rgba(24, 21, 18, 0.5);
+  --surface-solid: #141210;
+  --border: rgba(255, 214, 170, 0.14);
+  --border-strong: rgba(255, 214, 170, 0.26);
+  --text: #f7f3ef;
+  --muted: #b9ada2;
+  --muted-2: #8d8177;
+  --brand: #fb923c;
+  --brand-2: #fdba74;
+  --brand-soft: rgba(251, 146, 60, 0.15);
+  --on-brand: #140a03;
+  --warn: #fbbf24;
+  --warn-soft: rgba(251, 191, 36, 0.13);
+  --ok: #4ade80;
+  --shadow: 0 30px 70px -40px rgba(0, 0, 0, 0.95);
+  --ring: rgba(251, 146, 60, 0.45);
+  --sky-day-1: #221a14;
+  --sky-day-2: #3a2a1c;
+  --sky-day-3: #513a26;
+  --sky-night-1: #050505;
+  --sky-night-2: #120d09;
+  --sky-night-3: #221812;
+  --cloud: rgba(255, 224, 196, 0.24);
+  --icon-moon: #ffe4c4;
+  --icon-cloud: #fed7aa;
+  --icon-drop: #7dd3fc;
+  --icon-bolt: #fdba74;
+  --icon-star: #ffe4c4;
+  --icon-sun: #fdba74;
+}
+
+[data-theme="void"] {
+  color-scheme: dark;
+  --bg: #02040a;
+  --surface: rgba(12, 18, 32, 0.72);
+  --surface-2: rgba(12, 18, 32, 0.5);
+  --surface-solid: #0b1220;
+  --border: rgba(147, 197, 253, 0.14);
+  --border-strong: rgba(147, 197, 253, 0.26);
+  --text: #eef6ff;
+  --muted: #9fb3cc;
+  --muted-2: #7689a3;
+  --brand: #38bdf8;
+  --brand-2: #7dd3fc;
+  --brand-soft: rgba(56, 189, 248, 0.15);
+  --on-brand: #04121c;
+  --warn: #fbbf24;
+  --warn-soft: rgba(251, 191, 36, 0.13);
+  --ok: #4ade80;
+  --shadow: 0 30px 70px -40px rgba(0, 0, 0, 0.96);
+  --ring: rgba(56, 189, 248, 0.45);
+  --sky-day-1: #0a1626;
+  --sky-day-2: #122740;
+  --sky-day-3: #1a3a5c;
+  --sky-night-1: #01030a;
+  --sky-night-2: #071120;
+  --sky-night-3: #0e2038;
+  --cloud: rgba(186, 230, 253, 0.24);
+  --icon-moon: #e0f2fe;
+  --icon-cloud: #bae6fd;
+  --icon-drop: #7dd3fc;
+  --icon-bolt: #fbbf24;
+  --icon-star: #e0f2fe;
+  --icon-sun: #fbbf24;
+}
+
+[data-theme="crimson"] {
+  color-scheme: dark;
+  --bg: #080304;
+  --surface: rgba(32, 14, 17, 0.72);
+  --surface-2: rgba(32, 14, 17, 0.5);
+  --surface-solid: #1b0b0e;
+  --border: rgba(252, 165, 165, 0.15);
+  --border-strong: rgba(252, 165, 165, 0.27);
+  --text: #fff1f2;
+  --muted: #cfa3a7;
+  --muted-2: #a17b80;
+  --brand: #f43f5e;
+  --brand-2: #fb7185;
+  --brand-soft: rgba(244, 63, 94, 0.16);
+  --on-brand: #1a0308;
+  --warn: #fbbf24;
+  --warn-soft: rgba(251, 191, 36, 0.13);
+  --ok: #4ade80;
+  --shadow: 0 30px 70px -40px rgba(0, 0, 0, 0.96);
+  --ring: rgba(244, 63, 94, 0.45);
+  --sky-day-1: #2a0d12;
+  --sky-day-2: #43151d;
+  --sky-day-3: #5c1e28;
+  --sky-night-1: #080304;
+  --sky-night-2: #1a070b;
+  --sky-night-3: #2c0d13;
+  --cloud: rgba(254, 205, 211, 0.24);
+  --icon-moon: #ffe4e6;
+  --icon-cloud: #fecdd3;
+  --icon-drop: #7dd3fc;
+  --icon-bolt: #fbbf24;
+  --icon-star: #ffe4e6;
+  --icon-sun: #fbbf24;
+}
+
+[data-theme="plum"] {
+  color-scheme: dark;
+  --bg: #07030b;
+  --surface: rgba(28, 16, 36, 0.72);
+  --surface-2: rgba(28, 16, 36, 0.5);
+  --surface-solid: #180d22;
+  --border: rgba(240, 171, 252, 0.15);
+  --border-strong: rgba(240, 171, 252, 0.27);
+  --text: #fbf1ff;
+  --muted: #c3a8d0;
+  --muted-2: #977fa6;
+  --brand: #e879f9;
+  --brand-2: #f0abfc;
+  --brand-soft: rgba(232, 121, 249, 0.16);
+  --on-brand: #16031c;
+  --warn: #fbbf24;
+  --warn-soft: rgba(251, 191, 36, 0.13);
+  --ok: #4ade80;
+  --shadow: 0 30px 70px -40px rgba(0, 0, 0, 0.96);
+  --ring: rgba(232, 121, 249, 0.45);
+  --sky-day-1: #22102e;
+  --sky-day-2: #361a48;
+  --sky-day-3: #4a2460;
+  --sky-night-1: #07030b;
+  --sky-night-2: #150a1f;
+  --sky-night-3: #241232;
+  --cloud: rgba(245, 208, 254, 0.24);
+  --icon-moon: #f5e8ff;
+  --icon-cloud: #f0abfc;
+  --icon-drop: #7dd3fc;
+  --icon-bolt: #f0abfc;
+  --icon-star: #f5e8ff;
+  --icon-sun: #fbbf24;
+}
+
+[data-theme="jade"] {
+  color-scheme: dark;
+  --bg: #020806;
+  --surface: rgba(10, 26, 22, 0.72);
+  --surface-2: rgba(10, 26, 22, 0.5);
+  --surface-solid: #081a16;
+  --border: rgba(94, 234, 212, 0.15);
+  --border-strong: rgba(94, 234, 212, 0.27);
+  --text: #eafff9;
+  --muted: #9ac4ba;
+  --muted-2: #73988f;
+  --brand: #2dd4bf;
+  --brand-2: #5eead4;
+  --brand-soft: rgba(45, 212, 191, 0.15);
+  --on-brand: #02110e;
+  --warn: #fbbf24;
+  --warn-soft: rgba(251, 191, 36, 0.13);
+  --ok: #4ade80;
+  --shadow: 0 30px 70px -40px rgba(0, 0, 0, 0.96);
+  --ring: rgba(45, 212, 191, 0.45);
+  --sky-day-1: #06231d;
+  --sky-day-2: #0c3a30;
+  --sky-day-3: #125245;
+  --sky-night-1: #020806;
+  --sky-night-2: #061813;
+  --sky-night-3: #0c2a23;
+  --cloud: rgba(153, 246, 228, 0.24);
+  --icon-moon: #ccfbf1;
+  --icon-cloud: #99f6e4;
+  --icon-drop: #7dd3fc;
+  --icon-bolt: #5eead4;
+  --icon-star: #ccfbf1;
+  --icon-sun: #fbbf24;
+}
+
 [data-theme="aurora"] {
   color-scheme: dark;
   --bg: #04120f;
@@ -924,9 +1099,16 @@ svg {
   line-height: 0.8;
   font-variant-numeric: tabular-nums;
   background: linear-gradient(160deg, var(--text) 20%, var(--brand) 140%);
+  background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* The 0.8 line box is shorter than the glyphs, and a background clipped to
+     text only paints inside its own box: the gradient used to repeat and leave
+     a hard seam across the top of the digits. Padding widens the paint box,
+     negative margins keep the layout unchanged. */
+  padding: 0.32em 0.05em 0.3em;
+  margin: -0.32em -0.05em -0.3em;
 }
 
 /* The degree sign lives with the unit so it can never overlap the digits. */
@@ -1987,6 +2169,15 @@ svg {
 
 .settings-collapse {
   margin-top: 12px;
+}
+
+.settings-collapse .theme-grid,
+.settings-collapse .icon-grid {
+  margin-bottom: 0;
+}
+
+.settings-collapse > .hint {
+  margin: 0 0 8px;
 }
 
 .place-current {

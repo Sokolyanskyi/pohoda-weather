@@ -11,7 +11,7 @@ Live demo: https://pohoda-weather.vercel.app
 - **Readable at a glance.** A large temperature, a short condition line, and the three numbers people actually check: rain chance, wind, humidity.
 - **Ranges, not just numbers.** Every day row shows a temperature band placed on the week's scale, so a cold snap or a warm spell is visible without reading a table. Bands follow one colour ramp — violet well below freezing, sky blue at 0 °C, red in the heat — so the week reads as a temperature map.
 - **Honest about limits.** Free forecasts stop at 10–16 days. The 30-day tab fills the rest with ten-year climate averages and labels those days as `climate` instead of pretending they are a forecast.
-- **Weather you can see.** A full-screen scene (sun, moon, drifting clouds, canvas rain, snow, fog and lightning) reacts to the current condition, and eight icon packs are all animated.
+- **Weather you can see.** A full-screen scene (sun, moon, drifting clouds, canvas rain, snow, fog and lightning) reacts to the current condition, and fourteen icon packs are all animated.
 - **Ten years of the same day.** The “This day” block at the bottom compares today with the archive for the same date in each of the last ten years.
 
 ## Screenshots
@@ -24,13 +24,17 @@ Live demo: https://pohoda-weather.vercel.app
 | --- | --- |
 | ![30-day outlook](docs/desktop-month.png) | ![Settings](docs/desktop-settings.png) |
 
-| Themes and icon packs | Light theme |
+| Colour schemes | Icon packs |
 | --- | --- |
-| ![Themes and icon packs](docs/desktop-appearance.png) | ![Daylight theme](docs/desktop-light.png) |
+| ![Sixteen colour schemes](docs/desktop-appearance.png) | ![Fourteen animated icon packs](docs/desktop-icons.png) |
 
-| Black theme | Weather providers |
+| Light theme | Black theme |
 | --- | --- |
-| ![Black theme](docs/desktop-black.png) | ![Weather providers](docs/desktop-providers.png) | |
+| ![Daylight theme](docs/desktop-light.png) | ![Black theme](docs/desktop-black.png) |
+
+| Weather providers |
+| --- |
+| ![Weather providers](docs/desktop-providers.png) |
 
 | This day — ten years back | Phone — this day |
 | --- | --- |
@@ -84,11 +88,12 @@ Commercial providers that charge for their API were removed on purpose, so there
 
 ### Appearance
 
-- **Eleven colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `black`, `aurora`, `nebula`, `ocean`, `ember` (dark).
-- **Eight animated icon packs:** outline, duotone, solid, clay, neon, pixel, emoji, glyph.
+- **Sixteen colour schemes:** `daylight`, `sand`, `mint`, `blossom` (light) and `midnight`, `graphite`, `black`, `onyx`, `void`, `crimson`, `plum`, `jade`, `aurora`, `nebula`, `ocean`, `ember` (dark).
+- **Fourteen animated icon packs:** outline, duotone, solid, clay, neon, glass, sticker, sketch, candy, retro, pulse, pixel, emoji, glyph.
 - **Full-screen scenes** for clear, partly cloudy, overcast, fog, rain, snow and thunderstorms, with drifting colour fields, moving clouds, canvas particles for precipitation and a lightning flash for storms.
 - **A wind card with a tree and grass** that bend further and faster as the wind picks up.
 - **Motion levels:** full, calm, off. An explicit choice always wins; the system's reduced-motion preference only sets the default on the first visit.
+- **Compact settings:** the colour-scheme, icon-pack and provider lists fold away by default and keep the current choice in their summary line.
 
 ### Language and units
 
@@ -172,7 +177,7 @@ app/
 components/
   AppShell.tsx         layout, tabs, dialogs, loading and error states
   WeatherScene.tsx     full-screen animated scene + canvas particles
-  WeatherIcon.tsx      eight animated icon packs
+  WeatherIcon.tsx      fourteen animated icon packs
   views/               Today, Week, Month
   DayRow, SunCard, RangeBar, ThisDayCard, RadarDialog, Modal, SettingsDialog, PlaceDialog, Toast
 lib/

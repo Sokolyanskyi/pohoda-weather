@@ -149,8 +149,8 @@ export const ru = {
   "settings.provider.keyOptional":
     "Необязательно — ключ владельца приложения может уже работать.",
   "settings.provider.free": "Без ключа",
-  "settings.provider.show": "Все поставщики",
-  "settings.provider.hide": "Свернуть",
+  "settings.toggle.show": "Развернуть",
+  "settings.toggle.hide": "Свернуть",
 
   "settings.language.title": "Язык",
   "settings.language.text": "Применяется сразу и запоминается на этом устройстве.",
@@ -159,7 +159,7 @@ export const ru = {
   "settings.appearance.theme": "Цветовая тема",
   "settings.appearance.icons": "Иконки погоды",
   "settings.appearance.iconsText":
-    "Восемь анимированных наборов. Предпросмотр соответствует погоде сегодня.",
+    "Анимированные наборы. Предпросмотр соответствует погоде сегодня.",
   "settings.appearance.motion": "Анимация",
   "settings.appearance.motionFull": "Полная",
   "settings.appearance.motionCalm": "Спокойная",
@@ -240,6 +240,11 @@ export const ru = {
   "theme.ocean": "Океан",
   "theme.ember": "Уголь",
   "theme.black": "Чёрная",
+  "theme.onyx": "Оникс",
+  "theme.void": "Бездна",
+  "theme.crimson": "Багровая",
+  "theme.plum": "Слива",
+  "theme.jade": "Нефрит",
 
   "pack.outline": "Контур",
   "pack.duotone": "Двухтон",
@@ -249,6 +254,12 @@ export const ru = {
   "pack.pixel": "Пиксели",
   "pack.emoji": "Эмодзи",
   "pack.glyph": "Глиф",
+  "pack.glass": "Стекло",
+  "pack.sticker": "Стикер",
+  "pack.sketch": "Набросок",
+  "pack.candy": "Карамель",
+  "pack.retro": "Ретро",
+  "pack.pulse": "Пульс",
 
   "provider.open-meteo.desc":
     "Смесь моделей ECMWF, ICON и GFS. Лучший общий выбор.",

@@ -149,8 +149,8 @@ export const es = {
   "settings.provider.keyOptional":
     "Opcional: puede que ya haya una clave del propietario activa.",
   "settings.provider.free": "Sin clave",
-  "settings.provider.show": "Todos los proveedores",
-  "settings.provider.hide": "Contraer",
+  "settings.toggle.show": "Desplegar",
+  "settings.toggle.hide": "Contraer",
 
   "settings.language.title": "Idioma",
   "settings.language.text": "Se aplica al instante y se recuerda en este dispositivo.",
@@ -159,7 +159,7 @@ export const es = {
   "settings.appearance.theme": "Tema de color",
   "settings.appearance.icons": "Iconos del tiempo",
   "settings.appearance.iconsText":
-    "Ocho sets animados. La vista previa sigue el tiempo de hoy.",
+    "Sets animados. La vista previa sigue el tiempo de hoy.",
   "settings.appearance.motion": "Animación",
   "settings.appearance.motionFull": "Completa",
   "settings.appearance.motionCalm": "Tranquila",
@@ -240,6 +240,11 @@ export const es = {
   "theme.ocean": "Océano",
   "theme.ember": "Brasa",
   "theme.black": "Negro",
+  "theme.onyx": "Ónix",
+  "theme.void": "Vacío",
+  "theme.crimson": "Carmesí",
+  "theme.plum": "Ciruela",
+  "theme.jade": "Jade",
 
   "pack.outline": "Contorno",
   "pack.duotone": "Dúo",
@@ -249,6 +254,12 @@ export const es = {
   "pack.pixel": "Píxel",
   "pack.emoji": "Emoji",
   "pack.glyph": "Glifo",
+  "pack.glass": "Cristal",
+  "pack.sticker": "Pegatina",
+  "pack.sketch": "Boceto",
+  "pack.candy": "Caramelo",
+  "pack.retro": "Retro",
+  "pack.pulse": "Pulso",
 
   "provider.open-meteo.desc":
     "Combinación de modelos ECMWF, ICON y GFS. La mejor opción general.",

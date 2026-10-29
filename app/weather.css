@@ -663,6 +663,199 @@
   opacity: 0.9;
 }
 
+/* Six extra animated packs. They reuse the same geometry and only change the
+   paint, the stroke weight and the idle motion, so each one reads differently
+   without duplicating the shape code. */
+
+.wi-svgpack[data-pack="glass"] {
+  --wi-cloud: color-mix(in srgb, var(--brand) 24%, transparent);
+  --wi-line: color-mix(in srgb, #ffffff 65%, var(--brand));
+  --wi-sun: color-mix(in srgb, var(--icon-sun) 60%, transparent);
+  --wi-ray: color-mix(in srgb, #ffffff 55%, var(--icon-sun));
+  --wi-moon: color-mix(in srgb, #ffffff 45%, var(--icon-moon));
+  --wi-drop: color-mix(in srgb, var(--icon-drop) 65%, #ffffff);
+  --wi-drop-w: 2;
+  --wi-bolt: color-mix(in srgb, var(--icon-bolt) 60%, #ffffff);
+  --wi-star: #ffffff;
+  --wi-stroke: 1.1;
+}
+
+.wi-svgpack[data-pack="glass"] .wi-svg {
+  filter: drop-shadow(0 6px 12px color-mix(in srgb, var(--brand) 28%, transparent));
+}
+
+.wi-svgpack[data-pack="glass"][data-motion="full"] .wi-svg {
+  animation: wiGlass 6s ease-in-out infinite;
+}
+
+@keyframes wiGlass {
+  50% {
+    transform: translateY(-2px) scale(1.035);
+  }
+}
+
+.wi-svgpack[data-pack="sticker"] {
+  --wi-cloud: var(--brand);
+  --wi-line: #ffffff;
+  --wi-sun: var(--icon-sun);
+  --wi-ray: var(--icon-sun);
+  --wi-moon: var(--icon-moon);
+  --wi-drop: var(--icon-drop);
+  --wi-drop-w: 3.2;
+  --wi-bolt: var(--icon-bolt);
+  --wi-star: #ffffff;
+  --wi-stroke: 3.2;
+}
+
+.wi-svgpack[data-pack="sticker"] .wi-cloud path {
+  opacity: 0.9;
+}
+
+.wi-svgpack[data-pack="sticker"] .wi-svg {
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.16)) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.24));
+}
+
+.wi-svgpack[data-pack="sticker"][data-motion="full"] .wi-svg {
+  animation: wiSticker 4.4s ease-in-out infinite;
+}
+
+@keyframes wiSticker {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.wi-svgpack[data-pack="sketch"] {
+  --wi-cloud: transparent;
+  --wi-line: currentColor;
+  --wi-sun: transparent;
+  --wi-ray: currentColor;
+  --wi-moon: transparent;
+  --wi-drop: currentColor;
+  --wi-bolt: transparent;
+  --wi-star: currentColor;
+  --wi-stroke: 1.9;
+  opacity: 0.9;
+}
+
+.wi-svgpack[data-pack="sketch"] .wi-cloud path,
+.wi-svgpack[data-pack="sketch"] .wi-sun > circle,
+.wi-svgpack[data-pack="sketch"] .wi-moon > circle,
+.wi-svgpack[data-pack="sketch"] .wi-bolt path,
+.wi-svgpack[data-pack="sketch"] .wi-hail circle {
+  stroke-dasharray: 3.4 2.2;
+}
+
+.wi-svgpack[data-pack="sketch"] .wi-svg {
+  filter: drop-shadow(1px 1px 0 color-mix(in srgb, currentColor 22%, transparent));
+}
+
+.wi-svgpack[data-pack="sketch"][data-motion="full"] .wi-svg {
+  animation: wiSketch 3.2s steps(3, end) infinite;
+}
+
+@keyframes wiSketch {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(0.6px, -0.4px);
+  }
+  66% {
+    transform: translate(-0.5px, 0.5px);
+  }
+}
+
+.wi-svgpack[data-pack="candy"] {
+  --wi-cloud: #f9a8d4;
+  --wi-line: #fdf2f8;
+  --wi-sun: #fde047;
+  --wi-ray: #facc15;
+  --wi-moon: #ddd6fe;
+  --wi-drop: #67e8f9;
+  --wi-drop-w: 3;
+  --wi-bolt: #fdba74;
+  --wi-star: #fef9c3;
+  --wi-stroke: 2.2;
+}
+
+.wi-svgpack[data-pack="candy"] .wi-svg {
+  filter: drop-shadow(0 4px 8px rgba(236, 72, 153, 0.28)) saturate(1.15);
+}
+
+.wi-svgpack[data-pack="candy"][data-motion="full"] .wi-svg {
+  animation: wiCandy 2.4s ease-in-out infinite;
+}
+
+@keyframes wiCandy {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.04);
+  }
+}
+
+.wi-svgpack[data-pack="retro"] {
+  --wi-cloud: #fcd34d;
+  --wi-line: #7c2d12;
+  --wi-sun: #fb923c;
+  --wi-ray: #7c2d12;
+  --wi-moon: #fde68a;
+  --wi-drop: #0e7490;
+  --wi-drop-w: 2.8;
+  --wi-bolt: #fb923c;
+  --wi-star: #7c2d12;
+  --wi-stroke: 2.1;
+}
+
+.wi-svgpack[data-pack="retro"] .wi-svg {
+  filter: drop-shadow(2.5px 2.5px 0 rgba(124, 45, 18, 0.35));
+}
+
+.wi-svgpack[data-pack="retro"][data-motion="full"] .wi-svg {
+  animation: wiRetro 5.5s ease-in-out infinite;
+}
+
+@keyframes wiRetro {
+  50% {
+    transform: translateY(-2px) rotate(-1.6deg);
+  }
+}
+
+.wi-svgpack[data-pack="pulse"] {
+  --wi-cloud: transparent;
+  --wi-line: var(--brand);
+  --wi-sun: transparent;
+  --wi-ray: var(--brand);
+  --wi-moon: transparent;
+  --wi-drop: var(--brand);
+  --wi-bolt: transparent;
+  --wi-star: var(--brand);
+  --wi-stroke: 2.6;
+}
+
+.wi-svgpack[data-pack="pulse"] .wi-svg {
+  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--brand) 55%, transparent));
+}
+
+.wi-svgpack[data-pack="pulse"][data-motion="full"] .wi-svg {
+  animation: wiBreath 2.8s ease-in-out infinite;
+}
+
+@keyframes wiBreath {
+  50% {
+    transform: scale(0.93);
+    opacity: 0.7;
+  }
+}
+
 /* ------------------------------- pixel ---------------------------------- */
 
 .wi-pixel .wi-svg {

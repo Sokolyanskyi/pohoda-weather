@@ -8,6 +8,11 @@ export const THEMES = [
   "midnight",
   "graphite",
   "black",
+  "onyx",
+  "void",
+  "crimson",
+  "plum",
+  "jade",
   "aurora",
   "nebula",
   "ocean",
@@ -64,6 +69,31 @@ export const THEME_META: Record<ThemeId, ThemeMeta> = {
     scheme: "dark",
     barColor: "#000000",
     preview: { bg: "#000000", card: "#0d0d0d", accent: "#f4f4f5", line: "#262626" },
+  },
+  onyx: {
+    scheme: "dark",
+    barColor: "#050505",
+    preview: { bg: "#050505", card: "#141210", accent: "#fb923c", line: "#2d241c" },
+  },
+  void: {
+    scheme: "dark",
+    barColor: "#02040a",
+    preview: { bg: "#02040a", card: "#0b1220", accent: "#38bdf8", line: "#182c45" },
+  },
+  crimson: {
+    scheme: "dark",
+    barColor: "#080304",
+    preview: { bg: "#080304", card: "#1b0b0e", accent: "#f43f5e", line: "#3a1a20" },
+  },
+  plum: {
+    scheme: "dark",
+    barColor: "#07030b",
+    preview: { bg: "#07030b", card: "#180d22", accent: "#e879f9", line: "#33203f" },
+  },
+  jade: {
+    scheme: "dark",
+    barColor: "#020806",
+    preview: { bg: "#020806", card: "#081a16", accent: "#2dd4bf", line: "#14332c" },
   },
   aurora: {
     scheme: "dark",

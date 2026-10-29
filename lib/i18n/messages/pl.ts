@@ -149,8 +149,8 @@ export const pl = {
   "settings.provider.keyOptional":
     "Opcjonalnie — klucz właściciela aplikacji może być już aktywny.",
   "settings.provider.free": "Bez klucza",
-  "settings.provider.show": "Wszyscy dostawcy",
-  "settings.provider.hide": "Zwiń",
+  "settings.toggle.show": "Rozwiń",
+  "settings.toggle.hide": "Zwiń",
 
   "settings.language.title": "Język",
   "settings.language.text": "Zmienia się od razu i jest zapamiętywany na tym urządzeniu.",
@@ -159,7 +159,7 @@ export const pl = {
   "settings.appearance.theme": "Motyw kolorystyczny",
   "settings.appearance.icons": "Ikony pogody",
   "settings.appearance.iconsText":
-    "Osiem animowanych zestawów. Podgląd odpowiada dzisiejszej pogodzie.",
+    "Animowane zestawy. Podgląd odpowiada dzisiejszej pogodzie.",
   "settings.appearance.motion": "Animacja",
   "settings.appearance.motionFull": "Pełna",
   "settings.appearance.motionCalm": "Spokojna",
@@ -240,6 +240,11 @@ export const pl = {
   "theme.ocean": "Ocean",
   "theme.ember": "Żar",
   "theme.black": "Czarny",
+  "theme.onyx": "Onyks",
+  "theme.void": "Otchłań",
+  "theme.crimson": "Karmazyn",
+  "theme.plum": "Śliwka",
+  "theme.jade": "Jadeit",
 
   "pack.outline": "Kontur",
   "pack.duotone": "Dwuton",
@@ -249,6 +254,12 @@ export const pl = {
   "pack.pixel": "Piksele",
   "pack.emoji": "Emoji",
   "pack.glyph": "Glif",
+  "pack.glass": "Szkło",
+  "pack.sticker": "Naklejka",
+  "pack.sketch": "Szkic",
+  "pack.candy": "Karmel",
+  "pack.retro": "Retro",
+  "pack.pulse": "Puls",
 
   "provider.open-meteo.desc":
     "Połączenie modeli ECMWF, ICON i GFS. Najlepszy ogólny wybór.",

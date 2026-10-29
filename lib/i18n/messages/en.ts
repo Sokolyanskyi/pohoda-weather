@@ -146,8 +146,8 @@ export const en = {
   "settings.provider.getKey": "Get a key",
   "settings.provider.keyOptional": "Optional — an owner-provided key may already be active.",
   "settings.provider.free": "No key needed",
-  "settings.provider.show": "All providers",
-  "settings.provider.hide": "Collapse",
+  "settings.toggle.show": "Expand",
+  "settings.toggle.hide": "Collapse",
 
   "settings.language.title": "Language",
   "settings.language.text": "Applies immediately and is remembered on this device.",
@@ -156,7 +156,7 @@ export const en = {
   "settings.appearance.theme": "Colour scheme",
   "settings.appearance.icons": "Weather icons",
   "settings.appearance.iconsText":
-    "Eight animated sets. The preview follows today's weather.",
+    "Animated sets. The preview follows today's weather.",
   "settings.appearance.motion": "Animation",
   "settings.appearance.motionFull": "Full",
   "settings.appearance.motionCalm": "Calm",
@@ -237,6 +237,11 @@ export const en = {
   "theme.ocean": "Ocean",
   "theme.ember": "Ember",
   "theme.black": "Black",
+  "theme.onyx": "Onyx",
+  "theme.void": "Void",
+  "theme.crimson": "Crimson",
+  "theme.plum": "Plum",
+  "theme.jade": "Jade",
 
   "pack.outline": "Outline",
   "pack.duotone": "Duotone",
@@ -246,6 +251,12 @@ export const en = {
   "pack.pixel": "Pixel",
   "pack.emoji": "Emoji",
   "pack.glyph": "Glyph",
+  "pack.glass": "Glass",
+  "pack.sticker": "Sticker",
+  "pack.sketch": "Sketch",
+  "pack.candy": "Candy",
+  "pack.retro": "Retro",
+  "pack.pulse": "Pulse",
 
   "provider.open-meteo.desc":
     "Blended ECMWF, ICON and GFS models. The best general-purpose choice.",

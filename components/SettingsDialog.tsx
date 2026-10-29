@@ -51,6 +51,43 @@ function Segmented<T extends string>({
   );
 }
 
+function SettingsToggle({
+  title,
+  sub,
+  open,
+  controls,
+  showLabel,
+  hideLabel,
+  onToggle,
+}: {
+  title: string;
+  sub: string;
+  open: boolean;
+  controls: string;
+  showLabel: string;
+  hideLabel: string;
+  onToggle: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      className="settings-toggle"
+      aria-expanded={open}
+      aria-controls={controls}
+      onClick={onToggle}
+    >
+      <span className="settings-toggle-text">
+        <span className="settings-toggle-title">{title}</span>
+        <span className="settings-toggle-sub">{sub}</span>
+      </span>
+      <span className="settings-toggle-action">{open ? hideLabel : showLabel}</span>
+      <svg className="settings-chevron" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </button>
+  );
+}
+
 export function SettingsDialog({
   open,
   onClose,
@@ -59,8 +96,10 @@ export function SettingsDialog({
   isDay,
 }: SettingsDialogProps) {
   const { prefs, update, t } = usePrefs();
-  // Providers take a lot of room, so the list starts folded and the summary
-  // line still shows which one is in use.
+  // Themes, icon packs and providers are long lists, so every one of them
+  // starts folded and the summary line still shows what is selected.
+  const [themesOpen, setThemesOpen] = useState(false);
+  const [iconsOpen, setIconsOpen] = useState(false);
   const [providersOpen, setProvidersOpen] = useState(false);
 
   const activeProvider = PROVIDER_MAP[prefs.provider];
@@ -79,73 +118,99 @@ export function SettingsDialog({
       }
     >
       <section className="settings-block">
-        <div className="settings-heading">
-          <h3>{t("settings.appearance.title")}</h3>
-          <p>{t("settings.appearance.iconsText")}</p>
-        </div>
-        <span className="field-label">{t("settings.appearance.theme")}</span>
-        <div className="theme-grid" role="radiogroup" aria-label={t("a11y.theme")}>
-          {THEMES.map((theme) => {
-            const meta = THEME_META[theme];
-            const selected = prefs.theme === theme;
-            return (
-              <button
-                key={theme}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                className={selected ? "theme-card is-active" : "theme-card"}
-                onClick={() => update({ theme })}
-                style={{
-                  background: meta.preview.bg,
-                  borderColor: selected ? meta.preview.accent : meta.preview.line,
-                }}
-              >
-                <span className="theme-swatches" aria-hidden="true">
-                  <span style={{ background: meta.preview.card }} />
-                  <span style={{ background: meta.preview.accent }} />
-                  <span style={{ background: meta.preview.line }} />
-                </span>
-                <span className="theme-name" style={{ color: meta.scheme === "dark" ? "#f4f6fb" : "#142033" }}>
-                  {t(`theme.${theme}` as MessageKey)}
-                </span>
-                <span
-                  className="theme-scheme"
-                  style={{ color: meta.scheme === "dark" ? "#aab4c8" : "#5d6b80" }}
-                >
-                  {meta.scheme}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="appearance-row">
-          <span className="field-label">{t("settings.appearance.icons")}</span>
-          <div className="icon-grid" role="radiogroup" aria-label={t("a11y.iconPack")}>
-            {ICON_PACKS.map((pack: IconPack) => (
-              <button
-                key={pack}
-                type="button"
-                role="radio"
-                aria-checked={prefs.iconPack === pack}
-                className={prefs.iconPack === pack ? "icon-card is-active" : "icon-card"}
-                onClick={() => update({ iconPack: pack })}
-                title={t(`pack.${pack}` as MessageKey)}
-              >
-                <WeatherIcon
-                  kind={kind}
-                  isDay={isDay}
-                  pack={pack}
-                  size={38}
-                  motion={prefs.motion}
-                />
-                <span>{t(`pack.${pack}` as MessageKey)}</span>
-              </button>
-            ))}
+        <SettingsToggle
+          title={t("settings.appearance.theme")}
+          sub={t(`theme.${prefs.theme}` as MessageKey)}
+          open={themesOpen}
+          controls="settings-themes"
+          showLabel={t("settings.toggle.show")}
+          hideLabel={t("settings.toggle.hide")}
+          onToggle={() => setThemesOpen((value) => !value)}
+        />
+        {themesOpen ? (
+          <div id="settings-themes" className="settings-collapse">
+            <div className="theme-grid" role="radiogroup" aria-label={t("a11y.theme")}>
+              {THEMES.map((theme) => {
+                const meta = THEME_META[theme];
+                const selected = prefs.theme === theme;
+                return (
+                  <button
+                    key={theme}
+                    type="button"
+                    role="radio"
+                    aria-checked={selected}
+                    className={selected ? "theme-card is-active" : "theme-card"}
+                    onClick={() => update({ theme })}
+                    style={{
+                      background: meta.preview.bg,
+                      borderColor: selected ? meta.preview.accent : meta.preview.line,
+                    }}
+                  >
+                    <span className="theme-swatches" aria-hidden="true">
+                      <span style={{ background: meta.preview.card }} />
+                      <span style={{ background: meta.preview.accent }} />
+                      <span style={{ background: meta.preview.line }} />
+                    </span>
+                    <span
+                      className="theme-name"
+                      style={{ color: meta.scheme === "dark" ? "#f4f6fb" : "#142033" }}
+                    >
+                      {t(`theme.${theme}` as MessageKey)}
+                    </span>
+                    <span
+                      className="theme-scheme"
+                      style={{ color: meta.scheme === "dark" ? "#aab4c8" : "#5d6b80" }}
+                    >
+                      {meta.scheme}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        ) : null}
+      </section>
 
+      <section className="settings-block">
+        <SettingsToggle
+          title={t("settings.appearance.icons")}
+          sub={t(`pack.${prefs.iconPack}` as MessageKey)}
+          open={iconsOpen}
+          controls="settings-icons"
+          showLabel={t("settings.toggle.show")}
+          hideLabel={t("settings.toggle.hide")}
+          onToggle={() => setIconsOpen((value) => !value)}
+        />
+        {iconsOpen ? (
+          <div id="settings-icons" className="settings-collapse">
+            <p className="hint">{t("settings.appearance.iconsText")}</p>
+            <div className="icon-grid" role="radiogroup" aria-label={t("a11y.iconPack")}>
+              {ICON_PACKS.map((pack: IconPack) => (
+                <button
+                  key={pack}
+                  type="button"
+                  role="radio"
+                  aria-checked={prefs.iconPack === pack}
+                  className={prefs.iconPack === pack ? "icon-card is-active" : "icon-card"}
+                  onClick={() => update({ iconPack: pack })}
+                  title={t(`pack.${pack}` as MessageKey)}
+                >
+                  <WeatherIcon
+                    kind={kind}
+                    isDay={isDay}
+                    pack={pack}
+                    size={38}
+                    motion={prefs.motion}
+                  />
+                  <span>{t(`pack.${pack}` as MessageKey)}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </section>
+
+      <section className="settings-block">
         <Segmented
           label={t("settings.appearance.motion")}
           value={prefs.motion}
@@ -198,29 +263,19 @@ export function SettingsDialog({
       </section>
 
       <section className="settings-block">
-        <button
-          type="button"
-          className="settings-toggle"
-          aria-expanded={providersOpen}
-          aria-controls="settings-providers"
-          onClick={() => setProvidersOpen((value) => !value)}
-        >
-          <span className="settings-toggle-text">
-            <span className="settings-toggle-title">{t("settings.provider.title")}</span>
-            <span className="settings-toggle-sub">
-              {providersOpen
-                ? t("settings.provider.text")
-                : `${activeProvider.name} · ${activeProvider.model}`}
-            </span>
-          </span>
-          <span className="settings-toggle-action">
-            {providersOpen ? t("settings.provider.hide") : t("settings.provider.show")}
-          </span>
-          <svg className="settings-chevron" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 9l6 6 6-6" />
-          </svg>
-        </button>
-
+        <SettingsToggle
+          title={t("settings.provider.title")}
+          sub={
+            providersOpen
+              ? t("settings.provider.text")
+              : `${activeProvider.name} · ${activeProvider.model}`
+          }
+          open={providersOpen}
+          controls="settings-providers"
+          showLabel={t("settings.toggle.show")}
+          hideLabel={t("settings.toggle.hide")}
+          onToggle={() => setProvidersOpen((value) => !value)}
+        />
         {providersOpen ? (
           <div id="settings-providers" className="settings-collapse">
             <div className="provider-list" role="radiogroup" aria-label={t("a11y.provider")}>
@@ -241,7 +296,9 @@ export function SettingsDialog({
                       <small>{provider.name}</small>
                     </span>
                     <span className="provider-side">
-                      <span className="chip chip-soft">{t("settings.provider.days", { days: provider.days })}</span>
+                      <span className="chip chip-soft">
+                        {t("settings.provider.days", { days: provider.days })}
+                      </span>
                     </span>
                   </button>
                 );
